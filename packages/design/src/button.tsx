@@ -21,10 +21,14 @@ export const createButtonStylesheet = stylesheet.create({
         "bg-transparent text-foreground font-medium border border-foreground",
         "hover:bg-foreground/10 active:bg-foreground/20 dark:active:bg-foreground/30"
       ),
+      ghost: cn(
+        "bg-transparent text-foreground/90 font-normal border border-transparent",
+        "hover:bg-accent hover:border-accent"
+      ),
     },
     // button sizes go here
     size: {
-      sm: "px-3 py-1.5",
+      sm: "px-3 py-1.5 text-sm",
       md: "px-4 py-2",
       lg: "px-5 py-3",
     },
