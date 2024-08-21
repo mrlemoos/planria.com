@@ -5,10 +5,19 @@ function getAbsolutePath(value) {
 }
 
 const config = {
-  stories: ["../stories/*.stories.tsx", "../stories/**/*.stories.tsx"],
+  stories: ["../stories/*.stories.tsx"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-themes"),
+    {
+      name: getAbsolutePath("@storybook/addon-postcss"),
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
+        },
+      },
+    },
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -18,14 +27,15 @@ const config = {
   core: {},
 
   async viteFinal(config, { configType }) {
-    // customize the Vite config here
     return {
       ...config,
-      define: { "process.env": {} },
+      define: {
+        "process.env": {},
+      },
       resolve: {
         alias: [
           {
-            find: "@planria/design",
+            find: "@planria/design/",
             replacement: resolve(__dirname, "../../../packages/design/"),
           },
         ],

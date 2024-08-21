@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -19,7 +27,7 @@
         --border: 240 5.9% 90%;
         --input: 240 5.9% 90%;
         --ring: 346.8 77.2% 49.8%;
-        --radius: 1rem;
+        --radius: 1.5rem;
         --chart-1: 12 76% 61%;
         --chart-2: 173 58% 39%;
         --chart-3: 197 37% 24%;
