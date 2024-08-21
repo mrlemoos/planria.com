@@ -4,7 +4,9 @@
   "description": "Your feature flags. Fast. Instant. On the edge 🚀",
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "docker:up": "sh ./infra/scripts/docker_up.sh",
+    "docker:down": "sh ./infra/scripts/docker_down.sh"
   },
   "keywords": [
     "nextjs",

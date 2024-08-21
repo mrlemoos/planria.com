@@ -1,0 +1,1 @@
+docker compose down -f infra/docker/docker-compose.yaml
