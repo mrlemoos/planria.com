@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "dev": "storybook dev -p 6006 --ci",
     "build": "rimraf -rf ./storybook-static && storybook build --docs",
     "preview-storybook": "serve storybook-static",
     "clean": "rimraf -rf .turbo && rimraf -rf node_modules",
@@ -22,6 +22,8 @@
     "@storybook/addon-actions": "^8.2.6",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-links": "^8.2.6",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-themes": "^8.2.9",
     "@storybook/react": "^8.2.6",
     "@storybook/react-vite": "^8.2.6",
     "@types/node": "^22.4.1",
