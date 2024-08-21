@@ -64,3 +64,11 @@ export const Outlined: Story = {
   },
 };
 Outlined.storyName = "variant » outlined";
+
+export const Ghost: Story = {
+  args: {
+    children: "Ghost button",
+    variant: "ghost",
+  },
+};
+Ghost.storyName = "variant » ghost";
