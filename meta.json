@@ -1,0 +1,6 @@
+{
+  "name": "planria/design",
+  "description": "Your feature flags. Fast. Instant. On the edge 🚀",
+  "template": "https://vercel.com/templates/react/turborepo-design-system",
+  "featured": true
+}

@@ -1,0 +1,49 @@
+{
+  "name": "planria",
+  "version": "1.0.0",
+  "description": "Your feature flags. Fast. Instant. On the edge 🚀",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
+  "keywords": [
+    "nextjs",
+    "turbo",
+    "planria",
+    "feature",
+    "flags",
+    "fast",
+    "instant",
+    "edge",
+    "a/b",
+    "testing",
+    "qa",
+    "app",
+    "quick",
+    "runtime",
+    "rust",
+    "go",
+    "javascript",
+    "typescript",
+    "bun",
+    "nodejs",
+    "pnpm",
+    "npm",
+    "macos"
+  ],
+  "homepage": "https://planria.com",
+  "author": "Leonardo Lemos <leo.lemos@planria.com>",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@9.7.1",
+  "contributors": [
+    {
+      "name": "Leonardo Lemos",
+      "email": "leo.lemos@planria.com",
+      "url": "https://mrlemoos.dev"
+    }
+  ],
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "turbo": "^2.0.14"
+  }
+}
