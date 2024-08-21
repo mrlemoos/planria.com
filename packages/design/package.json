@@ -8,6 +8,16 @@
       "types": "./src/button.tsx",
       "import": "./dist/button.mjs",
       "require": "./dist/button.js"
+    },
+    "./css": {
+      "types": "./src/css.ts",
+      "import": "./dist/css.mjs",
+      "require": "./dist/css.js"
+    },
+    "./theme": {
+      "types": "./src/theme.ts",
+      "import": "./dist/theme.mjs",
+      "require": "./dist/theme.js"
     }
   },
   "scripts": {
@@ -26,6 +36,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "react": "^18.2.0"
+    "clsx": "^2.1.1",
+    "react": "^18.2.0",
+    "tailwind-variants": "^0.2.1",
+    "tailwind-merge": "^2.5.2"
   }
 }
