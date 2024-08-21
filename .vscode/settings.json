@@ -9,4 +9,10 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "cn"
+  ],
+  "tailwindCSS.experimental.configFile": "tools/tailwindcss/tailwind.config.ts"
 }
