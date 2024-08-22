@@ -19,6 +19,21 @@
       "import": "./dist/css.mjs",
       "require": "./dist/css.js"
     },
+    "./form": {
+      "types": "./src/form.tsx",
+      "import": "./dist/form.mjs",
+      "require": "./dist/form.js"
+    },
+    "./input": {
+      "types": "./src/input.tsx",
+      "import": "./dist/input.mjs",
+      "require": "./dist/input.js"
+    },
+    "./label": {
+      "types": "./src/label.tsx",
+      "import": "./dist/label.mjs",
+      "require": "./dist/label.js"
+    },
     "./logo": {
       "types": "./src/logo.tsx",
       "import": "./dist/logo.mjs",
