@@ -11,6 +11,9 @@
     "./crypto": {
       "default": "./src/crypto.ts"
     },
+    "./date": {
+      "default": "./src/date.ts"
+    },
     "./errors": {
       "default": "./src/errors.ts"
     },
@@ -34,6 +37,7 @@
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
     "bcrypt": "^5.1.1",
+    "dayjs": "^1.11.13",
     "zod": "^3.23.8"
   }
 }
