@@ -35,9 +35,14 @@
       "require": "./dist/theme.js"
     },
     "./top-bar": {
-      "types": "./src/top-bar.ts",
+      "types": "./src/top-bar.tsx",
       "import": "./dist/top-bar.mjs",
       "require": "./dist/top-bar.js"
+    },
+    "./typography": {
+      "types": "./src/typography.ts",
+      "import": "./dist/typography.mjs",
+      "require": "./dist/typography.js"
     }
   },
   "scripts": {
