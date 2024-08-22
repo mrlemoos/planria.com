@@ -1,10 +1,14 @@
 {
   "cSpell.words": [
     "autodocs",
+    "datasource",
     "esnext",
     "latin",
+    "multistatus",
     "nextjs",
-    "planria"
+    "paralleldrive",
+    "planria",
+    "PROPPATCH"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",
