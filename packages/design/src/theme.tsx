@@ -1,11 +1,13 @@
+"use client";
+
 import {
   createContext,
   useContext,
   useEffect,
-  useState,
-  type ReactNode,
-  type JSX,
   useMemo,
+  useState,
+  type JSX,
+  type ReactNode,
 } from "react";
 
 import { THEME_STORAGE_KEY } from "./constants";
@@ -38,9 +40,12 @@ export function ThemeProvider({
   storageKey = THEME_STORAGE_KEY,
   ...props
 }: ThemeProviderProps): JSX.Element {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") {
+      return defaultTheme;
+    }
+    return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -70,6 +75,9 @@ export function ThemeProvider({
     () => ({
       theme,
       setTheme(theme: Theme) {
+        if (typeof window === "undefined") {
+          return;
+        }
         localStorage.setItem(storageKey, theme);
         setTheme(theme);
       },

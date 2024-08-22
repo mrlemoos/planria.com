@@ -61,10 +61,13 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "clsx": "^2.1.1",
     "react": "^18.2.0",
+    "react-hook-form": "^7.52.2",
     "tailwind-merge": "^2.5.2",
     "tailwind-variants": "^0.2.1"
   }
