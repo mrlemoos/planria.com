@@ -1,0 +1,39 @@
+{
+  "name": "@planria/util",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "exports": {
+    "./crypto": {
+      "default": "./src/crypto.ts"
+    },
+    "./errors": {
+      "default": "./src/errors.ts"
+    },
+    "./http": {
+      "default": "./src/http.ts"
+    },
+    "./strings": {
+      "default": "./src/strings.ts"
+    },
+    "./zod": {
+      "default": "./src/zod.ts"
+    }
+  },
+  "devDependencies": {
+    "@planria/eslint-config": "workspace:*",
+    "@planria/tsconfig": "workspace:*",
+    "@types/bcrypt": "^5.0.2",
+    "typescript": "^5.3.3",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "bcrypt": "^5.1.1",
+    "zod": "^3.23.8"
+  }
+}

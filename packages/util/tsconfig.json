@@ -1,0 +1,6 @@
+{
+  "extends": "@planria/tsconfig/tsconfig.base.json",
+  "include": [
+    "src"
+  ]
+}
