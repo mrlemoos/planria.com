@@ -2,6 +2,8 @@
 
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 
+import { Slot } from "@radix-ui/react-slot";
+
 import { cn, stylesheet, type VariantProps } from "./css";
 
 export const createButtonStylesheet = stylesheet.create({
@@ -41,7 +43,9 @@ export const createButtonStylesheet = stylesheet.create({
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof createButtonStylesheet> {}
+    VariantProps<typeof createButtonStylesheet> {
+  asChild?: boolean;
+}
 
 /**
  * Button component.
@@ -62,18 +66,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       type = "button",
+      asChild = false,
       ...props
     },
     forwardedRef
-  ) => (
-    <button
-      {...props}
-      ref={forwardedRef}
-      type={type}
-      className={cn(createButtonStylesheet({ variant, size }))}
-    >
-      {children}
-    </button>
-  )
+  ) => {
+    const Element = asChild ? Slot : "button";
+
+    return (
+      <Element
+        {...props}
+        ref={forwardedRef}
+        type={type}
+        className={cn(createButtonStylesheet({ variant, size }))}
+      >
+        {children}
+      </Element>
+    );
+  }
 );
 Button.displayName = "Button";
