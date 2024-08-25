@@ -32,7 +32,7 @@ export function isErrorCode<T extends string>(
  * @param data - Optional additional data associated with the error.
  * @returns An object containing the error code, error message, and optional data.
  */
-export function handleException<T extends string>(
+export function handleException<T extends string = string>(
   code: ErrorCode<T>,
   message: string,
   data?: Record<string, unknown>

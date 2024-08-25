@@ -1,3 +1,23 @@
+import ky from "ky";
+
+import type { ErrorCode } from "./errors";
+import { isObject } from "./objects";
+
+/**
+ * HTTP client for making HTTP requests.
+ * Under the hood, an instance of the `ky` HTTP client is created.
+ *
+ * @see https://npmjs.com/package/ky
+ */
+export const httpClient = ky.create({
+  throwHttpErrors: true,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  timeout: 10 * 1000, // 10 seconds
+});
+
 /**
  * Hypertext Transfer Protocol (HTTP) response status codes.
  * @see {@link https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}
@@ -375,4 +395,36 @@ export enum HttpStatusCode {
    * to require agreement to Terms of Service before granting full Internet access via a Wi-Fi hotspot).
    */
   NETWORK_AUTHENTICATION_REQUIRED = 511,
+}
+
+/**
+ * Represents an HTTP error.
+ */
+export class HttpError<T extends string> {
+  constructor(
+    public readonly status: HttpStatusCode,
+    public readonly message: string,
+    public readonly errorCode: ErrorCode<T>,
+    public readonly error: unknown
+  ) {}
+}
+
+/**
+ * Checks if the given error is an instance of HttpError.
+ * @param error The error to check.
+ * @returns True if the error is an instance of HttpError, false otherwise.
+ */
+export function isHttpError<T extends string>(
+  error: unknown
+): error is HttpError<T> {
+  return (
+    error instanceof HttpError ||
+    (isObject(error) &&
+      // has errorCode
+      "errorCode" in error &&
+      typeof error.errorCode === "string" &&
+      // has message
+      "message" in error &&
+      typeof error.message === "string")
+  );
 }

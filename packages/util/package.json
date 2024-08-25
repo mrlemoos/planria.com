@@ -20,6 +20,12 @@
     "./http": {
       "default": "./src/http.ts"
     },
+    "./logging": {
+      "default": "./src/logging.ts"
+    },
+    "./runtime": {
+      "default": "./src/runtime.ts"
+    },
     "./strings": {
       "default": "./src/strings.ts"
     },
@@ -36,8 +42,11 @@
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
+    "@asteasolutions/zod-to-openapi": "^7.1.1",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.13",
+    "ky": "^1.7.1",
+    "tslog": "^4.9.3",
     "zod": "^3.23.8"
   }
 }
