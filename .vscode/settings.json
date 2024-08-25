@@ -1,15 +1,19 @@
 {
   "cSpell.words": [
+    "asteasolutions",
     "autodocs",
     "datasource",
+    "dismissable",
     "esnext",
     "hookform",
     "latin",
     "multistatus",
     "nextjs",
+    "openapi",
     "paralleldrive",
     "planria",
-    "PROPPATCH"
+    "PROPPATCH",
+    "tslog"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",
