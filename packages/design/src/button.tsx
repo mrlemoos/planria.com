@@ -27,6 +27,11 @@ export const createButtonStylesheet = stylesheet.create({
         "bg-transparent text-foreground/90 font-normal border border-transparent",
         "hover:bg-accent hover:border-accent"
       ),
+      link: cn(
+        "bg-transparent text-foreground/60 font-normal border border-transparent",
+        "p-0 rounded-none block", // <-- resets the default styles for the link variant
+        "hover:underline hover:text-foreground/80"
+      ),
     },
     // button sizes go here
     size: {
@@ -78,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         ref={forwardedRef}
         type={type}
-        className={cn(createButtonStylesheet({ variant, size }))}
+        className={cn(createButtonStylesheet({ variant, size }), className)}
       >
         {children}
       </Element>

@@ -108,7 +108,7 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(
       <FormItemContext.Provider value={memoizedContextValue}>
         <div
           ref={forwardedRef}
-          className={cn("space-y-2", className)}
+          className={cn("space-y-0.5", className)}
           {...props}
         />
       </FormItemContext.Provider>
@@ -146,6 +146,7 @@ export const FormControl = forwardRef<
 >(({ ...props }, forwardedRef) => {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
+  const isInvalid = !!error;
 
   return (
     <Slot
@@ -154,7 +155,7 @@ export const FormControl = forwardRef<
       aria-describedby={
         error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`
       }
-      aria-invalid={!!error}
+      aria-invalid={isInvalid}
       {...props}
     />
   );
