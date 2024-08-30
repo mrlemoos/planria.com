@@ -5,6 +5,7 @@ import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 import { cn, stylesheet, type VariantProps } from "./css";
+import { Ping } from "./ping";
 
 export const createButtonStylesheet = stylesheet.create({
   base: "px-4 py-2 rounded-full transition-all flex items-center justify-center",
@@ -50,6 +51,7 @@ export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof createButtonStylesheet> {
   asChild?: boolean;
+  isLoading?: boolean;
 }
 
 /**
@@ -72,6 +74,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       type = "button",
       asChild = false,
+      isLoading = false,
       ...props
     },
     forwardedRef
@@ -83,9 +86,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         ref={forwardedRef}
         type={type}
-        className={cn(createButtonStylesheet({ variant, size }), className)}
+        className={cn(
+          createButtonStylesheet({ variant, size }),
+          isLoading && "pointer-events-none cursor-wait",
+          className
+        )}
       >
-        {children}
+        {isLoading ? (
+          <div aria-label="Loading..." className="flex items-center gap-x-3">
+            <Ping />
+            <Ping className="delay-75" />
+            <Ping className="delay-150" />
+          </div>
+        ) : (
+          children
+        )}
       </Element>
     );
   }
