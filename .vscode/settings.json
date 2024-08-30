@@ -3,16 +3,28 @@
     "asteasolutions",
     "autodocs",
     "datasource",
+    "datetime",
+    "Didn",
     "dismissable",
     "esnext",
+    "ewald",
     "hookform",
+    "hoverable",
     "latin",
     "multistatus",
+    "neondatabase",
     "nextjs",
+    "nums",
     "openapi",
     "paralleldrive",
+    "pffmr",
     "planria",
+    "predb",
     "PROPPATCH",
+    "resendable",
+    "shadcn",
+    "superjson",
+    "tanstack",
     "tslog"
   ],
   "editor.codeActionsOnSave": {
@@ -26,5 +38,5 @@
     "className",
     "cn"
   ],
-  "tailwindCSS.experimental.configFile": "tools/tailwindcss/tailwind.config.ts"
+  "tailwindCSS.experimental.configFile": "tools/tailwindcss/tailwind.config.ts",
 }
