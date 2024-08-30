@@ -2,8 +2,11 @@
 
 import {
   ReactNode,
+  createContext,
   forwardRef,
+  useContext,
   useEffect,
+  useMemo,
   useState,
   type ComponentPropsWithoutRef,
   type ElementRef,
@@ -15,6 +18,7 @@ import * as ToastPrimitives from "@radix-ui/react-toast";
 
 import { TOAST_LIMIT, TOAST_REMOVE_DELAY } from "./constants";
 import { cn, stylesheet, type VariantProps } from "./css";
+import { Icon, type IconProps } from "./icon";
 
 export const ToastProvider = ToastPrimitives.Provider;
 
@@ -36,13 +40,19 @@ export const ToastViewport = forwardRef<
 ));
 ToastViewport.displayName = "ToastViewport";
 
-const toastVariants = stylesheet.create({
-  base: "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+export const createToastVariants = stylesheet.create({
+  base: "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-3 pr-4 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
   variants: {
     variant: {
       coherent: "border bg-background text-foreground",
       destructive:
         "destructive group border-destructive bg-destructive text-destructive-foreground",
+      error:
+        "border-transparent md:rounded-l-none md:rounded-r-md border-l-4 border-l-error bg-error-background text-error-foreground",
+      success:
+        "border-transparent md:rounded-l-none md:rounded-r-md border-l-4 border-l-success bg-success-background text-success-foreground",
+      warning:
+        "border-transparent md:rounded-l-none md:rounded-r-md border-l-4 border-l-warning bg-warning-background text-warning-foreground",
     },
   },
   defaultVariants: {
@@ -50,20 +60,58 @@ const toastVariants = stylesheet.create({
   },
 });
 
+interface InternalToastContextValue
+  extends VariantProps<typeof createToastVariants> {}
+
+const InternalToastContext = createContext<InternalToastContextValue | null>(
+  null
+);
+
+function useInternalToastContext() {
+  const context = useContext(InternalToastContext);
+
+  if (!context) {
+    throw new Error(
+      "It was not possible to load the internal context for the Toast component. Please make sure that the Toast composite components are being rendered inside the Toast component so this context is available."
+    );
+  }
+
+  return context;
+}
+
+interface InternalToastProviderProps extends InternalToastContextValue {
+  children: ReactNode;
+}
+
+function InternalToastProvider({
+  children,
+  variant,
+}: InternalToastProviderProps): JSX.Element {
+  const memoizedContextValue = useMemo(() => ({ variant }), [variant]);
+
+  return (
+    <InternalToastContext.Provider value={memoizedContextValue}>
+      {children}
+    </InternalToastContext.Provider>
+  );
+}
+
 export interface ToastProps
   extends ComponentPropsWithoutRef<typeof ToastPrimitives.Root>,
-    VariantProps<typeof toastVariants> {}
+    VariantProps<typeof createToastVariants> {}
 
 export const Toast = forwardRef<
   ElementRef<typeof ToastPrimitives.Root>,
   ToastProps
 >(({ className, variant, ...props }, forwardedRef) => {
   return (
-    <ToastPrimitives.Root
-      ref={forwardedRef}
-      className={cn(toastVariants({ variant }), className)}
-      {...props}
-    />
+    <InternalToastProvider variant={variant}>
+      <ToastPrimitives.Root
+        ref={forwardedRef}
+        className={cn(createToastVariants({ variant }), className)}
+        {...props}
+      />
+    </InternalToastProvider>
   );
 });
 Toast.displayName = "Toast";
@@ -74,9 +122,9 @@ export interface ToastActionProps
 export const ToastAction = forwardRef<
   ElementRef<typeof ToastPrimitives.Action>,
   ToastActionProps
->(({ className, ...props }, ref) => (
+>(({ className, ...props }, forwardedRef) => (
   <ToastPrimitives.Action
-    ref={ref}
+    ref={forwardedRef}
     className={cn(
       "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
       className
@@ -113,9 +161,9 @@ export interface ToastTitleProps
 export const ToastTitle = forwardRef<
   ElementRef<typeof ToastPrimitives.Title>,
   ToastTitleProps
->(({ className, ...props }, ref) => (
+>(({ className, ...props }, forwardedRef) => (
   <ToastPrimitives.Title
-    ref={ref}
+    ref={forwardedRef}
     className={cn("text-sm font-semibold", className)}
     {...props}
   />
@@ -137,13 +185,46 @@ export const ToastDescription = forwardRef<
 ));
 ToastDescription.displayName = "ToastDescription";
 
+export interface ToastIconProps extends Omit<IconProps, "name"> {}
+
+export function ToastIcon({
+  className,
+  ...props
+}: ToastIconProps): JSX.Element | null {
+  const { variant } = useInternalToastContext();
+
+  const iconPropsWithDefaults = {
+    ...props,
+    className: cn(className),
+    size: 18,
+  } satisfies Omit<IconProps, "name">;
+
+  if (variant === "warning" || variant === "error") {
+    return (
+      <Icon
+        {...iconPropsWithDefaults}
+        name="ExclamationTriangle"
+        className={variant === "warning" ? "text-warning" : "text-error"}
+      />
+    );
+  }
+
+  if (variant === "success") {
+    return (
+      <Icon {...iconPropsWithDefaults} name="Check" className="text-success" />
+    );
+  }
+
+  return null;
+}
+
 export type ToastPayload = ComponentPropsWithoutRef<typeof Toast>;
 
 export type ToastActionElement = ReactElement<typeof ToastAction>;
 
 // Inspired by react-hot-toast library
 
-type HotToastPayload = ToastProps & {
+export type HotToastPayload = ToastProps & {
   id: string;
   title?: ReactNode;
   description?: ReactNode;
@@ -369,9 +450,14 @@ export function ToastController(): JSX.Element {
     <ToastProvider>
       {toasts.map(({ id, title, description, action, ...props }) => (
         <Toast key={id} {...props}>
-          <div className="grid gap-1">
-            {title && <ToastTitle>{title}</ToastTitle>}
-            {description && <ToastDescription>{description}</ToastDescription>}
+          <div className="flex items-center gap-1">
+            <ToastIcon />
+            <div className="grid gap-1">
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && (
+                <ToastDescription>{description}</ToastDescription>
+              )}
+            </div>
           </div>
           {action}
           <ToastClose />

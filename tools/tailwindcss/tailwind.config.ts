@@ -1,5 +1,6 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   darkMode: ["class"],
@@ -46,6 +47,21 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        success: {
+          DEFAULT: colors.green[700],
+          background: colors.green[200],
+          foreground: colors.black,
+        },
+        error: {
+          DEFAULT: colors.red[700],
+          background: colors.red[200],
+          foreground: colors.black,
+        },
+        warning: {
+          DEFAULT: colors.amber[500],
+          background: colors.amber[200],
+          foreground: colors.black,
         },
       },
       borderRadius: {
