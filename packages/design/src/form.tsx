@@ -17,18 +17,19 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import {
   Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
   FormProvider,
   useForm,
   useFormContext,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
+  type UseFormReturn,
 } from "react-hook-form";
 
 import { cn } from "./css";
 import { Label } from "./label";
 
-export { useForm, zodResolver };
+export { useForm, zodResolver, type FieldValues, type UseFormReturn };
 
 export const Form = FormProvider;
 
@@ -108,7 +109,7 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(
       <FormItemContext.Provider value={memoizedContextValue}>
         <div
           ref={forwardedRef}
-          className={cn("space-y-0.5", className)}
+          className={cn("space-y-0.5 flex flex-col", className)}
           {...props}
         />
       </FormItemContext.Provider>
@@ -123,12 +124,12 @@ export interface FormLabelProps
 export const FormLabel = forwardRef<
   ElementRef<typeof LabelPrimitive.Root>,
   FormLabelProps
->(({ className, ...props }, ref) => {
+>(({ className, ...props }, forwardedRef) => {
   const { error, formItemId } = useFormField();
 
   return (
     <Label
-      ref={ref}
+      ref={forwardedRef}
       className={cn(error && "text-destructive", className)}
       htmlFor={formItemId}
       {...props}
@@ -207,3 +208,23 @@ export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
   }
 );
 FormMessage.displayName = "FormMessage";
+
+export interface FormFooterProps extends HTMLAttributes<HTMLDivElement> {}
+
+export function FormFooter({
+  children,
+  className,
+  ...props
+}: FormFooterProps): JSX.Element {
+  return (
+    <div
+      {...props}
+      className={cn(
+        "flex flex-col md:flex-row-reverse items-center gap-1 md:gap-2 [&_button]:w-full sm:[&_button]:w-auto",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
