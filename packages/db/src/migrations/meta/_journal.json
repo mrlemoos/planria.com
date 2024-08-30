@@ -43,6 +43,13 @@
       "when": 1724818907428,
       "tag": "0005_tearful_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1725009343144,
+      "tag": "0006_nappy_dust",
+      "breakpoints": true
     }
   ]
 }

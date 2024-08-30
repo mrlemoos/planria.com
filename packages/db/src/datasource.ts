@@ -81,6 +81,9 @@ export const featureFlags = pgTable("planria_feature_flags", {
   value: boolean("pff_value")
     .notNull()
     .$default(() => false),
+  projectId: text("pff_project_id")
+    .notNull()
+    .references(() => projects.projectId),
   createdAt: date("pff_created_at")
     .notNull()
     .$defaultFn(() => sql`now()`),
