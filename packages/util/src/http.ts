@@ -428,3 +428,17 @@ export function isHttpError<T extends string>(
       typeof error.message === "string")
   );
 }
+
+/**
+ * Checks if the given error is a "Failed to fetch" error of type TypeError.
+ *
+ * @param error The error to check.
+ * @returns A boolean indicating whether the error is a "Failed to fetch" error of type TypeError.
+ */
+export function isFailedToFetchError(error: unknown): error is TypeError {
+  return (
+    error instanceof TypeError &&
+    error.message === "Failed to fetch" &&
+    error.name === "TypeError"
+  );
+}

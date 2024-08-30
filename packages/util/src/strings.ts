@@ -1,3 +1,5 @@
+import { ADJECTIVES, NOUNS } from "./constants";
+
 export function containsDigit(value: string): boolean {
   return /\d/.test(value);
 }
@@ -80,3 +82,11 @@ export type CSSIdentifierSelector<T extends string> = `#${T}`;
 export type CSSSelector<T extends string> =
   | CSSClassSelector<T>
   | CSSIdentifierSelector<T>;
+
+export function randomNoun() {
+  return NOUNS[Math.floor(Math.random() * NOUNS.length)];
+}
+
+export function randomAdjective() {
+  return ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+}

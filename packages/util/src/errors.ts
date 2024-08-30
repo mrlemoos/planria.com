@@ -11,10 +11,32 @@ export function isZodError<T>(err: unknown): err is ZodError<T> {
 }
 
 /**
+ * Represents a network error.
+ */
+export class NetworkError extends Error {
+  readonly name = "NetworkError";
+}
+
+export class InvalidObjectError<T> extends Error {
+  readonly name = "InvalidObjectError";
+
+  constructor(
+    public readonly message: string,
+    public readonly validationResult?: T
+  ) {
+    super(message);
+  }
+}
+
+export class UnauthenticatedError extends Error {
+  readonly name = "UnauthenticatedError";
+}
+
+/**
  * Represents an error code with a string prefix and a numeric suffix.
  *
- * @template T - The type of the string prefix.
- * @template U - The type of the numeric suffix.
+ * @template T The type of the string prefix.
+ * @template U The type of the numeric suffix.
  */
 export type ErrorCode<T extends string> = `${T}`;
 
