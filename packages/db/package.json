@@ -1,0 +1,28 @@
+{
+  "name": "@planria/db",
+  "version": "0.1.0",
+  "description": "The internal package which defines the schemas for database with Drizzle ORM 💻",
+  "exports": {
+    ".": "./src/database.ts",
+    "./datasource": "./src/datasource.ts"
+  },
+  "scripts": {
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.4",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "@types/dotenv": "^8.2.0",
+    "drizzle-kit": "^0.24.2"
+  },
+  "peerDependencies": {
+    "@planria/util": "workspace:*"
+  }
+}

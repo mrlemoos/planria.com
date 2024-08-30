@@ -1,0 +1,1 @@
+ALTER TABLE "pff_feature_flags" RENAME TO "planria_feature_flags";

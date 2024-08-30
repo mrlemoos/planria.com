@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1724772856081,
+      "tag": "0000_cooing_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724773367595,
+      "tag": "0001_lying_medusa",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724815868002,
+      "tag": "0002_busy_vision",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1724816782868,
+      "tag": "0003_amused_kylun",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1724818769445,
+      "tag": "0004_nervous_kid_colt",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1724818907428,
+      "tag": "0005_tearful_bishop",
+      "breakpoints": true
+    }
+  ]
+}

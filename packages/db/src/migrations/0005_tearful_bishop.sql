@@ -1,0 +1,1 @@
+ALTER TABLE "planria_users" ALTER COLUMN "pu_email" DROP NOT NULL;

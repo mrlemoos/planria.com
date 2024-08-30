@@ -1,0 +1,351 @@
+{
+  "id": "dbc6e9da-0cbb-420e-88ea-fce6d85b8133",
+  "prevId": "7d3925e1-66c1-42d2-b444-0bdd8e1a7369",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.planria_feature_flag_mutation_records": {
+      "name": "planria_feature_flag_mutation_records",
+      "schema": "",
+      "columns": {
+        "pffmr_mutation_id": {
+          "name": "pffmr_mutation_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pffmr_feature_flag_id": {
+          "name": "pffmr_feature_flag_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pffmr_value": {
+          "name": "pffmr_value",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pffmr_user_id": {
+          "name": "pffmr_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pffmr_created_at": {
+          "name": "pffmr_created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pffmr_updated_at": {
+          "name": "pffmr_updated_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "planria_feature_flag_mutation_records_pffmr_user_id_planria_users_pu_user_id_fk": {
+          "name": "planria_feature_flag_mutation_records_pffmr_user_id_planria_users_pu_user_id_fk",
+          "tableFrom": "planria_feature_flag_mutation_records",
+          "tableTo": "planria_users",
+          "columnsFrom": [
+            "pffmr_user_id"
+          ],
+          "columnsTo": [
+            "pu_user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.planria_feature_flags": {
+      "name": "planria_feature_flags",
+      "schema": "",
+      "columns": {
+        "pff_private_id": {
+          "name": "pff_private_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pff_feature_flag_id": {
+          "name": "pff_feature_flag_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pff_slug": {
+          "name": "pff_slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pff_description": {
+          "name": "pff_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pff_value": {
+          "name": "pff_value",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pff_created_at": {
+          "name": "pff_created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pff_updated_at": {
+          "name": "pff_updated_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.planria_project_access_passes": {
+      "name": "planria_project_access_passes",
+      "schema": "",
+      "columns": {
+        "pap_access_pass_id": {
+          "name": "pap_access_pass_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pap_project_id": {
+          "name": "pap_project_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pap_user_id": {
+          "name": "pap_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pap_created_at": {
+          "name": "pap_created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pap_updated_at": {
+          "name": "pap_updated_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "planria_project_access_passes_pap_project_id_planria_projects_pp_project_id_fk": {
+          "name": "planria_project_access_passes_pap_project_id_planria_projects_pp_project_id_fk",
+          "tableFrom": "planria_project_access_passes",
+          "tableTo": "planria_projects",
+          "columnsFrom": [
+            "pap_project_id"
+          ],
+          "columnsTo": [
+            "pp_project_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "planria_project_access_passes_pap_user_id_planria_users_pu_user_id_fk": {
+          "name": "planria_project_access_passes_pap_user_id_planria_users_pu_user_id_fk",
+          "tableFrom": "planria_project_access_passes",
+          "tableTo": "planria_users",
+          "columnsFrom": [
+            "pap_user_id"
+          ],
+          "columnsTo": [
+            "pu_user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.planria_projects": {
+      "name": "planria_projects",
+      "schema": "",
+      "columns": {
+        "pp_project_id": {
+          "name": "pp_project_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pp_organisation_id": {
+          "name": "pp_organisation_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pp_name": {
+          "name": "pp_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pp_slug": {
+          "name": "pp_slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pp_description": {
+          "name": "pp_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pp_owner_id": {
+          "name": "pp_owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pp_members": {
+          "name": "pp_members",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pp_created_at": {
+          "name": "pp_created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pp_updated_at": {
+          "name": "pp_updated_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.planria_users": {
+      "name": "planria_users",
+      "schema": "",
+      "columns": {
+        "pu_private_id": {
+          "name": "pu_private_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "pu_user_id": {
+          "name": "pu_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_email": {
+          "name": "pu_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_first_name": {
+          "name": "pu_first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_last_name": {
+          "name": "pu_last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_username": {
+          "name": "pu_username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_full_name": {
+          "name": "pu_full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_avatar_url": {
+          "name": "pu_avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_created_at": {
+          "name": "pu_created_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pu_updated_at": {
+          "name": "pu_updated_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "planria_users_pu_private_id_unique": {
+          "name": "planria_users_pu_private_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "pu_private_id"
+          ]
+        },
+        "planria_users_pu_user_id_unique": {
+          "name": "planria_users_pu_user_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "pu_user_id"
+          ]
+        },
+        "planria_users_pu_email_unique": {
+          "name": "planria_users_pu_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "pu_email"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
