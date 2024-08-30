@@ -1,5 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    "CLERK_SECRET_KEY",
+    "DATABASE_URL",
+    "CLERK_SIGN_IN_URL",
+    "CLERK_SIGN_UP_URL"
+  ],
+  "ui": "tui",
   "tasks": {
     "build": {
       "inputs": [
@@ -18,6 +27,22 @@
       "dependsOn": [
         "^lint"
       ]
+    },
+    "db:push": {
+      "cache": false,
+      "persistent": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": false
+    },
+    "db:generate": {
+      "cache": false,
+      "persistent": false
     },
     "dev": {
       "cache": false,
