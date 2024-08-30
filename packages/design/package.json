@@ -74,6 +74,16 @@
       "import": "./dist/password-input.mjs",
       "require": "./dist/password-input.js"
     },
+    "./spinner": {
+      "types": "./src/spinner.tsx",
+      "import": "./dist/spinner.mjs",
+      "require": "./dist/spinner.js"
+    },
+    "./textarea": {
+      "types": "./src/textarea.tsx",
+      "import": "./dist/textarea.mjs",
+      "require": "./dist/textarea.js"
+    },
     "./theme": {
       "types": "./src/theme.tsx",
       "import": "./dist/theme.mjs",
@@ -83,6 +93,11 @@
       "types": "./src/toast.tsx",
       "import": "./dist/toast.mjs",
       "require": "./dist/toast.js"
+    },
+    "./tooltip": {
+      "types": "./src/tooltip.tsx",
+      "import": "./dist/tooltip.mjs",
+      "require": "./dist/tooltip.js"
     },
     "./top-bar": {
       "types": "./src/top-bar.tsx",
@@ -118,6 +133,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-toast": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "clsx": "^2.1.1",
     "react": "^18.2.0",
     "react-hook-form": "^7.52.2",
