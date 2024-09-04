@@ -105,7 +105,10 @@ export const featureFlags = pgTable("planria_feature_flags", {
  * (e.g. development, staging, production, etc).
  */
 export const environments = pgTable("planria_environments", {
-  environmentId: text("pe_environment_id").notNull().primaryKey(),
+  environmentId: text("pe_environment_id")
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => cuid()),
   name: text("pe_name").notNull(),
   projectId: text("pe_project_id")
     .notNull()
