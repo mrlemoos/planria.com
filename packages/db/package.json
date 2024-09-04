@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
-    "@types/dotenv": "^8.2.0",
     "drizzle-kit": "^0.24.2"
   },
   "peerDependencies": {

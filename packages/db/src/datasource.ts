@@ -1,6 +1,13 @@
 import { cuid } from "@planria/util/crypto";
 import { sql } from "drizzle-orm";
-import { boolean, date, pgTable, serial, text } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  date,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 /**
  * The schema which defines the users table in the database. This table is a mirror
@@ -18,10 +25,10 @@ export const users = pgTable("planria_users", {
   lastName: text("pu_last_name").notNull(),
   username: text("pu_username").notNull(),
   avatarURL: text("pu_avatar_url"),
-  createdAt: date("pu_created_at")
+  createdAt: timestamp("pu_created_at", { mode: "string" })
     .notNull()
-    .$defaultFn(() => sql`now()`),
-  updatedAt: date("pu_updated_at")
+    .defaultNow(),
+  updatedAt: timestamp("pu_updated_at", { mode: "string" })
     .notNull()
     .$defaultFn(() => sql`now()`),
 });
@@ -38,10 +45,10 @@ export const projects = pgTable("planria_projects", {
   ownerId: text("pp_owner_id")
     .notNull()
     .references(() => users.userId),
-  createdAt: date("pp_created_at")
+  createdAt: timestamp("pp_created_at", { mode: "string" })
     .notNull()
-    .$defaultFn(() => sql`now()`),
-  updatedAt: date("pp_updated_at")
+    .defaultNow(),
+  updatedAt: timestamp("pp_updated_at", { mode: "string" })
     .notNull()
     .$defaultFn(() => sql`now()`),
 });
@@ -58,10 +65,10 @@ export const projectAccessPasses = pgTable("planria_project_access_passes", {
   accessGrantedTo: text("pap_user_id")
     .notNull()
     .references(() => users.userId),
-  createdAt: date("pap_created_at")
+  createdAt: timestamp("pap_created_at", { mode: "string" })
     .notNull()
-    .$defaultFn(() => sql`now()`),
-  updatedAt: date("pap_updated_at")
+    .defaultNow(),
+  updatedAt: date("pap_updated_at", { mode: "string" })
     .notNull()
     .$defaultFn(() => sql`now()`),
 });
@@ -84,12 +91,31 @@ export const featureFlags = pgTable("planria_feature_flags", {
   projectId: text("pff_project_id")
     .notNull()
     .references(() => projects.projectId),
-  createdAt: date("pff_created_at")
+  createdAt: timestamp("pff_created_at", { mode: "string" })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("pff_updated_at", { mode: "string" })
     .notNull()
     .$defaultFn(() => sql`now()`),
-  updatedAt: date("pff_updated_at")
+});
+
+/**
+ * The schema which defines the environments table in the database. This table stores
+ * the environments which are used to group the feature flags based on the environment
+ * (e.g. development, staging, production, etc).
+ */
+export const environments = pgTable("planria_environments", {
+  environmentId: text("pe_environment_id").notNull().primaryKey(),
+  name: text("pe_name").notNull(),
+  projectId: text("pe_project_id")
     .notNull()
-    .$defaultFn(() => sql`now()`),
+    .references(() => projects.projectId),
+  createdAt: timestamp("pe_created_at", { mode: "string" })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("pe_updated_at", { mode: "string" })
+    .notNull()
+    .$onUpdateFn(() => sql`now()`),
 });
 
 /**
@@ -106,11 +132,12 @@ export const featureFlagMutationRecords = pgTable(
     userId: text("pffmr_user_id")
       .notNull()
       .references(() => users.userId),
-    createdAt: date("pffmr_created_at")
+    createdAt: timestamp("pffmr_created_at", { mode: "string" })
       .notNull()
-      .$defaultFn(() => sql`now()`),
-    updatedAt: date("pffmr_updated_at")
+      .defaultNow(),
+    updatedAt: timestamp("pffmr_updated_at", { mode: "string" })
       .notNull()
-      .$defaultFn(() => sql`now()`),
+      .defaultNow()
+      .$onUpdateFn(() => sql`now()`),
   }
 );
