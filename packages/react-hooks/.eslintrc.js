@@ -1,0 +1,1 @@
+module.exports = require('@planria/eslint-config/react');
