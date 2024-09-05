@@ -5,6 +5,7 @@ import * as schema from "./datasource";
 
 const databaseURL = process.env.DATABASE_URL!;
 
+export * from "drizzle-orm";
+export { schema };
 const sql = neon(databaseURL);
 export const db = drizzle(sql, { schema });
-export { schema };
