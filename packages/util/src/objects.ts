@@ -14,3 +14,13 @@ export function tryParseFormData<T>(formData: FormData): T | null {
     return null;
   }
 }
+
+export function copyFormData(formData: FormData): FormData {
+  const copy = new FormData();
+
+  formData.forEach((value, key) => {
+    copy.set(key, value);
+  });
+
+  return copy;
+}
