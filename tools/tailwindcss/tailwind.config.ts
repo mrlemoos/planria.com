@@ -13,6 +13,10 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ["var(--font-sans)", ...fontFamily.sans],
+      mono: ["var(--font-mono)", ...fontFamily.mono],
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
