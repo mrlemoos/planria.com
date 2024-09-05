@@ -10,10 +10,12 @@
     "ewald",
     "hookform",
     "hoverable",
+    "jsxliterals",
     "latin",
     "multistatus",
     "neondatabase",
     "nextjs",
+    "nofollow",
     "nums",
     "openapi",
     "paralleldrive",
@@ -25,7 +27,8 @@
     "shadcn",
     "superjson",
     "tanstack",
-    "tslog"
+    "tslog",
+    "vaul"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",
