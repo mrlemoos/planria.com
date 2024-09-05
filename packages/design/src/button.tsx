@@ -8,7 +8,10 @@ import { cn, stylesheet, type VariantProps } from "./css";
 import { Ping } from "./ping";
 
 export const createButtonStylesheet = stylesheet.create({
-  base: "px-4 py-2 rounded-full transition-all flex items-center justify-center",
+  base: cn(
+    "px-4 py-2 rounded-full transition-all flex items-center justify-center",
+    "disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-300 disabled:cursor-not-allowed"
+  ),
   variants: {
     // button variants go here
     variant: {
@@ -39,6 +42,7 @@ export const createButtonStylesheet = stylesheet.create({
       sm: "px-3 py-1.5 text-sm",
       md: "px-4 py-2",
       lg: "px-5 py-3",
+      icon: "p-0.5",
     },
   },
   defaultVariants: {

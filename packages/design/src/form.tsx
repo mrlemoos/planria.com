@@ -29,7 +29,13 @@ import {
 import { cn } from "./css";
 import { Label } from "./label";
 
-export { useForm, zodResolver, type FieldValues, type UseFormReturn };
+export {
+  useForm,
+  useFormContext,
+  zodResolver,
+  type FieldValues,
+  type UseFormReturn,
+};
 
 export const Form = FormProvider;
 
@@ -109,7 +115,7 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(
       <FormItemContext.Provider value={memoizedContextValue}>
         <div
           ref={forwardedRef}
-          className={cn("space-y-0.5 flex flex-col", className)}
+          className={cn("space-y-0.5 flex flex-col gap-1", className)}
           {...props}
         />
       </FormItemContext.Provider>
@@ -117,6 +123,22 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(
   }
 );
 FormItem.displayName = "FormItem";
+
+export const FormHint = forwardRef<
+  HTMLParagraphElement,
+  HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, forwardedRef) => {
+  const { formDescriptionId } = useFormField();
+
+  return (
+    <p
+      ref={forwardedRef}
+      id={formDescriptionId}
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
+});
 
 export interface FormLabelProps
   extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {}

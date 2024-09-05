@@ -19,7 +19,7 @@ export function NavigationBar({
   );
 }
 
-export interface NavigationBarLinkProps
+export interface NavigationBarItemProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
   asChild?: boolean;
 }
@@ -29,7 +29,7 @@ export function NavigationBarItem({
   className,
   asChild = false,
   ...props
-}: NavigationBarLinkProps): JSX.Element {
+}: NavigationBarItemProps): JSX.Element {
   const Element = asChild ? Slot : "button";
 
   return (
@@ -38,6 +38,7 @@ export function NavigationBarItem({
       {...props}
       className={cn(
         createButtonStylesheet({ size: "sm", variant: "ghost" }),
+        "font-semibold",
         className
       )}
     >

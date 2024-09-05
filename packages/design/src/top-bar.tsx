@@ -20,7 +20,7 @@ export function TopBar({
         <header
           {...props}
           className={cn(
-            "bg-background/50 border border-zinc-500/30 rounded-full p-2 flex items-center justify-between",
+            "bg-background/50 backdrop-blur-sm border border-zinc-500/30 rounded-full px-2 py-1 flex items-center justify-between",
             className
           )}
         >

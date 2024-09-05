@@ -4,7 +4,7 @@ const createHeadingStylesheet = stylesheet.create({
   base: "scroll-m-20 tracking-tight",
   variants: {
     variant: {
-      h1: "text-4xl font-extrabold lg:text-5xl",
+      h1: "text-3xl md:text-4xl font-extrabold lg:text-5xl",
       h2: "border-b pb-2 text-3xl font-semibold first:mt-0",
       h3: "text-2xl font-semibold",
       h4: "text-xl font-semibold",

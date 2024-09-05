@@ -8,19 +8,32 @@ import {
 
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
-import { cn } from "./css";
+import { VariantProps, cn, stylesheet } from "./css";
+
+export const createAvatarStyles = stylesheet.create({
+  base: "relative flex shrink-0 overflow-hidden rounded-full",
+  variants: {
+    size: {
+      sm: "size-8",
+      md: "size-9",
+      lg: "size-10",
+    },
+  },
+});
 
 export interface AvatarProps
-  extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {}
+  extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+    VariantProps<typeof createAvatarStyles> {}
 
 export const Avatar = forwardRef<
   ElementRef<typeof AvatarPrimitive.Root>,
   AvatarProps
->(({ className, ...props }, forwardedRef) => (
+>(({ className, size, ...props }, forwardedRef) => (
   <AvatarPrimitive.Root
     ref={forwardedRef}
     className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+      createAvatarStyles({ size }),
+      "relative flex shrink-0 overflow-hidden rounded-full",
       className
     )}
     {...props}

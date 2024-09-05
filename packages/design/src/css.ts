@@ -1,6 +1,6 @@
-import { tv } from "tailwind-variants";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { tv } from "tailwind-variants";
 
 /**
  * The stylesheet object maps the Tailwind CSS classes to the corresponding CSS-in-JS object.
@@ -31,4 +31,8 @@ export type { VariantProps } from "tailwind-variants";
  */
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
+}
+
+export function toRem(px: number): string {
+  return `${px / 16}rem`;
 }

@@ -7,7 +7,7 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 import { cn, stylesheet, type VariantProps } from "./css";
 
 const labelVariants = stylesheet.create({
-  base: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  base: "text-base font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 });
 
 export interface LabelProps
