@@ -6,7 +6,10 @@
     "CLERK_SECRET_KEY",
     "DATABASE_URL",
     "CLERK_SIGN_IN_URL",
-    "CLERK_SIGN_UP_URL"
+    "CLERK_SIGN_UP_URL",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET"
   ],
   "ui": "tui",
   "tasks": {
