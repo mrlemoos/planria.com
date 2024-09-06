@@ -3,13 +3,15 @@ import type { JSX } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@planria/design/avatar";
 import { Button } from "@planria/design/button";
 import { Logo } from "@planria/design/logo";
-import { NavigationBar, NavigationBarItem } from "@planria/design/navigation";
+import { NavigationBar } from "@planria/design/navigation";
 import { TopBar } from "@planria/design/top-bar";
 import Link from "next/link";
 
 import { ProjectSelector } from "$/domains/projects/selector";
 import { ForSignedIn, ForSignedOut } from "$/lib/auth/delimiters";
 import { tryGetUser } from "$/lib/auth/server";
+
+import { EnvironmentsAnchor } from "./anchors";
 
 export async function Header(): Promise<JSX.Element> {
   const user = await tryGetUser();
@@ -20,9 +22,7 @@ export async function Header(): Promise<JSX.Element> {
         <Logo size="md" />
       </Link>
       <NavigationBar>
-        <NavigationBarItem asChild={true}>
-          <Link href="/projects">Projects</Link>
-        </NavigationBarItem>
+        <EnvironmentsAnchor />
         <ForSignedIn>
           <ProjectSelector />
         </ForSignedIn>

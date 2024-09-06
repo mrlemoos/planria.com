@@ -3,16 +3,15 @@
 import { useEffect, useId, type JSX, type ReactNode } from "react";
 
 import { Button } from "@planria/design/button";
-import { cn } from "@planria/design/css";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogContentProps,
-  DialogHeader,
-  DialogTitle,
-} from "@planria/design/dialog";
+import { toRem } from "@planria/design/css";
 import { Divider } from "@planria/design/divider";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerProps,
+} from "@planria/design/drawer";
 import {
   Form,
   FormControl,
@@ -25,8 +24,8 @@ import {
 } from "@planria/design/form";
 import { Switch } from "@planria/design/switch";
 import { toast } from "@planria/design/toast";
+import { useMediaQuery } from "@planria/react-hooks/media";
 import { copyFormData } from "@planria/util/objects";
-import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 import { useFormActionSubmissionHandler } from "$/lib/hooks/form";
@@ -38,50 +37,59 @@ import {
 } from "./schema";
 import { toggleFeatureFlagAction } from "./server-actions";
 
-export interface ToggleFeatureFlagContainerProps
-  extends Omit<DialogContentProps, "children"> {
+export interface ToggleDrawerProps
+  extends Pick<DrawerProps, "onClose" | "isOpen"> {
+  featureFlagId: string;
+  slug: string;
+  currentValue: boolean;
+  /**
+   * The tree to be composed with the drawer.
+   */
   children: ReactNode;
 }
 
-export function ToggleFeatureFlagContainer({
+export function ToggleDrawer({
+  currentValue,
+  slug,
   children,
-  className,
-  ...props
-}: ToggleFeatureFlagContainerProps): JSX.Element {
-  const router = useRouter();
+  isOpen,
+  onClose,
+}: ToggleDrawerProps): JSX.Element {
+  const isSmallViewport = useMediaQuery(`(max-width: ${toRem(768)})`);
 
   return (
-    <Dialog
-      variant="dismissable"
-      isOpen={true}
-      onVisibilityUpdate={(event) => {
-        if (!event.isOpen) {
-          router.back();
-        }
-      }}
+    <Drawer
+      isOpen={isOpen}
+      onClose={onClose}
+      direction={isSmallViewport ? "bottom" : "right"}
     >
-      <DialogContent {...props} className={cn(className)}>
-        <DialogHeader>
-          <DialogTitle>Toggle Feature Flag</DialogTitle>
-        </DialogHeader>
+      <DrawerContent>
+        <DrawerHeader>Toggle feature flag</DrawerHeader>
+        <DrawerDescription className="text-sm text-muted-foreground">
+          The feature flag <span className="font-semibold">{slug}</span> is
+          currently {currentValue ? "enabled" : "disabled"}. Please flip the
+          switch below and confirm to toggle the feature flag.
+          <br />
+          You can always revert this by switching the toggle back or closing
+          this dialog.
+        </DrawerDescription>
         {children}
-        <DialogClose />
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 }
 
-export interface ToggleFeatureFlagProps
+export interface ToggleFeatureFlagFormProps
   extends Pick<FeatureFlag, "description" | "featureFlagId" | "slug"> {
   currentValue: boolean;
 }
 
-export function ToggleFeatureFlag({
+export function ToggleFeatureFlagForm({
   currentValue,
   description,
   featureFlagId,
   slug,
-}: ToggleFeatureFlagProps): JSX.Element {
+}: ToggleFeatureFlagFormProps): JSX.Element {
   const [{ ok, message }, formAction] = useFormState(toggleFeatureFlagAction, {
     ok: false,
   });
@@ -115,8 +123,6 @@ export function ToggleFeatureFlag({
       return;
     }
 
-    console.log({ ok, message });
-
     if (ok) {
       toast({
         title: "Flag toggled!",
@@ -137,8 +143,12 @@ export function ToggleFeatureFlag({
     <div className="flex flex-col gap-1">
       <Form {...form}>
         <span className="text-sm text-muted-foreground">
-          Please toggle the switch below and confirm the action. You can always
-          revert this by switching the toggle back or closing this dialog.
+          The feature flag <span className="font-semibold">{slug}</span> is
+          currently {currentValue ? "enabled" : "disabled"}. Please flip the
+          switch below and confirm to toggle the feature flag.
+          <br />
+          You can always revert this by switching the toggle back or closing
+          this dialog.
         </span>
         <div className="flex flex-col gap-3 mt-6">
           <span

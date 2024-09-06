@@ -9,7 +9,7 @@ export function BreakpointMarker(): JSX.Element {
     <div
       aria-hidden="true"
       className={cn(
-        "fixed left-5 bottom-5 bg-background text-foreground backdrop-blur-md rounded-md border border-zinc-200 dark:border-zinc-800 p-3 shadow-xl",
+        "fixed left-5 bottom-5 bg-background text-foreground backdrop-blur-md rounded-md border border-zinc-200 dark:border-zinc-800 p-3 shadow-xl z-50",
         fontMono
       )}
     >

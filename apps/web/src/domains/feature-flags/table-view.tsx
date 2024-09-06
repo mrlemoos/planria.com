@@ -1,7 +1,9 @@
 import {
+  Fragment,
   createContext,
   useContext,
   useMemo,
+  useState,
   type JSX,
   type ReactNode,
 } from "react";
@@ -23,14 +25,13 @@ import {
   TableHeader,
   TableRow,
 } from "@planria/design/table";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { date } from "@planria/util/date";
 
 import { useProjectManagement } from "$/domains/projects/management/context";
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 
-import { date } from "@planria/util/date";
 import { BadgeStatus } from "./badge-status";
+import { ToggleDrawer, ToggleFeatureFlagForm } from "./toggle";
 
 interface FeatureFlagRowContextType
   extends Pick<
@@ -91,52 +92,75 @@ function TableViewHeader(): JSX.Element {
 function TableViewRow(): JSX.Element {
   const { featureFlagId, description, slug, updatedAt, value } =
     useFeatureFlagRow();
-  const pathname = usePathname();
+  const [isToggleDrawerOpen, setToggleDrawerVisibilityStatus] = useState(false);
+
+  function handleOpenToggleDrawer() {
+    return setToggleDrawerVisibilityStatus(true);
+  }
+
+  function handleCloseToggleDrawer() {
+    return setToggleDrawerVisibilityStatus(false);
+  }
 
   return (
-    <TableRow key={featureFlagId}>
-      <TableCell className="font-medium">{slug}</TableCell>
-      <TableCell>{description || "-"}</TableCell>
-      <TableCell>
-        <BadgeStatus isEnabled={value} />
-      </TableCell>
-      <TableCell>
-        <Badge variant="outline">Production</Badge>
-        <Badge variant="outline">Staging</Badge>
-        <Badge variant="outline">Development</Badge>
-      </TableCell>
-      <TableCell>
-        <time dateTime={updatedAt}>
-          {date(updatedAt).format("YYYY MMMM DD [at] HH:mm")}
-        </time>
-      </TableCell>
-      <TableCell>
-        <DropdownMenu position="bottom-center" offset={12}>
-          <DropdownMenuTrigger asChild={true}>
-            <Button variant="ghost" size="icon">
-              <Icon name="DropdownMenu" aria-hidden="true" size={18} />
-              <span className="sr-only">Actions</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem asChild={true}>
-              <Link href={`${pathname}/feature-flags/${featureFlagId}/toggle`}>
+    <Fragment>
+      <ToggleDrawer
+        featureFlagId={featureFlagId}
+        currentValue={value}
+        slug={slug}
+        isOpen={isToggleDrawerOpen}
+        onClose={handleCloseToggleDrawer}
+      >
+        <ToggleFeatureFlagForm
+          featureFlagId={featureFlagId}
+          currentValue={value}
+          slug={slug}
+          description={description}
+        />
+      </ToggleDrawer>
+
+      <TableRow key={featureFlagId}>
+        <TableCell className="font-medium">{slug}</TableCell>
+        <TableCell>{description || "-"}</TableCell>
+        <TableCell>
+          <BadgeStatus isEnabled={value} />
+        </TableCell>
+        <TableCell>
+          <Badge variant="outline">Production</Badge>
+          <Badge variant="outline">Staging</Badge>
+          <Badge variant="outline">Development</Badge>
+        </TableCell>
+        <TableCell>
+          <time dateTime={updatedAt}>
+            {date(updatedAt).format("YYYY MMMM DD [at] HH:mm")}
+          </time>
+        </TableCell>
+        <TableCell>
+          <DropdownMenu position="bottom-center" offset={12}>
+            <DropdownMenuTrigger asChild={true}>
+              <Button variant="ghost" size="icon">
+                <Icon name="DropdownMenu" aria-hidden="true" size={18} />
+                <span className="sr-only">Actions</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
                 <Icon name="Switch" aria-hidden="true" size={16} />
                 Toggle
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Icon name="Pencil2" aria-hidden="true" size={16} />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Icon name="Trash" aria-hidden="true" size={16} />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableCell>
-    </TableRow>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Icon name="Pencil2" aria-hidden="true" size={16} />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Icon name="Trash" aria-hidden="true" size={16} />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </TableCell>
+      </TableRow>
+    </Fragment>
   );
 }
 
