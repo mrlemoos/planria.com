@@ -19,7 +19,9 @@ export const createLogoStylesheet = stylesheet.create({
       lg: cn("size-10 text-xl font-medium"),
     },
     variant: {
-      coherent: cn("bg-foreground text-background"),
+      coherent: cn(
+        "bg-black text-white border border-black dark:border-zinc-300/30"
+      ),
       outlined: cn(
         "bg-transparent text-zinc-500 border border-zinc-500 font-medium"
       ),
