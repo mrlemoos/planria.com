@@ -29,7 +29,8 @@
     "superjson",
     "tanstack",
     "tslog",
-    "vaul"
+    "vaul",
+    "zustand"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",
