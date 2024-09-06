@@ -1,8 +1,9 @@
-import { type JSX, type ReactNode } from "react";
+import { Fragment, type JSX, type ReactNode } from "react";
 
 import { notFound } from "next/navigation";
 
 import { ProjectManagementProvider } from "$/domains/projects/management/context";
+import { Aside } from "$/domains/shared/aside/aside";
 import {
   fetchProjectById,
   fetchProjectFeatureFlagsByProjectId,
@@ -32,12 +33,19 @@ export default async function Page({
   );
 
   return (
-    <ProjectManagementProvider
-      {...foundProject}
-      featureFlags={foundFeatureFlags}
-    >
-      {children}
-      {toggle}
-    </ProjectManagementProvider>
+    <Fragment>
+      <Aside
+        projectName={foundProject.name}
+        projectSlug={foundProject.slug}
+        projectDescription={foundProject.description ?? undefined}
+      />
+      <ProjectManagementProvider
+        {...foundProject}
+        featureFlags={foundFeatureFlags}
+      >
+        {children}
+        {toggle}
+      </ProjectManagementProvider>
+    </Fragment>
   );
 }
