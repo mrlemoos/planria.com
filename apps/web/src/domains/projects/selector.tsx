@@ -1,6 +1,5 @@
 import type { JSX } from "react";
 
-import { getUser } from "$/lib/auth/server";
 import { fetchProjectsOwnedByAndAssociatedWithCurrentUser } from "$/server/data/projects";
 
 import {
@@ -11,15 +10,11 @@ import {
 
 export async function ProjectSelector(): Promise<JSX.Element> {
   const projects = await fetchProjectsOwnedByAndAssociatedWithCurrentUser();
-  const user = await getUser();
 
   return (
-    <ProjectSelectorMenu>
+    <ProjectSelectorMenu projects={projects}>
       <ProjectSelectorMenuTrigger />
-      <ProjectSelectorMenuContent
-        currentUserId={user!.userId}
-        projects={projects}
-      />
+      <ProjectSelectorMenuContent />
     </ProjectSelectorMenu>
   );
 }
