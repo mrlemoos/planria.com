@@ -60,5 +60,19 @@ export function createMetadata({ openGraph, twitter, noIndex = false, ...metadat
     generator: `${APP_NAME} ${APP_VERSION}`,
     ...metadata,
     ...(noIndex ? { robots: 'noindex nofollow' } : {}),
+    icons: {
+      icon: [
+        {
+          media: '(prefers-color-scheme: light)',
+          url: '/logos/planria@light.png',
+          href: '/logos/planria@light.png',
+        },
+        {
+          media: '(prefers-color-scheme: dark)',
+          url: '/logos/planria@dark.png',
+          href: '/logos/planria@dark.png',
+        },
+      ],
+    }
   }
 }
