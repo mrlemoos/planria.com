@@ -52,7 +52,6 @@ export async function getSession(): Promise<UserSession> {
     log.debug(
       `Failed to validate and parse the "session" symbol at asynchronous call getSession(). See the original error as follows: ${error}`
     );
-
     if (isZodError(error)) {
       throw new InvalidObjectError(
         'Failed to validate and parse the "session" symbol at asynchronous call getSession()',
