@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
  * See an example below:
  *
  * ```tsx
- * import { useClipboard } from "@planria/react-hooks";
+ * import { useClipboard } from "@planria/react-hooks/clipboard";
  *
  * // ...
  *
