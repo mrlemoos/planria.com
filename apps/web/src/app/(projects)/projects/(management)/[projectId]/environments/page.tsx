@@ -15,7 +15,9 @@ export default async function Page({
 
   return (
     <div className="mx-auto container">
-      <h1 className={cn(heading({ variant: "h3" }), "mt-10")}>Environments</h1>
+      <h1 className={cn(heading({ variant: "h3" }), "mt-20 mb-10")}>
+        Environments
+      </h1>
       <div>
         <EnvironmentsListView environments={environments} />
       </div>
