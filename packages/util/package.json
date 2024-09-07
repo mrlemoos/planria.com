@@ -4,7 +4,7 @@
   "sideEffects": false,
   "license": "Apache-2.0",
   "scripts": {
-    "test": "vitest run",
+    "test": "vitest run --reporter=verbose",
     "test:watch": "vitest"
   },
   "exports": {
