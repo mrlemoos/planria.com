@@ -1,5 +1,6 @@
 import { z } from "@planria/util/zod";
 import { createEnv } from "@t3-oss/env-nextjs";
+import { vercel } from "@t3-oss/env-nextjs/presets";
 
 const envConfig = createEnv({
   // These are server-side environment variables, not available on the client
@@ -34,6 +35,7 @@ const envConfig = createEnv({
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
+  extends: [vercel()],
 });
 
 export type EnvironmentConfiguration = typeof envConfig;
