@@ -6,6 +6,8 @@ import type { Stripe } from "stripe";
 import { stripe } from "$/lib/stripe/server";
 import { env } from "$/server/env";
 
+import { STRIPE_SIGNATURE_HEADER } from "./constants";
+
 const permittedEvents = [
   "checkout.session.completed",
   "payment_intent.succeeded",
@@ -18,7 +20,7 @@ export async function POST(req: Request): Promise<Response> {
   try {
     event = stripe.webhooks.constructEvent(
       await (await req.blob()).text(),
-      req.headers.get("stripe-signature") as string,
+      req.headers.get(STRIPE_SIGNATURE_HEADER) as string,
       env("STRIPE_WEBHOOK_SECRET") as string
     );
   } catch (err) {
@@ -36,7 +38,7 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   // Successfully constructed event.
-  console.debug(
+  log.debug(
     `✅ The event has successfully been created. [event.id: ${event.id}]`
   );
 
