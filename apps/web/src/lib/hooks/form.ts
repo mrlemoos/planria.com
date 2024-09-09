@@ -31,13 +31,13 @@ import type { FieldValues, UseFormReturn } from "@planria/design/form";
  *
  * By using this custom hook, you can simplify the form submission logic to:
  * ```tsx
- * import { useFormActionSubmissionHandler } from "@planria/design/form";
+ * import { useFormAction } from "@planria/design/form";
  *
  * // ...
  *
  * const [formState, formAction] = useFormState(myServerFormAction, initialState);
  * const form = useForm({ ... });
- * const { boundFormRef, handleSubmit } = useFormActionSubmissionHandler(form, formAction);
+ * const { boundFormRef, handleSubmit } = useFormAction(form, formAction);
  *
  * return (
  *   <form
@@ -53,7 +53,7 @@ import type { FieldValues, UseFormReturn } from "@planria/design/form";
  * @param formAction The function to be called when the form is submitted.
  * @returns An object containing the `handleSubmit` function to be used as the form's `onSubmit` handler.
  */
-export function useFormActionSubmissionHandler<T extends FieldValues>(
+export function useFormAction<T extends FieldValues>(
   form: UseFormReturn<T>,
   formAction: (formData: FormData) => void,
   options?: {
