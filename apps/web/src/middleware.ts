@@ -8,9 +8,8 @@ export const config: MiddlewareConfig = {
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     // Always run for API routes
     "/(api|trpc)(.*)",
-    "/^sign-in(.*)",
-    "/^sign-up(.*)",
-    "/^blog(.*)",
+    // Skip routes nested in "/sign-in", "/sign-up", and "/blog"
+    "/((?!sign-in|sign-up|blog).*)",
   ],
 };
 
