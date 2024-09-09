@@ -38,7 +38,7 @@ export const users = pgTable("planria_users", {
  * store the projects created by the users.
  */
 export const projects = pgTable("planria_projects", {
-  projectId: text("pp_project_id").notNull().primaryKey(),
+  projectId: text("pp_project_id").notNull().unique().primaryKey(),
   name: text("pp_name").notNull(),
   slug: text("pp_slug").notNull(),
   description: text("pp_description"),
@@ -78,14 +78,14 @@ export const projectAccessPasses = pgTable("planria_project_access_passes", {
  * the feature flags which are used to enable or disable features in the application.
  */
 export const featureFlags = pgTable("planria_feature_flags", {
-  privateId: serial("pff_private_id").notNull().primaryKey(),
-
+  privateId: serial("pff_private_id").unique().notNull().primaryKey(),
   featureFlagId: text("pff_feature_flag_id")
-    .notNull()
-    .$defaultFn(() => cuid()),
+    .$defaultFn(() => cuid())
+    .unique()
+    .notNull(),
   slug: text("pff_slug").notNull(),
   description: text("pff_description"),
-  value: boolean("pff_value")
+  defaultValue: boolean("pff_default_value")
     .notNull()
     .$default(() => false),
   projectId: text("pff_project_id")
@@ -106,9 +106,10 @@ export const featureFlags = pgTable("planria_feature_flags", {
  */
 export const environments = pgTable("planria_environments", {
   environmentId: text("pe_environment_id")
+    .$defaultFn(() => cuid())
     .notNull()
     .primaryKey()
-    .$defaultFn(() => cuid()),
+    .unique(),
   name: text("pe_name").notNull(),
   projectId: text("pe_project_id")
     .notNull()
@@ -120,6 +121,36 @@ export const environments = pgTable("planria_environments", {
     .notNull()
     .$onUpdateFn(() => sql`now()`),
 });
+
+/**
+ * The schema which defines the table to store the value of the feature flags ID-ed by
+ * the environment and the feature flag ID. This table is used to store the value of the
+ * feature flags in the environments.
+ */
+export const environmentFeatureFlags = pgTable(
+  "planria_environment_feature_flags",
+  {
+    environmentFeatureFlagId: text("peff_environment_feature_flag_id")
+      .notNull()
+      .$defaultFn(() => cuid())
+      .unique()
+      .primaryKey(),
+    environmentId: text("peff_environment_id")
+      .notNull()
+      .references(() => environments.environmentId),
+    // featureFlagId: text("peff_feature_flag_id")
+    //   .notNull()
+    //   .references(() => featureFlags.featureFlagId),
+    featureFlagId: text("peff_feature_flag_id").notNull(),
+    value: boolean("peff_value").default(false),
+    createdAt: timestamp("peff_created_at", { mode: "string" })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("peff_updated_at", { mode: "string" })
+      .notNull()
+      .$onUpdateFn(() => sql`now()`),
+  }
+);
 
 /**
  * The schema which defines the mutation records (aka the history) of the feature flags
