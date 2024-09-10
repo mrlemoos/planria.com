@@ -5,7 +5,7 @@ export const featureFlagSchema = z.object({
   featureFlagId: z.string().min(1).cuid2(),
   slug: z.string().min(1),
   description: z.string().nullable(),
-  value: z.boolean(),
+  defaultValue: z.boolean(),
   projectId: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
