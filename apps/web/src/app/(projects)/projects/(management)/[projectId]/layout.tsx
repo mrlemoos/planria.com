@@ -2,12 +2,14 @@ import { Fragment, type JSX, type ReactNode } from "react";
 
 import { notFound } from "next/navigation";
 
+import { EnvironmentsProvider } from "$/domains/environments/context";
 import { ProjectManagementProvider } from "$/domains/projects/management/context";
 import { Aside } from "$/domains/shared/aside/aside";
 import {
   fetchProjectById,
   fetchProjectFeatureFlagsByProjectId,
 } from "$/server/data/projects";
+import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
 // https://nextjs.org/docs/app/building-your-application/routing/parallel-routes
 export default async function Page({
@@ -28,9 +30,10 @@ export default async function Page({
     return notFound();
   }
 
-  const foundFeatureFlags = await fetchProjectFeatureFlagsByProjectId(
-    projectId
-  );
+  const [foundFeatureFlags, foundEnvironments] = await Promise.all([
+    fetchProjectFeatureFlagsByProjectId(projectId),
+    fetchEnvironmentsByProjectId(projectId),
+  ]);
 
   return (
     <Fragment>
@@ -43,8 +46,10 @@ export default async function Page({
         {...foundProject}
         featureFlags={foundFeatureFlags}
       >
-        {children}
-        {toggle}
+        <EnvironmentsProvider environments={foundEnvironments}>
+          {children}
+          {toggle}
+        </EnvironmentsProvider>
       </ProjectManagementProvider>
     </Fragment>
   );

@@ -4,6 +4,7 @@ import { Button } from "@planria/design/button";
 import { cn } from "@planria/design/css";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -12,8 +13,8 @@ import {
 import { heading } from "@planria/design/typography";
 
 import { EnvironmentsProvider } from "$/domains/environments/context";
-import { EnvironmentsListView } from "$/domains/environments/list-view";
 import { NewEnvironment } from "$/domains/environments/new";
+import { EnvironmentsTableView } from "$/domains/environments/table-view";
 import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
 export default async function Page({
@@ -37,13 +38,14 @@ export default async function Page({
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Create environment</DialogTitle>
+                <DialogClose />
               </DialogHeader>
               <NewEnvironment />
             </DialogContent>
           </Dialog>
         </div>
         <div>
-          <EnvironmentsListView />
+          <EnvironmentsTableView />
         </div>
       </div>
     </EnvironmentsProvider>
