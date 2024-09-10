@@ -96,7 +96,10 @@ export async function toggleFeatureFlagAction(
 // #region updateFeatureFlagAction()
 
 interface UpdateFeatureFlagActionFormState {
-  updatedFeatureFlag?: Pick<FeatureFlag, "slug" | "description" | "value">;
+  updatedFeatureFlag?: Pick<
+    FeatureFlag,
+    "slug" | "description" | "defaultValue"
+  >;
   message?: string;
   issues?: string[];
   ok: boolean;
@@ -138,7 +141,7 @@ export async function updateFeatureFlagAction(
       updatedFeatureFlag: {
         slug: updatedFeatureFlag.slug,
         description: updatedFeatureFlag.description,
-        value: updatedFeatureFlag.value,
+        defaultValue: updatedFeatureFlag.defaultValue,
       },
       message: "Feature flag updated successfully",
       ok: true,

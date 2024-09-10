@@ -15,7 +15,7 @@ export function SDKPreview(): JSX.Element {
   const { watch } = useFormContext<CreateFeatureFlagFormValues>();
 
   const slug = watch("slug");
-  const value = watch("value");
+  const value = watch("defaultValue");
 
   return (
     <CodeSnippetProvider

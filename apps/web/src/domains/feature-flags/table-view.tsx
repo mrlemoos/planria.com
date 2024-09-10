@@ -36,7 +36,7 @@ import { ToggleDrawer, ToggleFeatureFlagForm } from "./toggle";
 interface FeatureFlagRowContextType
   extends Pick<
     FeatureFlag,
-    "description" | "featureFlagId" | "slug" | "value" | "updatedAt"
+    "description" | "featureFlagId" | "slug" | "defaultValue" | "updatedAt"
   > {}
 
 const FeatureFlagRowContext = createContext<FeatureFlagRowContextType | null>(
@@ -78,7 +78,7 @@ function TableViewHeader(): JSX.Element {
       <TableRow>
         <TableHead>Slug</TableHead>
         <TableHead>Description</TableHead>
-        <TableHead>Status</TableHead>
+        <TableHead>Default status</TableHead>
         <TableHead>Environments</TableHead>
         <TableHead>Last update</TableHead>
         <TableHead>
@@ -90,7 +90,7 @@ function TableViewHeader(): JSX.Element {
 }
 
 function TableViewRow(): JSX.Element {
-  const { featureFlagId, description, slug, updatedAt, value } =
+  const { featureFlagId, description, slug, updatedAt, defaultValue } =
     useFeatureFlagRow();
   const [isToggleDrawerOpen, setToggleDrawerVisibilityStatus] = useState(false);
 
@@ -106,14 +106,14 @@ function TableViewRow(): JSX.Element {
     <Fragment>
       <ToggleDrawer
         featureFlagId={featureFlagId}
-        currentValue={value}
+        currentValue={defaultValue}
         slug={slug}
         isOpen={isToggleDrawerOpen}
         onClose={handleCloseToggleDrawer}
       >
         <ToggleFeatureFlagForm
           featureFlagId={featureFlagId}
-          currentValue={value}
+          currentValue={defaultValue}
           slug={slug}
           description={description}
         />
@@ -123,7 +123,7 @@ function TableViewRow(): JSX.Element {
         <TableCell className="font-medium">{slug}</TableCell>
         <TableCell>{description || "-"}</TableCell>
         <TableCell>
-          <BadgeStatus isEnabled={value} />
+          By default it is <BadgeStatus isEnabled={defaultValue} />
         </TableCell>
         <TableCell>
           <Badge variant="outline">Production</Badge>
@@ -180,12 +180,12 @@ export function TableView(): JSX.Element {
       <TableViewHeader />
       <TableBody>
         {featureFlags.map(
-          ({ featureFlagId, slug, value, description, updatedAt }) => (
+          ({ featureFlagId, slug, defaultValue, description, updatedAt }) => (
             <FeatureFlagRowProvider
               key={featureFlagId}
               featureFlagId={featureFlagId}
               slug={slug}
-              value={value}
+              defaultValue={defaultValue}
               description={description}
               updatedAt={updatedAt}
             >
