@@ -175,3 +175,35 @@ export const featureFlagMutationRecords = pgTable(
       .$onUpdateFn(() => sql`now()`),
   }
 );
+
+/**
+ * The schema which defines the user payment accounts table in the database. This table
+ * stores the payment accounts of the users which are used to manage the payment accounts
+ * of the users.
+ */
+export const userPaymentAccounts = pgTable("planria_user_payment_accounts", {
+  paymentAccountId: text("pupa_payment_account_id")
+    .$defaultFn(() => cuid())
+    .notNull()
+    .unique()
+    .primaryKey(),
+  userId: text("pupa_user_id")
+    .notNull()
+    .references(() => users.userId),
+  stripeCustomerId: text("pupa_stripe_customer_id")
+    .$defaultFn(() => cuid())
+    .notNull()
+    .unique(),
+  stripeSubscriptionId: text("pupa_stripe_subscription_id"),
+  stripePriceId: text("pupa_price_id"),
+  stripeCurrentPeriodEnd: timestamp("pupa_current_period_end", {
+    mode: "string",
+  }),
+  createdAt: timestamp("pupa_created_at", { mode: "string" })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("pupa_updated_at", { mode: "string" })
+    .notNull()
+    .defaultNow()
+    .$onUpdateFn(() => sql`now()`),
+});
