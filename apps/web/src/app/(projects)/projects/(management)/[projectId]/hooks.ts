@@ -1,5 +1,5 @@
 import type { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 /**
  * Custom hook for project management navigation.
@@ -20,4 +20,13 @@ export function useProjectManagementRouter() {
   }
 
   return push;
+}
+
+/**
+ * A custom hook to get the project ID from the URL.
+ */
+export function useProjectId() {
+  const params = useParams<{ projectId: string }>();
+
+  return params.projectId;
 }
