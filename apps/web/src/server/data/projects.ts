@@ -196,7 +196,7 @@ export async function createProjectFeatureFlag(
 export async function updateProjectFeatureFlag(
   featureFlagId: string,
   payload: Partial<
-    Pick<InferInsertModel<typeof featureFlags>, "description" | "value">
+    Pick<InferInsertModel<typeof featureFlags>, "description" | "defaultValue">
   >
 ): Promise<FeatureFlag | null> {
   try {
@@ -217,33 +217,5 @@ export async function updateProjectFeatureFlag(
       `An error occurred at updateProjectFeatureFlag() while attempting to update the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
     );
     return null;
-  }
-}
-
-/**
- * Toggles the feature flag identified by the given featureFlagId.
- * @param featureFlagId The ID of the feature flag to toggle.
- * @param payload The payload containing the partial update for the feature flag value.
- * @returns A promise that resolves to a boolean indicating whether the feature flag was toggled successfully.
- */
-export async function toggleProjectFeatureFlag(
-  featureFlagId: string,
-  payload: Partial<Pick<InferInsertModel<typeof featureFlags>, "value">>
-): Promise<boolean> {
-  try {
-    await db
-      .update(featureFlags)
-      .set({
-        value: payload.value,
-        updatedAt: sql`now()`,
-      })
-      .where(eq(featureFlags.featureFlagId, featureFlagId));
-    log.debug(`Toggled the feature flag. [featureFlagId: "${featureFlagId}"]`);
-    return true;
-  } catch (error) {
-    log.error(
-      `An error occurred at toggleProjectFeatureFlag() while attempting to toggle the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
-    );
-    return false;
   }
 }

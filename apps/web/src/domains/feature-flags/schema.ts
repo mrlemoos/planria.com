@@ -26,15 +26,3 @@ export const updateFeatureFlagSchema = featureFlagSchema.pick({
 export type UpdateFeatureFlagFormValues = Output<
   typeof updateFeatureFlagSchema
 >;
-
-// #region Toggle Feature Flag
-
-export const toggleFeatureFlagSchema = featureFlagSchema.pick({
-  featureFlagId: true,
-  defaultValue: true,
-  slug: true,
-});
-
-export type ToggleFeatureFlagFormValues = Output<
-  typeof toggleFeatureFlagSchema
->;
