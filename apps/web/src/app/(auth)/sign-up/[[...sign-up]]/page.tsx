@@ -188,7 +188,7 @@ export default function Page(): JSX.Element {
                             <Clerk.Input
                               type="otp"
                               className="flex justify-center has-[:disabled]:opacity-50"
-                              autoSubmit
+                              autoSubmit={true}
                               render={({ value, status }) => (
                                 <div
                                   data-status={status}
@@ -214,8 +214,8 @@ export default function Page(): JSX.Element {
                           <Clerk.FieldError className="block text-center text-sm text-destructive" />
                         </Clerk.Field>
                         <SignUp.Action
-                          asChild
-                          resend
+                          asChild={true}
+                          resend={true}
                           className="text-muted-foreground"
                           fallback={({ resendableAfter }) => (
                             <Button variant="link" size="sm" disabled={true}>
