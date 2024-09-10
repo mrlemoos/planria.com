@@ -2,6 +2,7 @@ import { cache } from "react";
 
 import { db } from "@planria/db";
 import { userPaymentAccounts, users } from "@planria/db/datasource";
+import { date } from "@planria/util/date";
 import { log } from "@planria/util/logging";
 import { InferInsertModel, eq } from "drizzle-orm";
 
@@ -146,5 +147,39 @@ export async function updateUserPaymentAccountBySubscriptionId(
       `An error occurred at updateUserPaymentAccountBySubscriptionId(). We did not update the user payment account. See the original error: ${error}`
     );
     return null;
+  }
+}
+
+export async function hasUserValidSubscription(
+  userId: string
+): Promise<{ isValid: boolean; paymentAccountId?: string }> {
+  try {
+    const [foundPaymentAccount] = await db
+      .select()
+      .from(userPaymentAccounts)
+      .where(eq(userPaymentAccounts.userId, userId))
+      .limit(1);
+
+    if (!foundPaymentAccount) {
+      return {
+        isValid: false,
+      };
+    }
+
+    const isSubscriptionValid =
+      !!foundPaymentAccount.stripeCurrentPeriodEnd &&
+      date(foundPaymentAccount.stripeCurrentPeriodEnd).toDate().getTime() +
+        84_400_000 /* aka a day in milliseconds */ >
+        Date.now();
+
+    return {
+      isValid: isSubscriptionValid,
+      paymentAccountId: foundPaymentAccount.paymentAccountId,
+    };
+  } catch (error) {
+    log.error(
+      `An error occurred at hasUserValidSubscription("${userId}"). We did not find the user payment account. See the original error: ${error}`
+    );
+    return { isValid: false };
   }
 }
