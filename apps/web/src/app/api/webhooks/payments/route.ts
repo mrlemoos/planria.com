@@ -15,12 +15,6 @@ import {
 } from "$/server/data/users";
 import { env } from "$/server/env";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 function tryCreateWebhookEvent(
   raw: string,
   signature: string
