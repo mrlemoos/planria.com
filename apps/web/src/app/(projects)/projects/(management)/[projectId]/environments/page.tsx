@@ -17,6 +17,8 @@ import { NewEnvironment } from "$/domains/environments/new";
 import { EnvironmentsTableView } from "$/domains/environments/table-view";
 import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page({
   params,
 }: {
