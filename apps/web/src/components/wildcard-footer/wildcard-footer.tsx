@@ -28,7 +28,7 @@ function FooterLink({
 
 const currentYear = new Date().getFullYear();
 
-export function BoxFooter(): JSX.Element {
+export function WildcardFooter(): JSX.Element {
   return (
     <Footer>
       <FooterSection className="flex flex-col justify-center items-center gap-3">

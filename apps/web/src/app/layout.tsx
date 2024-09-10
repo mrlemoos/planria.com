@@ -5,8 +5,8 @@ import { ThemeProvider } from "@planria/design/theme";
 import { ToastController } from "@planria/design/toast";
 import type { Metadata } from "next";
 
-import { BoxFooter } from "$/components/box-footer";
 import { BreakpointMarker } from "$/components/dev/breakpoint/marker";
+import { WildcardFooter } from "$/components/wildcard-footer";
 import { AuthProvider } from "$/lib/auth/provider";
 import { fontSans } from "$/lib/styles/fonts";
 import "$/lib/styles/globals.css";
@@ -34,7 +34,7 @@ export default function Layout({
             )}
           >
             {children}
-            <BoxFooter />
+            <WildcardFooter />
             <ToastController />
             {env("NODE_ENV") === "development" && <BreakpointMarker />}
           </body>
