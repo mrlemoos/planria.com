@@ -11,8 +11,6 @@ import { ProjectSelector } from "$/domains/projects/selector";
 import { ForSignedIn, ForSignedOut } from "$/lib/auth/delimiters";
 import { tryGetUser } from "$/lib/auth/server";
 
-import { EnvironmentsAnchor } from "./anchors";
-
 export async function Header(): Promise<JSX.Element> {
   const user = await tryGetUser();
 
@@ -22,7 +20,6 @@ export async function Header(): Promise<JSX.Element> {
         <Logo size="md" />
       </Link>
       <NavigationBar>
-        <EnvironmentsAnchor />
         <ForSignedIn>
           <ProjectSelector />
         </ForSignedIn>
