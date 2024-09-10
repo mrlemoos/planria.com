@@ -9,7 +9,7 @@ export const config: MiddlewareConfig = {
     // Always run for API routes
     "/(api|trpc)(.*)",
     // Skip routes nested in "/sign-in", "/sign-up", and "/blog"
-    "/((?!sign-in|sign-up|blog).*)",
+    "/((?!sign-in|sign-up|blog|pricing).*)",
   ],
 };
 
