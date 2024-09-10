@@ -29,7 +29,7 @@ import { randomAdjective, randomNoun } from "@planria/util/strings";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { useProjectManagementRouter } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
-import { useFormActionSubmissionHandler } from "$/lib/hooks/form";
+import { useFormAction } from "$/lib/hooks/form";
 import { useUser } from "$/lib/hooks/user";
 
 import { createProjectSchema, type CreateProjectFormValues } from "./schema";
@@ -73,10 +73,7 @@ export function NewProject({ children }: NewProjectProps): JSX.Element {
     },
   });
   const { toast } = useToast();
-  const { boundFormRef, handleSubmit } = useFormActionSubmissionHandler(
-    form,
-    formAction
-  );
+  const { boundFormRef, handleSubmit } = useFormAction(form, formAction);
   const pushToProject = useProjectManagementRouter();
 
   useEffect(() => {

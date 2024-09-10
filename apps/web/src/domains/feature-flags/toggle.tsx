@@ -28,7 +28,7 @@ import { useMediaQuery } from "@planria/react-hooks/media";
 import { copyFormData } from "@planria/util/objects";
 import { useFormState } from "react-dom";
 
-import { useFormActionSubmissionHandler } from "$/lib/hooks/form";
+import { useFormAction } from "$/lib/hooks/form";
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 
 import {
@@ -102,20 +102,16 @@ export function ToggleFeatureFlagForm({
     },
   });
   const isSwitchEnabled = form.watch("value");
-  const { boundFormRef, handleSubmit } = useFormActionSubmissionHandler(
-    form,
-    formAction,
-    {
-      composeFormData(curr) {
-        const formData = copyFormData(curr);
-        // workaround for the switch component not setting the value to be
-        // carried on by the form data object. Why? The switch is a boolean but
-        // form data doesn't support anything but strings.
-        formData.set("value", String(form.watch("value")));
-        return formData;
-      },
-    }
-  );
+  const { boundFormRef, handleSubmit } = useFormAction(form, formAction, {
+    composeFormData(curr) {
+      const formData = copyFormData(curr);
+      // workaround for the switch component not setting the value to be
+      // carried on by the form data object. Why? The switch is a boolean but
+      // form data doesn't support anything but strings.
+      formData.set("value", String(form.watch("value")));
+      return formData;
+    },
+  });
   const descriptionId = useId();
 
   useEffect(() => {

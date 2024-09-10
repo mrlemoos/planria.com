@@ -22,7 +22,7 @@ import { copyFormData } from "@planria/util/objects";
 import { useFormState } from "react-dom";
 
 import { useProjectManagement } from "$/domains/projects/management/context";
-import { useFormActionSubmissionHandler } from "$/lib/hooks/form";
+import { useFormAction } from "$/lib/hooks/form";
 
 import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "./constants";
 import { SDKPreview } from "./preview";
@@ -49,20 +49,16 @@ export function NewFeatureFlagForm(): JSX.Element {
       value: false,
     },
   });
-  const { boundFormRef, handleSubmit } = useFormActionSubmissionHandler(
-    form,
-    formAction,
-    {
-      composeFormData(curr) {
-        const formData = copyFormData(curr);
-        // workaround for the switch component not setting the value to be
-        // carried on by the form data object. Why? The switch is a boolean but
-        // form data doesn't support anything but strings.
-        formData.set("value", String(form.watch("value")));
-        return formData;
-      },
-    }
-  );
+  const { boundFormRef, handleSubmit } = useFormAction(form, formAction, {
+    composeFormData(curr) {
+      const formData = copyFormData(curr);
+      // workaround for the switch component not setting the value to be
+      // carried on by the form data object. Why? The switch is a boolean but
+      // form data doesn't support anything but strings.
+      formData.set("value", String(form.watch("value")));
+      return formData;
+    },
+  });
   const { toast } = useToast();
 
   useEffect(() => {
@@ -159,7 +155,7 @@ export function NewFeatureFlagForm(): JSX.Element {
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormLabel>Enabled</FormLabel>
+                <FormLabel>Will it be enabled by default?</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
