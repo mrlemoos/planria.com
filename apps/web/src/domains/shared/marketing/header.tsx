@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 
+import { BorderBeam } from "@planria/design/border-beam";
 import { Button } from "@planria/design/button";
 import { Logo } from "@planria/design/logo";
 import { NavigationBar, NavigationBarItem } from "@planria/design/navigation";
@@ -8,7 +9,7 @@ import Link from "next/link";
 
 export function MarketingHeader(): JSX.Element {
   return (
-    <TopBar className="mb-8">
+    <TopBar className="mb-8 pr-1">
       <Link href="/">
         <Logo size="md" />
       </Link>
@@ -22,12 +23,10 @@ export function MarketingHeader(): JSX.Element {
         <NavigationBarItem asChild={true}>
           <Link href="/developers">Developers</Link>
         </NavigationBarItem>
-        <NavigationBarItem asChild={true}>
-          {/* TODO: Use a glowing button here. */}
-          <Button variant="primary" asChild={true}>
-            <Link href="/onboarding">Get Started</Link>
-          </Button>
-        </NavigationBarItem>
+        <Button variant="primary" size="sm">
+          <Link href="/onboarding">Get Started</Link>
+        </Button>
+        <BorderBeam className="rounded-full" />
       </NavigationBar>
     </TopBar>
   );
