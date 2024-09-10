@@ -38,3 +38,22 @@ export const userSchema = z.object({
  * Represents a user object.
  */
 export type User = Infer<typeof userSchema>;
+
+/**
+ * The schema for a user payment account.
+ */
+export const userPaymentAccountSchema = z.object({
+  paymentAccountId: z.string().min(1),
+  userId: z.string().min(1),
+  stripeCustomerId: z.string().min(1),
+  stripeSubscriptionId: z.string().min(1).nullable(),
+  stripePriceId: z.string().min(1).nullable(),
+  stripeCurrentPeriodEnd: z.string().min(1).nullable(),
+  updatedAt: z.string().min(1).datetime(),
+  createdAt: z.string().min(1).datetime(),
+});
+
+/**
+ * Represents a user payment account.
+ */
+export type UserPaymentAccount = Infer<typeof userPaymentAccountSchema>;
