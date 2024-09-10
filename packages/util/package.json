@@ -11,6 +11,9 @@
     "./crypto": {
       "default": "./src/crypto.ts"
     },
+    "./currency": {
+      "default": "./src/currency.ts"
+    },
     "./date": {
       "default": "./src/date.ts"
     },
@@ -25,6 +28,9 @@
     },
     "./objects": {
       "default": "./src/objects.ts"
+    },
+    "./proto": {
+      "default": "./src/proto.ts"
     },
     "./runtime": {
       "default": "./src/runtime.ts"
