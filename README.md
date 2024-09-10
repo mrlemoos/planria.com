@@ -1,5 +1,9 @@
 # planria
 
+<p align="center">
+  <img width="1000" src="./docs/assets/open-graph/planria.png" alt="planria logo" />
+</p>
+
 This is a Software as a Service (SaaS) tool for feature flags.
 
 This is an open-source (licensed under the [Apache 2.0 license](./LICENSE)) because we believe in
