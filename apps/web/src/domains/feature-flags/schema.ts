@@ -20,7 +20,7 @@ export type CreateFeatureFlagFormValues = Output<
 export const updateFeatureFlagSchema = featureFlagSchema.pick({
   description: true,
   featureFlagId: true,
-  value: true,
+  defaultValue: true,
 });
 
 export type UpdateFeatureFlagFormValues = Output<
@@ -31,7 +31,7 @@ export type UpdateFeatureFlagFormValues = Output<
 
 export const toggleFeatureFlagSchema = featureFlagSchema.pick({
   featureFlagId: true,
-  value: true,
+  defaultValue: true,
   slug: true,
 });
 

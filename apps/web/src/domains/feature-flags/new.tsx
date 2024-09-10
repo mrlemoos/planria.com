@@ -46,7 +46,7 @@ export function NewFeatureFlagForm(): JSX.Element {
       description: "",
       projectId,
       slug: "",
-      value: false,
+      defaultValue: false,
     },
   });
   const { boundFormRef, handleSubmit } = useFormAction(form, formAction, {
@@ -55,7 +55,7 @@ export function NewFeatureFlagForm(): JSX.Element {
       // workaround for the switch component not setting the value to be
       // carried on by the form data object. Why? The switch is a boolean but
       // form data doesn't support anything but strings.
-      formData.set("value", String(form.watch("value")));
+      formData.set("value", String(form.watch("defaultValue")));
       return formData;
     },
   });
@@ -146,7 +146,7 @@ export function NewFeatureFlagForm(): JSX.Element {
           />
           <FormField
             control={form.control}
-            name="value"
+            name="defaultValue"
             render={({ field }) => (
               <FormItem className="flex-row items-center">
                 <FormControl>
