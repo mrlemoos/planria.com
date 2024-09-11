@@ -13,21 +13,14 @@
   ],
   "ui": "tui",
   "tasks": {
-    "web#build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**"
-      ]
-    },
     "build": {
       "inputs": [
         "$TURBO_DEFAULT$",
         ".env*"
       ],
       "outputs": [
+        ".next/**",
+        "!.next/cache/**",
         "dist/**",
         "storybook-static/**"
       ],
