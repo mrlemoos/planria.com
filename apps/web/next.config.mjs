@@ -1,4 +1,6 @@
-/** @type {import('next').NextConfig} */
+/** 
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   logging: {
     fetches: {
@@ -7,6 +9,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   transpilePackages: ["@planria/design", "@planria/db", "@planria/util", "@planria/react-hooks"],
+  optimizeFonts: true,
 };
 
 export default nextConfig;
