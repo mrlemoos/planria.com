@@ -55,6 +55,11 @@ export function createMetadata({ openGraph, twitter, noIndex = false, ...metadat
       alternateLocale: ['en_GB', 'en_CA', 'en_AU'],
       emails: [CONTACT_EMAIL, SUPPORT_EMAIL],
       determiner: 'auto',
+      images: [
+        {
+          url: 'https://planria.com/og',
+        },
+      ],
       ...openGraph,
     },
     generator: `${APP_NAME} ${APP_VERSION}`,
@@ -73,6 +78,6 @@ export function createMetadata({ openGraph, twitter, noIndex = false, ...metadat
           href: '/logos/planria@dark.png',
         },
       ],
-    }
+    },
   }
 }
