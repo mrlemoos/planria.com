@@ -31,7 +31,7 @@ export default function Layout({
           <body
             className={cn(
               "antialiased bg-background text-foreground",
-              fontSans.className
+              fontSans.variable
             )}
           >
             {children}
