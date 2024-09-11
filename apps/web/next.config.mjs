@@ -5,6 +5,8 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  reactStrictMode: true,
+  transpilePackages: ["@planria/design", "@planria/db", "@planria/util", "@planria/react-hooks"],
 };
 
 export default nextConfig;
