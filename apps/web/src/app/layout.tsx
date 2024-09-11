@@ -9,9 +9,10 @@ import { BreakpointMarker } from "$/components/dev/breakpoint/marker";
 import { WildcardFooter } from "$/components/wildcard-footer";
 import { AuthProvider } from "$/lib/auth/provider";
 import { fontSans } from "$/lib/styles/fonts";
-import "$/lib/styles/globals.css";
 import { env } from "$/server/env";
 import { APP_NAME, PRODUCT_DESCRIPTION } from "$/server/meta";
+
+import "$/lib/styles/globals.css";
 
 export const metadata: Metadata = {
   title: `${APP_NAME} | ${PRODUCT_DESCRIPTION}`,
