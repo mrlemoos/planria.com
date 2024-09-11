@@ -13,6 +13,15 @@
   ],
   "ui": "tui",
   "tasks": {
+    "web#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
+    },
     "build": {
       "inputs": [
         "$TURBO_DEFAULT$",
