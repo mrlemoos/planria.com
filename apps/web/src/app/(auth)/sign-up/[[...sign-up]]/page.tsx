@@ -30,9 +30,10 @@ export default function Page(): JSX.Element {
               <SignUp.Step name="start">
                 <Card className="w-full sm:w-96">
                   <CardHeader>
-                    <CardTitle>Create your account</CardTitle>
+                    <CardTitle>A new face arrives...</CardTitle>
                     <CardDescription>
-                      Let&apos;s get started with your account
+                      <b>Welcome to Planria.</b> Let&apos;s get started with
+                      your account
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="grid gap-y-4">

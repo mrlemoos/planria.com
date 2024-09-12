@@ -6,10 +6,12 @@ import Link from "next/link";
 export function ClerkTag(): JSX.Element {
   return (
     <Link
-      className={cn("rounded text-sm font-medium bg-[#6c47ff] text-white")}
+      className={cn(
+        "rounded-sm text-sm font-medium text-[#6c47ff] bg-zinc-100 dark:bg-zinc-950 px-3 py-1"
+      )}
       href="https://clerk.com"
     >
-      Proudly secured by Clerk
+      Proudly secured by <span className="font-semibold">Clerk</span>
     </Link>
   );
 }

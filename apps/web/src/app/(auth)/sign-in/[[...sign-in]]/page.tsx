@@ -29,7 +29,7 @@ export default function Page(): JSX.Element {
               <SignIn.Step name="start">
                 <Card className="w-full sm:w-96">
                   <CardHeader>
-                    <CardTitle>Sign in to Acme Co</CardTitle>
+                    <CardTitle>You&apos;re back</CardTitle>
                     <CardDescription>
                       Welcome back! Please sign in to continue
                     </CardDescription>

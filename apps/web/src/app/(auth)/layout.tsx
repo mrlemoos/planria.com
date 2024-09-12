@@ -17,7 +17,7 @@ export default function Layout({
         </div>
         <div className="w-1/2 flex items-center justify-center">{children}</div>
       </div>
-      <div className="fixed left-4 bottom-4">
+      <div className="fixed right-4 top-4">
         <ClerkTag />
       </div>
     </Fragment>
