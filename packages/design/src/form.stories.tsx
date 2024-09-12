@@ -1,14 +1,15 @@
 import { Fragment } from "react";
 
-import { Input, type InputProps } from "@planria/design/input";
-import { Label } from "@planria/design/label";
-import { PasswordInput } from "@planria/design/password-input";
 import type { Meta, StoryObj } from "@storybook/react";
+
+import { Input, type InputProps } from "./input";
+import { Label } from "./label";
+import { PasswordInput } from "./password-input";
 
 type Story = StoryObj<InputProps>;
 
 export default {
-  title: "Components/Form",
+  title: "Design System/Form",
 } satisfies Meta<InputProps>;
 
 export const WithInput: Story = {

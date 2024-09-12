@@ -1,15 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  Logo,
-  createLogoStylesheet,
-  type LogoProps,
-} from "@planria/design/logo";
+import { Logo, createLogoStylesheet, type LogoProps } from "./logo";
 
 type Story = StoryObj<LogoProps>;
 
 export default {
-  title: "Components/Logo",
+  title: "Design System/Logo",
   component: Logo,
   argTypes: {
     shape: {

@@ -7,10 +7,10 @@ import {
   AvatarFallback,
   AvatarImage,
   type AvatarProps,
-} from "@planria/design/avatar";
+} from "./avatar";
 
 export default {
-  title: "Components/Avatar",
+  title: "Design System/Avatar",
   component: Avatar,
   argTypes: {
     children: {

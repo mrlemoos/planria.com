@@ -1,15 +1,16 @@
 import { Fragment } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@planria/design/avatar";
-import { Logo } from "@planria/design/logo";
-import { NavigationBar, NavigationBarItem } from "@planria/design/navigation";
-import { TopBar, type TopBarProps } from "@planria/design/top-bar";
 import type { Meta, StoryObj } from "@storybook/react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Logo } from "./logo";
+import { NavigationBar, NavigationBarItem } from "./navigation";
+import { TopBar, type TopBarProps } from "./top-bar";
 
 type Story = StoryObj<TopBarProps>;
 
 export default {
-  title: "Components/TopBar",
+  title: "Design System/TopBar",
   component: TopBar,
   argTypes: {
     children: {

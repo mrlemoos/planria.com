@@ -5,15 +5,16 @@ import {
   type JSX,
 } from "react";
 
-import { Button } from "@planria/design/button";
-import { cn } from "@planria/design/css";
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { Button } from "./button";
+import { cn } from "./css";
 import {
   ToastController,
   createToastVariants,
   useToast,
   type HotToastPayload,
-} from "@planria/design/toast";
-import type { Meta, StoryObj } from "@storybook/react";
+} from "./toast";
 
 type Story = StoryObj<HotToastPayload>;
 
@@ -43,29 +44,56 @@ function ArbitraryToastTrigger({
   );
 }
 
-export default {
-  title: "Components/Toast",
+const meta: Meta<HotToastPayload> = {
+  // defining the meta object and then exporting it because otherwise
+  // caused an inferring error in the Storybook's `render` function.
+  title: "Design System/Toast",
   args: {
     variant: "coherent",
   },
   argTypes: {
     variant: {
       name: "Toast variant",
+      description:
+        "The variant of the toast which alters the appearance and hierarchy of the toast as well as the action that it implies.",
       control: {
         type: "select",
-        options: [...Object.keys(createToastVariants.variants.variant)],
+      },
+      options: [...Object.keys(createToastVariants.variants.variant)],
+      table: {
+        defaultValue: {
+          summary: "coherent",
+        },
+        type: {
+          summary: Object.keys(createToastVariants.variants.variant)
+            .map((val) => `'${val}'`)
+            .join(" | "),
+        },
       },
     },
     title: {
       name: "Toast title",
+      description:
+        "The bolded title of the toast message. It should be concise and informative.",
       control: {
         type: "text",
+      },
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
       },
     },
     description: {
       name: "Toast description",
+      description: "The actual text to be displayed in the toast body.",
       control: {
         type: "text",
+      },
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
       },
     },
   },
@@ -84,7 +112,9 @@ export default {
       </ArbitraryToastTrigger>
     );
   },
-} satisfies Meta<HotToastPayload>;
+};
+
+export default meta;
 
 export const Playground: Story = {
   args: {
@@ -105,7 +135,7 @@ export const Coherent: Story = {
     },
   },
 };
-Coherent.storyName = "variant » coherent";
+Coherent.storyName = "Variant/Coherent";
 
 export const CoherentAndTitle: Story = {
   args: {
@@ -121,7 +151,7 @@ export const CoherentAndTitle: Story = {
     },
   },
 };
-CoherentAndTitle.storyName = "variant » coherent + title";
+CoherentAndTitle.storyName = "Variant/Coherent + Title";
 
 export const Destructive: Story = {
   args: {
@@ -136,7 +166,7 @@ export const Destructive: Story = {
     },
   },
 };
-Destructive.storyName = "variant » destructive";
+Destructive.storyName = "Variant/Destructive";
 
 export const DestructiveAndTitle: Story = {
   args: {
@@ -152,7 +182,7 @@ export const DestructiveAndTitle: Story = {
     },
   },
 };
-DestructiveAndTitle.storyName = "variant » destructive + title";
+DestructiveAndTitle.storyName = "Variant/Destructive + Title";
 
 export const Success: Story = {
   args: {
@@ -167,7 +197,7 @@ export const Success: Story = {
     },
   },
 };
-Success.storyName = "variant » success";
+Success.storyName = "Variant/Success";
 
 export const SuccessAndTitle: Story = {
   args: {
@@ -183,7 +213,7 @@ export const SuccessAndTitle: Story = {
     },
   },
 };
-SuccessAndTitle.storyName = "variant » success + title";
+SuccessAndTitle.storyName = "Variant/Success + Title";
 
 export const Error: Story = {
   args: {
@@ -198,7 +228,7 @@ export const Error: Story = {
     },
   },
 };
-Error.storyName = "variant » error";
+Error.storyName = "Variant/Error";
 
 export const ErrorWithTitle: Story = {
   args: {
@@ -214,7 +244,7 @@ export const ErrorWithTitle: Story = {
     },
   },
 };
-ErrorWithTitle.storyName = "variant » error + title";
+ErrorWithTitle.storyName = "Variant/Error + Title";
 
 export const Warning: Story = {
   args: {
@@ -229,7 +259,7 @@ export const Warning: Story = {
     },
   },
 };
-Warning.storyName = "variant » warning";
+Warning.storyName = "Variant/Warning";
 
 export const WarningAndTitle: Story = {
   args: {
@@ -245,4 +275,4 @@ export const WarningAndTitle: Story = {
     },
   },
 };
-WarningAndTitle.storyName = "variant » warning + title";
+WarningAndTitle.storyName = "Variant/Warning + Title";

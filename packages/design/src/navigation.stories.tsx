@@ -6,12 +6,12 @@ import {
   NavigationBar,
   NavigationBarItem,
   type NavigationBarProps,
-} from "@planria/design/navigation";
+} from "./navigation";
 
 type Story = StoryObj<NavigationBarProps>;
 
 export default {
-  title: "Components/Navigation",
+  title: "Design System/Navigation",
   component: NavigationBar,
   argTypes: {
     children: {
