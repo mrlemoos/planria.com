@@ -167,6 +167,7 @@
   },
   "scripts": {
     "build": "tsup ./src",
+    "postbuild": "rimraf -rf ./dist/*.{stories,test,spec}.*",
     "dev": "tsup ./src --watch",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
