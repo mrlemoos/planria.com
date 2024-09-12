@@ -207,3 +207,22 @@ export const userPaymentAccounts = pgTable("planria_user_payment_accounts", {
     .defaultNow()
     .$onUpdateFn(() => sql`now()`),
 });
+
+/**
+ * The schema which defines the project access tokens table in the database. This table
+ * stores the access tokens which are used to authenticate the users to access the projects.
+ */
+export const accessTokens = pgTable("planria_project_access_tokens", {
+  accessTokenId: text("ppat_access_token_id").notNull().primaryKey(),
+  projectId: text("ppat_project_id")
+    .notNull()
+    .references(() => projects.projectId),
+  token: text("ppat_token").notNull(),
+  createdAt: timestamp("ppat_created_at", { mode: "string" })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("ppat_updated_at", { mode: "string" })
+    .notNull()
+    .$onUpdateFn(() => sql`now()`)
+    .defaultNow(),
+});

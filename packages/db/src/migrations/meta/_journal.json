@@ -71,6 +71,13 @@
       "when": 1726002935611,
       "tag": "0009_natural_agent_zero",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1726152754803,
+      "tag": "0010_slimy_blue_blade",
+      "breakpoints": true
     }
   ]
 }
