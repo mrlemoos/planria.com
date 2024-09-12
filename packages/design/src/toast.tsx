@@ -204,7 +204,10 @@ export function ToastIcon({
       <Icon
         {...iconPropsWithDefaults}
         name="ExclamationTriangle"
-        className={variant === "warning" ? "text-warning" : "text-error"}
+        className={cn(
+          variant === "warning" ? "text-warning" : "text-error",
+          className
+        )}
       />
     );
   }
