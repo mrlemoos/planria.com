@@ -221,6 +221,9 @@ export const accessTokens = pgTable("planria_project_access_tokens", {
   createdAt: timestamp("ppat_created_at", { mode: "string" })
     .notNull()
     .defaultNow(),
+  environmentId: text("ppat_environment_id")
+    .notNull()
+    .references(() => environments.environmentId),
   updatedAt: timestamp("ppat_updated_at", { mode: "string" })
     .notNull()
     .$onUpdateFn(() => sql`now()`)
