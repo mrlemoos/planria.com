@@ -85,21 +85,31 @@ export interface TooltipContentProps
   extends ComponentPropsWithRef<typeof PrimitiveContent> {}
 
 export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
-  ({ children, className, sideOffset = 4, ...props }, forwardedRef) => {
-    return (
-      <PrimitiveContent
-        ref={forwardedRef}
-        sideOffset={sideOffset}
-        className={cn(
-          "z-50 overflow-hidden rounded-md border border-foreground/10 bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </PrimitiveContent>
-    );
-  }
+  (
+    {
+      children,
+      className,
+      side = "top",
+      align = "center",
+      sideOffset = 4,
+      ...props
+    },
+    forwardedRef
+  ) => (
+    <PrimitiveContent
+      ref={forwardedRef}
+      sideOffset={sideOffset}
+      side={side}
+      align={align}
+      className={cn(
+        "z-50 overflow-hidden rounded-md border border-foreground/10 bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </PrimitiveContent>
+  )
 );
 
 export interface TooltipArrowProps
