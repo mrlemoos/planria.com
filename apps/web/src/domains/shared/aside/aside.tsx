@@ -74,20 +74,71 @@ export function Aside({
           )}
         </div>
         <Divider />
-        {params.projectId && (
+        {!!params.projectId && (
           <Fragment>
-            <SideBarItem asChild={true}>
-              <Link href={`/projects/${params.projectId}/environments`}>
-                <Icon name="Grid" size={24} className="mr-1" />
-                <SideBarItemLabel>Environments</SideBarItemLabel>
-              </Link>
-            </SideBarItem>
-            <SideBarItem asChild={true}>
-              <Link href={`/projects/${params.projectId}`}>
-                <Icon name="Switch" size={24} className="mr-1" />
-                <SideBarItemLabel>Feature Flags</SideBarItemLabel>
-              </Link>
-            </SideBarItem>
+            <Tooltip>
+              <TooltipTrigger>
+                <SideBarItem asChild={true}>
+                  <Link href={`/projects/${params.projectId}/environments`}>
+                    <Icon
+                      name="Grid"
+                      size={24}
+                      className="mr-1"
+                      aria-label="Environments"
+                    />
+                    <SideBarItemLabel aria-hidden="true">
+                      Environments
+                    </SideBarItemLabel>
+                  </Link>
+                </SideBarItem>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={-10}>
+                <span className="font-medium">Environments</span>
+                <TooltipArrow />
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger>
+                <SideBarItem asChild={true}>
+                  <Link href={`/projects/${params.projectId}/access-tokens`}>
+                    <Icon
+                      name="LockClosed"
+                      size={24}
+                      className="mr-1"
+                      aria-label="Access Tokens"
+                    />
+                    <SideBarItemLabel aria-hidden="true">
+                      Access Tokens
+                    </SideBarItemLabel>
+                  </Link>
+                </SideBarItem>
+                <TooltipContent side="right" sideOffset={-10}>
+                  <span className="font-medium">Access Tokens</span>
+                  <TooltipArrow />
+                </TooltipContent>
+              </TooltipTrigger>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger>
+                <SideBarItem asChild={true}>
+                  <Link href={`/projects/${params.projectId}`}>
+                    <Icon
+                      name="Switch"
+                      size={24}
+                      className="mr-1"
+                      aria-label="Feature Flags"
+                    />
+                    <SideBarItemLabel aria-hidden="true">
+                      Feature Flags
+                    </SideBarItemLabel>
+                  </Link>
+                </SideBarItem>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={-10}>
+                <span className="font-medium">Feature Flags</span>
+                <TooltipArrow />
+              </TooltipContent>
+            </Tooltip>
           </Fragment>
         )}
       </SideBarContent>
