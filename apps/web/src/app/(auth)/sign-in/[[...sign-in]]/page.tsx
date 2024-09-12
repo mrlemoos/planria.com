@@ -60,7 +60,7 @@ export default function Page(): JSX.Element {
                           </Clerk.Loading>
                         </Button>
                       </Clerk.Connection>
-                      <Clerk.Connection name="google" asChild={true}>
+                      <Clerk.Connection name="notion" asChild={true}>
                         <Button
                           size="sm"
                           variant="outlined"
