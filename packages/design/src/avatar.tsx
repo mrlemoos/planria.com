@@ -19,6 +19,9 @@ export const createAvatarStyles = stylesheet.create({
       lg: "size-10",
     },
   },
+  defaultVariants: {
+    size: "md",
+  },
 });
 
 export interface AvatarProps
