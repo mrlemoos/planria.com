@@ -214,10 +214,14 @@ export const userPaymentAccounts = pgTable("planria_user_payment_accounts", {
  */
 export const accessTokens = pgTable("planria_project_access_tokens", {
   accessTokenId: text("ppat_access_token_id").notNull().primaryKey(),
+  displayName: text("ppat_display_name").notNull(),
   projectId: text("ppat_project_id")
     .notNull()
     .references(() => projects.projectId),
-  token: text("ppat_token").notNull(),
+  token: text("ppat_token").notNull(), // should ALWAYS be hashed
+  tokenFourInitialCharacters: text(
+    "ppat_token_four_initial_characters"
+  ).notNull(),
   createdAt: timestamp("ppat_created_at", { mode: "string" })
     .notNull()
     .defaultNow(),

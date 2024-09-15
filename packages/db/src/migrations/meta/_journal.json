@@ -85,6 +85,13 @@
       "when": 1726155066981,
       "tag": "0011_peaceful_brood",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1726403776994,
+      "tag": "0012_deep_secret_warriors",
+      "breakpoints": true
     }
   ]
 }
