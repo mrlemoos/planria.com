@@ -1,12 +1,51 @@
 import { cache } from "react";
 
-import { db, eq, type InferInsertModel } from "@planria/db";
+import { and, db, eq, isNull, type InferInsertModel } from "@planria/db";
 import { accessTokens, environments } from "@planria/db/datasource";
 import { cuid } from "@planria/util/crypto";
 import { log } from "@planria/util/logging";
 
 import type { AccessToken } from "$/lib/schemas/projects/access-tokens";
 import type { AccessTokenAndEnvironment } from "$/lib/schemas/projects/access-tokens+environment";
+
+/**
+ * Fills the {@link accessTokens.deletedAt | `deletedAt`} field with the current date and time so
+ * that the access token is soft deleted. Returns the date and time when the access token was
+ * soft deleted.
+ *
+ * Note: This function does not actually drop the access token from the database.
+ */
+export async function softDeleteAccessTokenById(
+  accessTokenId: string
+): Promise<{ deletedAt: string } | null> {
+  try {
+    const deletedAt = new Date().toISOString();
+    const [{ deletionAt }] = await db
+      .update(accessTokens)
+      .set({
+        deletedAt,
+      })
+      .where(eq(accessTokens.accessTokenId, accessTokenId))
+      .returning({
+        deletionAt: accessTokens.deletedAt,
+      });
+    const hasBeenSoftDeleted = deletionAt !== null;
+
+    if (!hasBeenSoftDeleted) {
+      log.error(
+        `Failed to soft delete the access token at softDeleteAccessTokenById(${accessTokenId}). Please check the logs for more information.`
+      );
+      return null;
+    }
+
+    return { deletedAt };
+  } catch (error) {
+    log.error(
+      `An error occurred at deleteAccessTokenById(${accessTokenId}) due to the following: ${error}`
+    );
+    return null;
+  }
+}
 
 /**
  * Creates an access token and returns it with the environment name.
@@ -60,7 +99,12 @@ export const fetchAccessTokensWithEnvironmentByProjectId = cache(
           environmentName: environments.name,
         })
         .from(accessTokens)
-        .where(eq(accessTokens.projectId, projectId))
+        .where(
+          and(
+            eq(accessTokens.projectId, projectId),
+            isNull(accessTokens.deletedAt)
+          )
+        )
         .innerJoin(
           environments,
           eq(accessTokens.environmentId, environments.environmentId)

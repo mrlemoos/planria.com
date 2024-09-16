@@ -28,6 +28,7 @@ import { fontMono } from "$/lib/styles/fonts";
 
 import { TABLE_VIEW_DATE_FORMAT } from "./constants";
 import { useAccessTokens } from "./context";
+import { DeleteAccessTokenButtonAction } from "./delete";
 
 interface AccessTokenTableViewRowProps
   extends Pick<
@@ -37,6 +38,7 @@ interface AccessTokenTableViewRowProps
     | "environmentName"
     | "tokenFourInitialCharacters"
     | "displayName"
+    | "accessTokenId"
   > {}
 
 function AccessTokenTableViewRow({
@@ -44,6 +46,7 @@ function AccessTokenTableViewRow({
   environmentName,
   displayName,
   tokenFourInitialCharacters,
+  accessTokenId,
 }: AccessTokenTableViewRowProps): JSX.Element {
   return (
     <TableRow>
@@ -96,7 +99,7 @@ function AccessTokenTableViewRow({
         </time>
       </TableCell>
       <TableCell>
-        <span className="sr-only">Actions</span>
+        <DeleteAccessTokenButtonAction accessTokenId={accessTokenId} />
       </TableCell>
     </TableRow>
   );
@@ -132,6 +135,7 @@ export function AccessTokensTableView(): JSX.Element {
               }) => (
                 <AccessTokenTableViewRow
                   key={accessTokenId}
+                  accessTokenId={accessTokenId}
                   createdAt={createdAt}
                   environmentId={environmentId}
                   environmentName={environmentName}

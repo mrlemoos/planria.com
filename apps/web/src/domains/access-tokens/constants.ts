@@ -1,1 +1,1 @@
-export const TABLE_VIEW_DATE_FORMAT = "YYYY MMM ddd [at] hh:mm[.]SSS A";
+export const TABLE_VIEW_DATE_FORMAT = "YYYY MMMM DD [at] hh:mm A";
