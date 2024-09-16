@@ -9,7 +9,7 @@ import { Ping } from "./ping";
 
 export const createButtonStylesheet = stylesheet.create({
   base: cn(
-    "px-4 py-2 rounded-full transition-all flex items-center justify-center",
+    "rounded-full transition-all flex items-center justify-center",
     "disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-300 disabled:cursor-not-allowed"
   ),
   variants: {
@@ -36,13 +36,17 @@ export const createButtonStylesheet = stylesheet.create({
         "p-0 rounded-none block", // <-- resets the default styles for the link variant
         "hover:underline hover:text-foreground/80"
       ),
+      destructive: cn(
+        "bg-destructive text-background font-medium border border-destructive",
+        "hover:bg-destructive/90 active:text-rose-300 dark:active:text-rose-800"
+      ),
     },
     // button sizes go here
     size: {
       sm: "px-3 py-1.5 text-sm",
       md: "px-4 py-2",
       lg: "px-5 py-3",
-      icon: "p-0.5",
+      icon: "size-9 rounded-sm p-0",
     },
   },
   defaultVariants: {
