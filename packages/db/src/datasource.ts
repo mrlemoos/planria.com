@@ -232,4 +232,5 @@ export const accessTokens = pgTable("planria_project_access_tokens", {
     .notNull()
     .$onUpdateFn(() => sql`now()`)
     .defaultNow(),
+  deletedAt: timestamp("ppat_deleted_at", { mode: "string" }),
 });

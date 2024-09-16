@@ -1,0 +1,1 @@
+ALTER TABLE "planria_project_access_tokens" ADD COLUMN "ppat_deleted_at" timestamp;
