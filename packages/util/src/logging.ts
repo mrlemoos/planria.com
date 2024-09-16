@@ -1,6 +1,11 @@
 import { Logger } from "tslog";
 
-const channel = new Logger();
+const channel = new Logger({
+  prefix: [""],
+  name: "",
+  type: "pretty",
+  hideLogPositionForProduction: true,
+});
 
 export const log = {
   error(message: string, ...args: unknown[]): void {
