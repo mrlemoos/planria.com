@@ -109,6 +109,11 @@
       "import": "./dist/ping.mjs",
       "require": "./dist/ping.js"
     },
+    "./select": {
+      "types": "./src/select.tsx",
+      "import": "./dist/select.mjs",
+      "require": "./dist/select.js"
+    },
     "./sheet": {
       "types": "./src/sheet.tsx",
       "import": "./dist/sheet.mjs",
