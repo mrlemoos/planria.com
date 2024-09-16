@@ -109,6 +109,11 @@
       "import": "./dist/ping.mjs",
       "require": "./dist/ping.js"
     },
+    "./responsive-dialog": {
+      "types": "./src/responsive-dialog.tsx",
+      "import": "./dist/responsive-dialog.mjs",
+      "require": "./dist/responsive-dialog.js"
+    },
     "./select": {
       "types": "./src/select.tsx",
       "import": "./dist/select.mjs",
