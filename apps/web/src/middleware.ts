@@ -1,6 +1,7 @@
 import type { MiddlewareConfig } from "next/server";
 
 import { createAuthMiddleware } from "$/lib/auth/server";
+import { withLoggingMiddleware } from "$/server/logging";
 
 export const config: MiddlewareConfig = {
   matcher: [
@@ -9,4 +10,4 @@ export const config: MiddlewareConfig = {
   ],
 };
 
-export default createAuthMiddleware();
+export default withLoggingMiddleware(createAuthMiddleware());
