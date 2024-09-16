@@ -124,6 +124,11 @@
       "import": "./dist/sidebar.mjs",
       "require": "./dist/sidebar.js"
     },
+    "./slot": {
+      "types": "./src/slot.tsx",
+      "import": "./dist/slot.mjs",
+      "require": "./dist/slot.js"
+    },
     "./spinner": {
       "types": "./src/spinner.tsx",
       "import": "./dist/spinner.mjs",
