@@ -45,7 +45,7 @@
     "@stripe/stripe-js": "^4.4.0",
     "@stripe/react-stripe-js": "^2.8.0",
     "@vercel/og": "^0.6.2",
-    "@next/mdx": "^14.2.8",
+    "@next/mdx": "^14.2.11",
     "drizzle-orm": "^0.33.0",
     "react": "^18",
     "react-dom": "^18",
