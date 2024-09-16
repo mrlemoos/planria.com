@@ -38,6 +38,9 @@
     "./strings": {
       "default": "./src/strings.ts"
     },
+    "./uuid": {
+      "default": "./src/uuid.ts"
+    },
     "./zod": {
       "default": "./src/zod.ts"
     }
