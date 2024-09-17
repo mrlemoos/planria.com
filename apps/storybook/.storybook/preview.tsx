@@ -19,9 +19,6 @@ export const decorators: Preview["decorators"] = [
 
 export const parameters: Preview["parameters"] = {
   layout: "centered",
-  actions: {
-    argTypesRegex: "^on[A-Z].*",
-  },
   backgrounds: {
     values: [
       { name: "light", value: "#fff" },
