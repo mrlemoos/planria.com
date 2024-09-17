@@ -1,19 +1,19 @@
 "use client";
 
-import { forwardRef, type JSX } from "react";
+import { type JSX } from "react";
 
 import { Badge } from "@planria/design/badge";
-import { Button, type ButtonProps } from "@planria/design/button";
+import { Button } from "@planria/design/button";
 import { cn } from "@planria/design/css";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@planria/design/dialog";
 import { Icon } from "@planria/design/icon";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogClose,
+  ResponsiveDialogContent,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
+  ResponsiveDialogTrigger,
+} from "@planria/design/responsive-dialog";
 import {
   Tooltip,
   TooltipArrow,
@@ -21,6 +21,7 @@ import {
   TooltipTrigger,
 } from "@planria/design/tooltip";
 import { heading } from "@planria/design/typography";
+import Link from "next/link";
 
 import { useEnvironments } from "$/domains/environments/context";
 import { BoxCard, BoxCardContent } from "$/domains/feature-flags/box-card";
@@ -28,21 +29,7 @@ import { NewFeatureFlagForm } from "$/domains/feature-flags/new";
 import { TableView } from "$/domains/feature-flags/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
-import Link from "next/link";
 import { useProjectManagement } from "./context";
-
-interface CreateFeatureFlagButtonProps extends Pick<ButtonProps, "disabled"> {}
-
-const CreateFeatureFlagButton = forwardRef<
-  HTMLButtonElement,
-  CreateFeatureFlagButtonProps
->(({ disabled }, forwardedRef) => (
-  <Button ref={forwardedRef} size="sm" type="button" disabled={disabled}>
-    <Icon name="Plus" aria-hidden="true" size={15} className="mr-2" />
-    Create flag
-  </Button>
-));
-CreateFeatureFlagButton.displayName = "CreateFeatureFlagButton";
 
 function canCreateFeatureFlag(environments: Environment[]): boolean {
   return environments.length > 0;
@@ -72,23 +59,35 @@ export function Dashboard(): JSX.Element {
           </section>
           <div className="flex items-center gap-1">
             {canCreateFeatureFlag(environments) ? (
-              <Dialog variant="dismissable">
-                <DialogTrigger asChild={true}>
-                  <CreateFeatureFlagButton />
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Create feature flag</DialogTitle>
-                  </DialogHeader>
+              <ResponsiveDialog variant="dismissable">
+                <ResponsiveDialogTrigger asChild={true}>
+                  <Button size="sm" type="button">
+                    <Icon
+                      name="Plus"
+                      aria-hidden="true"
+                      size={15}
+                      className="mr-2"
+                    />
+                    Create flag
+                  </Button>
+                </ResponsiveDialogTrigger>
+                <ResponsiveDialogContent>
+                  <ResponsiveDialogHeader>
+                    <ResponsiveDialogTitle>
+                      Create feature flag
+                    </ResponsiveDialogTitle>
+                  </ResponsiveDialogHeader>
                   <NewFeatureFlagForm />
-                  <DialogClose />
-                </DialogContent>
-              </Dialog>
+                  <ResponsiveDialogClose />
+                </ResponsiveDialogContent>
+              </ResponsiveDialog>
             ) : (
               <Tooltip>
                 <TooltipTrigger asChild={true}>
                   <div className="cursor-not-allowed">
-                    <CreateFeatureFlagButton disabled={true} />
+                    <Button size="sm" type="button" disabled={true}>
+                      Create flag
+                    </Button>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
