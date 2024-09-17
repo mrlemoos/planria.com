@@ -18,4 +18,3 @@ export function Onboarding(): JSX.Element {
     </div>
   );
 }
-1;
