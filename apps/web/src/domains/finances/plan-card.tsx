@@ -29,6 +29,8 @@ export function PlanCard({
   features,
   action,
 }: PlanCardProps): JSX.Element {
+  const isEnterprise = name !== "Enterprise";
+
   return (
     <Card className="flex flex-col justify-between">
       <CardHeader>
@@ -38,10 +40,10 @@ export function PlanCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {name !== "Enterprise" && (
+        {isEnterprise && (
           <Fragment>
             <p className="mt-2 text-4xl font-bold">{`$${price}`}</p>
-            <p className="text-sm tracking-wide">per user/{recurring}</p>
+            <p className="text-sm tracking-wide">{`per user/${recurring}`}</p>
           </Fragment>
         )}
         <ul className="mt-4 space-y-2">
