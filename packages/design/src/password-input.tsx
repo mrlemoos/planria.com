@@ -9,7 +9,7 @@ export interface PasswordInputProps
   extends Omit<InputProps, "type" | "asChild"> {}
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ children, className, ...props }) => {
+  ({ children, className, ...props }, forwardedRef) => {
     const [isPasswordVisible, setPasswordVisibility] = useState(false);
 
     function handleTogglePasswordVisibility() {
@@ -26,6 +26,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           )}
         >
           <input
+            ref={forwardedRef}
             type={isPasswordVisible ? "text" : "password"}
             className="placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 p-4 rounded-l-sm w-full bg-background"
           />
