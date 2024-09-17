@@ -25,7 +25,7 @@ import {
 } from "@planria/design/table";
 import { date } from "@planria/util/date";
 
-import { useProjectManagement } from "$/domains/projects/management/context";
+import { useProjectManagement } from "$/domains/projects/context";
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 
 import { BadgeStatus } from "./badge-status";

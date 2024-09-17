@@ -32,8 +32,8 @@ import { useProjectManagementRouter } from "$/app/(projects)/projects/(managemen
 import { useFormAction } from "$/lib/hooks/form";
 import { useUser } from "$/lib/hooks/user";
 
-import { createProjectSchema, type CreateProjectFormValues } from "./schema";
-import { createProjectAction } from "./server-actions";
+import { createProjectSchema, type CreateProjectFormValues } from "../schema";
+import { createProjectAction } from "../server-actions";
 
 export interface NewProjectProps {
   children?: ReactNode;
@@ -128,7 +128,7 @@ export function NewProject({ children }: NewProjectProps): JSX.Element {
               <FormLabel>Description</FormLabel>
               <p className={muted({ className: "text-sm" })}>(Optional)</p>
               <FormControl>
-                {/* @ts-expect-error FIXME: The field is passing value as string | null */}
+                {/* @ts-expect-error FIXME */}
                 <Textarea
                   {...field}
                   placeholder="We'll create a ship nice and shiny, buy a comfy pilot seat, and a cockpit full of buttons..."

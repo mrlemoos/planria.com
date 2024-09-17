@@ -3,7 +3,7 @@ import { Fragment, type JSX, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 
 import { EnvironmentsProvider } from "$/domains/environments/context";
-import { ProjectManagementProvider } from "$/domains/projects/management/context";
+import { ProjectManagementProvider } from "$/domains/projects/context";
 import { Aside } from "$/domains/shared/aside/aside";
 import {
   fetchProjectById,

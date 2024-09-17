@@ -8,8 +8,8 @@ import {
   CodeSnippetProvider,
 } from "$/components/code-snippet";
 
-import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "./constants";
-import type { CreateFeatureFlagFormValues } from "./schema";
+import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "../constants";
+import type { CreateFeatureFlagFormValues } from "../schema";
 
 export function SDKPreview(): JSX.Element {
   const { watch } = useFormContext<CreateFeatureFlagFormValues>();

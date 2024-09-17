@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import { Logo } from "@planria/design/logo";
 
-import { NewProject } from "$/domains/projects/new";
+import { NewProject } from "$/domains/projects/views/new";
 
 export function Onboarding(): JSX.Element {
   return (

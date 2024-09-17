@@ -21,7 +21,7 @@ import { useToast } from "@planria/design/toast";
 import { copyFormData } from "@planria/util/objects";
 import { useFormState } from "react-dom";
 
-import { useProjectManagement } from "$/domains/projects/management/context";
+import { useProjectManagement } from "$/domains/projects/context";
 import { useFormAction } from "$/lib/hooks/form";
 
 import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "../constants";

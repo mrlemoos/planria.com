@@ -9,7 +9,7 @@ import {
   type CardProps,
 } from "@planria/design/card";
 
-import { useProjectManagement } from "$/domains/projects/management/context";
+import { useProjectManagement } from "$/domains/projects/context";
 
 export interface BoxCardProps extends CardProps {}
 
