@@ -17,7 +17,7 @@ import { useToast } from "@planria/design/toast";
 
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 
-import { deleteAccessTokenAction } from "./server-actions";
+import { deleteAccessTokenAction } from "../server-actions";
 
 export interface DeleteAccessTokenButtonActionProps {
   accessTokenId: string;

@@ -10,7 +10,7 @@ import {
 } from "@planria/design/sheet";
 import { uuid } from "@planria/util/uuid";
 
-import { NewAccessTokenForm } from "$/domains/access-tokens/new";
+import { NewAccessTokenForm } from "$/domains/access-tokens/views/new";
 import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
 export const dynamic = "force-dynamic";

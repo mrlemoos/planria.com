@@ -38,8 +38,8 @@ import { fontMono } from "$/lib/styles/fonts";
 import {
   createAccessTokenSchema,
   type CreateAccessTokenFormValues,
-} from "./schema";
-import { createAccessTokenAction } from "./server-actions";
+} from "../schema";
+import { createAccessTokenAction } from "../server-actions";
 
 export interface NewAccessTokenFormProps {
   generatedToken: string;
