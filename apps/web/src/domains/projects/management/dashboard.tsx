@@ -24,9 +24,12 @@ import { heading } from "@planria/design/typography";
 import Link from "next/link";
 
 import { useEnvironments } from "$/domains/environments/context";
-import { BoxCard, BoxCardContent } from "$/domains/feature-flags/box-card";
-import { NewFeatureFlagForm } from "$/domains/feature-flags/new";
-import { TableView } from "$/domains/feature-flags/table-view";
+import {
+  BoxCard,
+  BoxCardContent,
+} from "$/domains/feature-flags/views/box-card";
+import { NewFeatureFlagForm } from "$/domains/feature-flags/views/new";
+import { TableView } from "$/domains/feature-flags/views/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
 import { useProjectManagement } from "./context";

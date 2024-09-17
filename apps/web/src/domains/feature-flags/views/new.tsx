@@ -24,13 +24,14 @@ import { useFormState } from "react-dom";
 import { useProjectManagement } from "$/domains/projects/management/context";
 import { useFormAction } from "$/lib/hooks/form";
 
-import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "./constants";
-import { SDKPreview } from "./preview";
+import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "../constants";
 import {
   createFeatureFlagSchema,
   type CreateFeatureFlagFormValues,
-} from "./schema";
-import { createFeatureFlagAction } from "./server-actions";
+} from "../schema";
+import { createFeatureFlagAction } from "../server-actions";
+
+import { SDKPreview } from "./preview";
 
 export function NewFeatureFlagForm(): JSX.Element {
   const [{ ok, createdFeatureFlag, message }, formAction] = useFormState(
