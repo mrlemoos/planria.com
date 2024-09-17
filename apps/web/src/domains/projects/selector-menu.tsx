@@ -9,8 +9,6 @@ import {
   type ReactNode,
 } from "react";
 
-import { useUser } from "$/lib/hooks/user";
-import { Project } from "$/lib/schemas/projects";
 import { Badge } from "@planria/design/badge";
 import { Button } from "@planria/design/button";
 import { cn } from "@planria/design/css";
@@ -24,6 +22,9 @@ import {
 import { Icon } from "@planria/design/icon";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+
+import { useUser } from "$/lib/hooks/user";
+import { Project } from "$/lib/schemas/projects";
 
 interface ProjectsSelectorContextType {
   projects: Project[];
