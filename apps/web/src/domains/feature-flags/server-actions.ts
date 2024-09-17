@@ -60,7 +60,7 @@ export async function updateFeatureFlagAction(
         ok: false,
       };
     }
-    revalidatePath(`/p/${updatedFeatureFlag.slug}`);
+    revalidatePath(`/projects/${updatedFeatureFlag.slug}`);
     return {
       updatedFeatureFlag: {
         slug: updatedFeatureFlag.slug,
