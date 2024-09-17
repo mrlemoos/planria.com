@@ -13,8 +13,8 @@ import {
 import { heading } from "@planria/design/typography";
 import { date } from "@planria/util/date";
 
-import { TABLE_VIEW_DATE_FORMAT } from "./constants";
-import { useEnvironments } from "./context";
+import { TABLE_VIEW_DATE_FORMAT } from "../constants";
+import { useEnvironments } from "../context";
 
 export function EnvironmentsTableViewEmptyState(): JSX.Element {
   return (

@@ -13,8 +13,8 @@ import {
 import { heading } from "@planria/design/typography";
 
 import { EnvironmentsProvider } from "$/domains/environments/context";
-import { NewEnvironment } from "$/domains/environments/new";
-import { EnvironmentsTableView } from "$/domains/environments/table-view";
+import { NewEnvironment } from "$/domains/environments/views/new";
+import { EnvironmentsTableView } from "$/domains/environments/views/table-view";
 import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
 export const dynamic = "force-dynamic";

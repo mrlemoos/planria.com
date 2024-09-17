@@ -23,12 +23,12 @@ import { useFormState } from "react-dom";
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 import { useFormAction } from "$/lib/hooks/form";
 
-import { useEnvironments } from "./context";
+import { useEnvironments } from "../context";
 import {
   createEnvironmentSchema,
   type CreateEnvironmentFormValues,
-} from "./schema";
-import { createEnvironmentAction } from "./server-actions";
+} from "../schema";
+import { createEnvironmentAction } from "../server-actions";
 
 export function NewEnvironment(): JSX.Element {
   const [{ ok, message, issues }, formAction] = useFormState(
