@@ -5,6 +5,7 @@ export const fontSans = Inter({
   display: "swap",
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 // export const fontSans = localFont({

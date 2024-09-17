@@ -1,8 +1,8 @@
 import React from "react";
 
-import type { Preview } from "@storybook/react";
-import { withThemeByClassName } from "@storybook/addon-themes";
 import { ThemeProvider } from "@planria/design/theme";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import type { Preview } from "@storybook/react";
 
 import "../globals.css";
 
