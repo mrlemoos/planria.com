@@ -13,7 +13,8 @@
     "db:studio": "dotenv -e .env -- turbo run db:studio",
     "db:migrate": "dotenv -e .env -- turbo run db:migrate",
     "db:generate": "dotenv -e .env -- turbo run db:generate",
-    "db:push": "dotenv -e .env -- turbo run db:push"
+    "db:push": "dotenv -e .env -- turbo run db:push",
+    "sb:upgrade": "( cd apps/storybook && pnpm run sb:upgrade )"
   },
   "keywords": [
     "nextjs",
