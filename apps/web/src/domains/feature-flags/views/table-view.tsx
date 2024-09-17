@@ -28,8 +28,6 @@ import { date } from "@planria/util/date";
 import { useProjectManagement } from "$/domains/projects/context";
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 
-import { BadgeStatus } from "./badge-status";
-
 interface FeatureFlagRowContextType
   extends Pick<
     FeatureFlag,
@@ -95,7 +93,7 @@ function TableViewRow(): JSX.Element {
       <TableCell className="font-medium">{slug}</TableCell>
       <TableCell>{description || "-"}</TableCell>
       <TableCell>
-        By default it is <BadgeStatus isEnabled={defaultValue} />
+        <Badge variant="secondary">{defaultValue ? "True" : "False"}</Badge>
       </TableCell>
       <TableCell>
         <Badge variant="outline">Production</Badge>
