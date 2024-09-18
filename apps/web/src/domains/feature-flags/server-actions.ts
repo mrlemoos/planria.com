@@ -5,11 +5,16 @@ import { log } from "@planria/util/logging";
 import { tryParseFormData } from "@planria/util/objects";
 import { revalidatePath } from "next/cache";
 
-import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
+import type {
+  EnvironmentFeatureFlag,
+  FeatureFlag,
+} from "$/lib/schemas/projects/feature-flags";
 import {
+  createEnvironmentFeatureFlagValuesPerEnvironment,
   createProjectFeatureFlag,
   deleteProjectFeatureFlag,
   updateProjectFeatureFlag,
+  toggleEnvironmentFeatureFlagValue,
 } from "$/server/data/projects";
 
 import {
@@ -42,9 +47,53 @@ export async function deleteFeatureFlagAction({
   };
 }
 
+export async function toggleFeatureFlagEnvironmentValueWithinEnvironmentAction({
+  environmentFeatureFlagId,
+  newValue,
+  projectId,
+  featureFlagId,
+}: {
+  environmentFeatureFlagId: string;
+  newValue: boolean;
+  projectId: string;
+  featureFlagId: string;
+}): Promise<{ ok: boolean; message: string }> {
+  try {
+    const updatedEnvironmentFeatureFlag =
+      await toggleEnvironmentFeatureFlagValue({
+        environmentFeatureFlagId,
+        newValue,
+      });
+
+    if (updatedEnvironmentFeatureFlag === null) {
+      return {
+        ok: false,
+        message:
+          "It was not possible to update the feature flag. Please try again.",
+      };
+    }
+    revalidatePath(
+      `/projects/${projectId}/feature-flags/${featureFlagId}/toggle`,
+    );
+    return {
+      ok: true,
+      message: "The feature flag has successfully been updated.",
+    };
+  } catch (error) {
+    log.error(
+      `An error ocurred at toggleFeatureFlagEnvironmentValueWithinEnvironmentAction() server action. See the error as follows: ${error}`,
+    );
+    return {
+      ok: false,
+      message:
+        "An error occurred while updating the feature flag. Please try again.",
+    };
+  }
+}
+
 export async function toggleFeatureFlagDefaultValueAction(
   newValue: boolean,
-  featureFlagId: string
+  featureFlagId: string,
 ): Promise<{
   ok: boolean;
   message?: string;
@@ -66,7 +115,7 @@ export async function toggleFeatureFlagDefaultValueAction(
     };
   } catch (error) {
     log.error(
-      `An error ocurred at toggleFeatureFlagDefaultValue(${newValue}, "${featureFlagId}") server action. See the error as follows: ${error}`
+      `An error ocurred at toggleFeatureFlagDefaultValue(${newValue}, "${featureFlagId}") server action. See the error as follows: ${error}`,
     );
     return {
       ok: false,
@@ -94,7 +143,7 @@ interface UpdateFeatureFlagActionFormState {
  */
 export async function updateFeatureFlagAction(
   _previousFormState: UpdateFeatureFlagActionFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<UpdateFeatureFlagActionFormState> {
   const formValues = tryParseFormData<UpdateFeatureFlagFormValues>(formData);
 
@@ -109,7 +158,7 @@ export async function updateFeatureFlagAction(
     const data = updateFeatureFlagSchema.parse(formValues);
     const updatedFeatureFlag = await updateProjectFeatureFlag(
       data.featureFlagId,
-      data
+      data,
     );
     if (!updatedFeatureFlag) {
       return {
@@ -117,6 +166,7 @@ export async function updateFeatureFlagAction(
         ok: false,
       };
     }
+
     revalidatePath(`/projects/${updatedFeatureFlag.slug}`);
     return {
       updatedFeatureFlag: {
@@ -158,7 +208,7 @@ interface CreateFeatureFlagActionFormState {
  */
 export async function createFeatureFlagAction(
   _previousFormState: CreateFeatureFlagActionFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CreateFeatureFlagActionFormState> {
   const formValues = tryParseFormData<
     Omit<CreateFeatureFlagFormValues, "defaultValue"> & {
@@ -185,7 +235,14 @@ export async function createFeatureFlagAction(
         ok: false,
       };
     }
-    revalidatePath(`/p/${createdFeatureFlag.slug}`);
+
+    await createEnvironmentFeatureFlagValuesPerEnvironment({
+      defaultValue: createdFeatureFlag.defaultValue,
+      featureFlagId: createdFeatureFlag.featureFlagId,
+      projectId: createdFeatureFlag.projectId,
+    });
+
+    revalidatePath(`/projects/${createdFeatureFlag.slug}`);
     return {
       createdFeatureFlag: {
         slug: createdFeatureFlag.slug,

@@ -2,6 +2,7 @@
 
 import type { JSX } from "react";
 
+import { Badge } from "@planria/design/badge";
 import { Button } from "@planria/design/button";
 import { Icon } from "@planria/design/icon";
 import {
@@ -13,13 +14,17 @@ import {
   ResponsiveDialogTitle,
 } from "@planria/design/responsive-dialog";
 import { useToast } from "@planria/design/toast";
-import { Tooltip, TooltipTrigger } from "@planria/design/tooltip";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@planria/design/tooltip";
 import { inlineCode, p, ul } from "@planria/design/typography";
 import { create } from "zustand";
 
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 
-import { Badge } from "@planria/design/badge";
 import { deleteFeatureFlagAction } from "../server-actions";
 
 const useConfirmDeleteFeatureFlagController = create<{
@@ -57,6 +62,10 @@ export function ConfirmDeleteFeatureFlagButton({
           <Icon name="Trash" aria-hidden="true" size={18} />
         </Button>
       </TooltipTrigger>
+      <TooltipContent>
+        <span>Delete</span>
+        <TooltipArrow />
+      </TooltipContent>
     </Tooltip>
   );
 }

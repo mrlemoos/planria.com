@@ -12,3 +12,14 @@ export const featureFlagSchema = z.object({
 });
 
 export type FeatureFlag = Infer<typeof featureFlagSchema>;
+
+export const environmentFeatureFlagSchema = z.object({
+  environmentFeatureFlagId: z.string().min(1).cuid2(),
+  environmentId: z.string().min(1),
+  featureFlagId: z.string().min(1),
+  value: z.boolean().nullable(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+});
+
+export type EnvironmentFeatureFlag = Infer<typeof environmentFeatureFlagSchema>;
