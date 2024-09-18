@@ -1,6 +1,6 @@
 {
   "name": "@planria/db",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "The internal package which defines the schemas for database with Drizzle ORM 💻",
   "exports": {
     ".": "./src/database.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@planria/design",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "sideEffects": false,
   "license": "Apache-2.0",
   "exports": {
