@@ -143,8 +143,6 @@ export async function updateFeatureFlagAction(
   }
 }
 
-// #region createFeatureFlagAction()
-
 interface CreateFeatureFlagActionFormState {
   createdFeatureFlag?: Pick<FeatureFlag, "slug">;
   message?: string;
