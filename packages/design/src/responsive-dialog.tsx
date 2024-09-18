@@ -37,10 +37,8 @@ import {
 } from "./drawer";
 
 export interface ResponsiveDialogProps
-  extends Pick<DialogProps, "onVisibilityUpdate" | "variant"> {
+  extends Pick<DialogProps, "onVisibilityUpdate" | "isOpen" | "variant"> {
   children: ReactNode;
-  isOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
 }
 
 const desktop = "(min-width: 768px)";
