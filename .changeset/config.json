@@ -12,8 +12,8 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "@planria/storybook",
-    "@planria/web"
-  ]
+  "privatePackages": {
+    "tag": true,
+    "version": true
+  }
 }
