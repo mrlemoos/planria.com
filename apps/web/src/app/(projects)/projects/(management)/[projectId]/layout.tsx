@@ -15,13 +15,11 @@ import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environment
 export default async function Page({
   params,
   children,
-  toggle,
 }: {
   params: {
     projectId: string;
   };
   children: ReactNode;
-  toggle: ReactNode;
 }): Promise<JSX.Element> {
   const { projectId } = params;
   const foundProject = await fetchProjectById(projectId);
@@ -47,8 +45,7 @@ export default async function Page({
         featureFlags={foundFeatureFlags}
       >
         <EnvironmentsProvider environments={foundEnvironments}>
-          {children}
-          {toggle}
+          <div className="md:ml-24">{children}</div>
         </EnvironmentsProvider>
       </ProjectManagementProvider>
     </Fragment>
