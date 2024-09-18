@@ -12,14 +12,15 @@ import { useToast } from "@planria/design/toast";
 import { muted, ul } from "@planria/design/typography";
 import Link from "next/link";
 
+import { useFeatureFlagId } from "$/app/(projects)/projects/(management)/[projectId]/feature-flags/[featureFlagId]/toggle/hooks";
+import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 import { useEnvironments } from "$/domains/environments/context";
 import type {
   EnvironmentFeatureFlag,
   FeatureFlag,
 } from "$/lib/schemas/projects/feature-flags";
-import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
-import { useFeatureFlagId } from "$/app/(projects)/projects/(management)/[projectId]/feature-flags/[featureFlagId]/toggle/hooks";
 
+import { date } from "@planria/util/date";
 import {
   toggleFeatureFlagDefaultValueAction,
   toggleFeatureFlagEnvironmentValueWithinEnvironmentAction,
@@ -38,7 +39,7 @@ export function ToggleFeatureFlagListItem({
 }: ToggleFeatureFlagListItemProps): JSX.Element {
   const { environments } = useEnvironments();
   const environment = environments.find(
-    (env) => env.environmentId === environmentId,
+    (env) => env.environmentId === environmentId
   );
   const isProduction =
     environment?.name?.trim()?.toLowerCase() === "production";
@@ -120,7 +121,7 @@ export function ToggleFeatureFlag({
     setIsTogglingDefaultValueSubmitting(true);
     const { ok, message } = await toggleFeatureFlagDefaultValueAction(
       newValue,
-      featureFlag.featureFlagId,
+      featureFlag.featureFlagId
     );
     setIsTogglingDefaultValueSubmitting(false);
 
@@ -161,7 +162,7 @@ export function ToggleFeatureFlag({
                     environmentFeatureFlagId={environmentFeatureFlagId}
                     value={!!value}
                   />
-                ),
+                )
               )}
             </ul>
           </div>
@@ -187,7 +188,7 @@ export function ToggleFeatureFlag({
               <span className="font-medium">Default value</span>
               <Switch
                 className={cn(
-                  isTogglingDefaultValueSubmitting && "cursor-wait",
+                  isTogglingDefaultValueSubmitting && "cursor-wait"
                 )}
                 checked={featureFlag.defaultValue}
                 disabled={isTogglingDefaultValueSubmitting}
@@ -200,8 +201,24 @@ export function ToggleFeatureFlag({
               <h2 className="font-semibold text-base my-3">
                 About this feature flag
               </h2>
-              <h3 className="font-medium">Description</h3>
-              <p>{featureFlag.description}</p>
+              <div className="flex flex-col gap-1">
+                <span>
+                  <b className="font-semibold">Description:</b>&nbsp;
+                  {featureFlag.description}
+                </span>
+                <span>
+                  <b className="font-semibold">Last updated at:</b>&nbsp;
+                  {date(featureFlag.updatedAt).format(
+                    "DD MMMM YYYY [at] HH:mm A"
+                  )}
+                </span>
+                <span>
+                  <b className="font-semibold">Created at:</b>&nbsp;
+                  {date(featureFlag.createdAt).format(
+                    "DD MMMM YYYY [at] HH:mm A"
+                  )}
+                </span>
+              </div>
             </div>
           </div>
         </div>
