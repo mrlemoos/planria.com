@@ -6,9 +6,6 @@ export interface TopBarProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
 
-/**
- * Renders a top bar component.
- */
 export function TopBar({
   children,
   className,
