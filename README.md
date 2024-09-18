@@ -1,5 +1,3 @@
-# planria
-
 <p align="center">
   <img width="1000" src="./docs/assets/open-graph/planria.png" alt="planria logo" />
 </p>
