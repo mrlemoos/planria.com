@@ -1,4 +1,5 @@
 import {
+  Fragment,
   createContext,
   useContext,
   useMemo,
@@ -8,12 +9,6 @@ import {
 
 import { Badge } from "@planria/design/badge";
 import { Button } from "@planria/design/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@planria/design/dropdown-menu";
 import { Icon } from "@planria/design/icon";
 import {
   Table,
@@ -23,10 +18,22 @@ import {
   TableHeader,
   TableRow,
 } from "@planria/design/table";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@planria/design/tooltip";
 import { date } from "@planria/util/date";
+import Link from "next/link";
 
+import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 import { useProjectManagement } from "$/domains/projects/context";
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
+import {
+  ConfirmDeleteFeatureFlagButton,
+  ConfirmDeleteFeatureFlagDialog,
+} from "./delete";
 
 interface FeatureFlagRowContextType
   extends Pick<
@@ -74,11 +81,8 @@ function TableViewHeader(): JSX.Element {
         <TableHead>Slug</TableHead>
         <TableHead>Description</TableHead>
         <TableHead>Default status</TableHead>
-        <TableHead>Environments</TableHead>
-        <TableHead>Last update</TableHead>
-        <TableHead>
-          <span className="sr-only">Actions</span>
-        </TableHead>
+        <TableHead>Last updated at</TableHead>
+        <TableHead>Actions</TableHead>
       </TableRow>
     </TableHeader>
   );
@@ -87,49 +91,52 @@ function TableViewHeader(): JSX.Element {
 function TableViewRow(): JSX.Element {
   const { featureFlagId, description, slug, updatedAt, defaultValue } =
     useFeatureFlagRow();
+  const projectId = useProjectId();
 
   return (
-    <TableRow key={featureFlagId}>
-      <TableCell className="font-medium">{slug}</TableCell>
-      <TableCell>{description || "-"}</TableCell>
-      <TableCell>
-        <Badge variant="secondary">{defaultValue ? "True" : "False"}</Badge>
-      </TableCell>
-      <TableCell>
-        <Badge variant="outline">Production</Badge>
-        <Badge variant="outline">Staging</Badge>
-        <Badge variant="outline">Development</Badge>
-      </TableCell>
-      <TableCell>
-        <time dateTime={updatedAt}>
-          {date(updatedAt).format("YYYY MMMM DD [at] HH:mm")}
-        </time>
-      </TableCell>
-      <TableCell>
-        <DropdownMenu position="bottom-center" offset={12}>
-          <DropdownMenuTrigger asChild={true}>
-            <Button variant="ghost" size="icon">
-              <Icon name="DropdownMenu" aria-hidden="true" size={18} />
-              <span className="sr-only">Actions</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <Icon name="Switch" aria-hidden="true" size={16} />
-              Toggle
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Icon name="Pencil2" aria-hidden="true" size={16} />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Icon name="Trash" aria-hidden="true" size={16} />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableCell>
-    </TableRow>
+    <Fragment>
+      <TableRow key={featureFlagId}>
+        <TableCell className="font-medium">{slug}</TableCell>
+        <TableCell>{description || "-"}</TableCell>
+        <TableCell>
+          <Badge variant="secondary">{defaultValue ? "True" : "False"}</Badge>
+        </TableCell>
+        <TableCell>
+          <time dateTime={updatedAt}>
+            {date(updatedAt).format("YYYY MMMM DD [at] HH:mm")}
+          </time>
+        </TableCell>
+        <TableCell>
+          <div className="flex items-center gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild={true}>
+                <Button variant="ghost" size="icon" asChild={true}>
+                  <Link
+                    href={`/projects/${projectId}/feature-flags/${featureFlagId}/toggle`}
+                  >
+                    <Icon
+                      name="Switch"
+                      aria-hidden="true"
+                      size={16}
+                      className="mr-1"
+                    />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Manage toggling</span>
+                <TooltipArrow />
+              </TooltipContent>
+            </Tooltip>
+            <ConfirmDeleteFeatureFlagButton featureFlagId={featureFlagId} />
+          </div>
+        </TableCell>
+      </TableRow>
+      <ConfirmDeleteFeatureFlagDialog
+        featureFlagSlug={slug}
+        featureFlagId={featureFlagId}
+      />
+    </Fragment>
   );
 }
 

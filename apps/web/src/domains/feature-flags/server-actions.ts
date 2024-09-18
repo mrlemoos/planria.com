@@ -1,12 +1,14 @@
 "use server";
 
 import { isZodError } from "@planria/util/errors";
+import { log } from "@planria/util/logging";
 import { tryParseFormData } from "@planria/util/objects";
 import { revalidatePath } from "next/cache";
 
 import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 import {
   createProjectFeatureFlag,
+  deleteProjectFeatureFlag,
   updateProjectFeatureFlag,
 } from "$/server/data/projects";
 
@@ -17,7 +19,62 @@ import {
   type UpdateFeatureFlagFormValues,
 } from "./schema";
 
-// #region updateFeatureFlagAction()
+export async function deleteFeatureFlagAction({
+  featureFlagId,
+  projectId,
+}: {
+  featureFlagId: string;
+  projectId: string;
+}): Promise<{ ok: boolean; message: string }> {
+  const res = await deleteProjectFeatureFlag(featureFlagId);
+
+  if (!res) {
+    return {
+      ok: false,
+      message: "It was not possible to delete the project. Please try again.",
+    };
+  }
+
+  revalidatePath(`/projects/${projectId}`);
+  return {
+    ok: true,
+    message: "Feature flag deleted successfully",
+  };
+}
+
+export async function toggleFeatureFlagDefaultValueAction(
+  newValue: boolean,
+  featureFlagId: string
+): Promise<{
+  ok: boolean;
+  message?: string;
+}> {
+  try {
+    const updatedFeatureFlag = await updateProjectFeatureFlag(featureFlagId, {
+      defaultValue: newValue,
+    });
+    if (!updatedFeatureFlag) {
+      return {
+        ok: false,
+        message: "It was not possible to update the project. Please try again.",
+      };
+    }
+    revalidatePath(`/projects/${updatedFeatureFlag}`);
+    return {
+      ok: true,
+      message: "Feature flag updated successfully",
+    };
+  } catch (error) {
+    log.error(
+      `An error ocurred at toggleFeatureFlagDefaultValue(${newValue}, "${featureFlagId}") server action. See the error as follows: ${error}`
+    );
+    return {
+      ok: false,
+      message:
+        "An error occurred while updating the feature flag. Please try again.",
+    };
+  }
+}
 
 interface UpdateFeatureFlagActionFormState {
   updatedFeatureFlag?: Pick<
