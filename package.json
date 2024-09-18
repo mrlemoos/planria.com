@@ -14,7 +14,8 @@
     "db:migrate": "dotenv -e .env -- turbo run db:migrate",
     "db:generate": "dotenv -e .env -- turbo run db:generate",
     "db:push": "dotenv -e .env -- turbo run db:push",
-    "sb:upgrade": "( cd apps/storybook && pnpm run sb:upgrade )"
+    "sb:upgrade": "( cd apps/storybook && pnpm run sb:upgrade )",
+    "version": "changeset version"
   },
   "keywords": [
     "nextjs",
@@ -53,6 +54,7 @@
     }
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.27.8",
     "dotenv-cli": "^7.4.2",
     "rimraf": "^6.0.1",
     "turbo": "^2.1.2",
