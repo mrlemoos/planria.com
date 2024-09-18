@@ -97,6 +97,7 @@ export const featureFlags = pgTable("planria_feature_flags", {
   updatedAt: timestamp("pff_updated_at", { mode: "string" })
     .notNull()
     .$defaultFn(() => sql`now()`),
+  deletedAt: timestamp("pff_deleted_at", { mode: "string" }),
 });
 
 /**
