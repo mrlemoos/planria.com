@@ -15,7 +15,7 @@ export async function Header(): Promise<JSX.Element> {
   const user = await tryGetUser();
 
   return (
-    <TopBar className="mb-8">
+    <TopBar className="mx-auto mb-8 max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg left-[50%] right-[unset]">
       <Link href="/p">
         <Logo size="md" />
       </Link>
