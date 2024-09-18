@@ -19,6 +19,11 @@
       "import": "./dist/border-beam.mjs",
       "require": "./dist/border-beam.js"
     },
+    "./breadcrumb": {
+      "types": "./src/breadcrumb.tsx",
+      "import": "./dist/breadcrumb.mjs",
+      "require": "./dist/breadcrumb.js"
+    },
     "./button": {
       "types": "./src/button.tsx",
       "import": "./dist/button.mjs",
