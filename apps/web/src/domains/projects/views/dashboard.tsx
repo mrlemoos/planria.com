@@ -24,14 +24,11 @@ import { heading } from "@planria/design/typography";
 import Link from "next/link";
 
 import { useEnvironments } from "$/domains/environments/context";
-import {
-  BoxCard,
-  BoxCardContent,
-} from "$/domains/feature-flags/views/box-card";
 import { NewFeatureFlagForm } from "$/domains/feature-flags/views/new";
 import { TableView } from "$/domains/feature-flags/views/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@planria/design/card";
 import { useProjectManagement } from "../context";
 
 function canCreateFeatureFlag(environments: Environment[]): boolean {
@@ -108,11 +105,14 @@ export function Dashboard(): JSX.Element {
           </div>
         </div>
         <main className="grid flex-1 items-start gap-4 p-2 sm:px-6 sm:py-0 md:gap-8">
-          <BoxCard>
-            <BoxCardContent>
+          <Card>
+            <CardHeader>
+              <CardTitle>Feature flags</CardTitle>
+            </CardHeader>
+            <CardContent>
               <TableView />
-            </BoxCardContent>
-          </BoxCard>
+            </CardContent>
+          </Card>
         </main>
       </div>
     </div>
