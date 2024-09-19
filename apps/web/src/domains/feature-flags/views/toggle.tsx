@@ -1,17 +1,14 @@
 "use client";
 
-import { useState, type JSX } from "react";
+import { useOptimistic, useState, type JSX } from "react";
 
 import { Button } from "@planria/design/button";
 import { cn } from "@planria/design/css";
-import { Divider } from "@planria/design/divider";
 import { Icon } from "@planria/design/icon";
 import { Spinner } from "@planria/design/spinner";
 import { Switch } from "@planria/design/switch";
 import { useToast } from "@planria/design/toast";
 import { muted, ul } from "@planria/design/typography";
-import { date } from "@planria/util/date";
-import Link from "next/link";
 
 import { useFeatureFlagId } from "$/app/(projects)/projects/(management)/[projectId]/feature-flags/[featureFlagId]/toggle/hooks";
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
@@ -22,10 +19,7 @@ import type {
   FeatureFlag,
 } from "$/lib/schemas/projects/feature-flags";
 
-import {
-  toggleFeatureFlagDefaultValueAction,
-  toggleFeatureFlagEnvironmentValueWithinEnvironmentAction,
-} from "../server-actions";
+import { toggleFeatureFlagEnvironmentValueWithinEnvironmentAction } from "../server-actions";
 
 function isProduction(
   environment: Environment | undefined
@@ -64,8 +58,10 @@ export function ToggleFeatureFlagListItem({
   const featureFlagId = useFeatureFlagId();
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
+  const [optimisticValue, setOptimisticValue] = useOptimistic(value);
 
   async function handleToggleDefaultValue(newValue: boolean) {
+    setOptimisticValue(newValue);
     setSubmitting(true);
     const { ok, message } =
       await toggleFeatureFlagEnvironmentValueWithinEnvironmentAction({
@@ -100,9 +96,8 @@ export function ToggleFeatureFlagListItem({
       <span className="flex-1">{environment?.name ?? ""}</span>
       {isSubmitting && <Spinner />}
       <Switch
-        checked={!!value}
-        disabled={isSubmitting}
-        className={cn(isSubmitting && "cursor-wait")}
+        checked={optimisticValue}
+        className={cn(isSubmitting && "pointer-events-none")}
         onCheckedChange={handleToggleDefaultValue}
       />
       <div className="w-20 ml-2">
@@ -118,127 +113,36 @@ export function ToggleFeatureFlagListItem({
 }
 
 export interface ToggleFeatureFlagProps {
-  projectId: string;
   featureFlag: FeatureFlag;
   foundValues: Omit<EnvironmentFeatureFlag, "createdAt" | "updatedAt">[];
 }
 
 export function ToggleFeatureFlag({
-  projectId,
   foundValues,
   featureFlag,
 }: ToggleFeatureFlagProps): JSX.Element {
-  const { toast } = useToast();
-  const [
-    isTogglingDefaultValueSubmitting,
-    setIsTogglingDefaultValueSubmitting,
-  ] = useState(false);
-
-  async function handleToggleFeatureFlag(newValue: boolean) {
-    setIsTogglingDefaultValueSubmitting(true);
-    const { ok, message } = await toggleFeatureFlagDefaultValueAction(
-      newValue,
-      featureFlag.featureFlagId
-    );
-    setIsTogglingDefaultValueSubmitting(false);
-
-    if (!ok) {
-      toast({
-        title: "Oops...",
-        description: message,
-        variant: "error",
-      });
-      return;
-    }
-
-    toast({
-      title: "Success",
-      description: message,
-      variant: "success",
-    });
-  }
-
   return (
-    <div className="flex flex-col animate-in">
-      <div className="flex flex-col lg:flex-row">
-        <div className="flex-1">
-          <div className="flex flex-col gap-3">
-            <h1 className="font-bold text-lg mt-5">
-              Feature Flag: {featureFlag.slug}
-            </h1>
-            <p className={muted()}>
-              This page allows you to toggle the value of the feature flag in
-              each of the environments.
-            </p>
-            <ul className={cn(ul(), "[&>li]:max-w-screen-sm mt-1 md:mt-10")}>
-              {foundValues.map(
-                ({ environmentFeatureFlagId, value, environmentId }) => (
-                  <ToggleFeatureFlagListItem
-                    key={environmentFeatureFlagId}
-                    environmentId={environmentId}
-                    environmentFeatureFlagId={environmentFeatureFlagId}
-                    value={!!value}
-                  />
-                )
-              )}
-            </ul>
-          </div>
-        </div>
-        <div className="bg-gray-50 dark:bg-gray-950 lg:w-[32%] p-3 md:p-5 rounded-sm">
-          <div className="flex flex-col gap-4">
-            <span className={muted()}>
-              The default value is that which the feature flag will default to
-              in case a new environment is created. You can manage your
-              environments&nbsp;
-              <Link
-                href={`/projects/${projectId}/environments`}
-                className="underline"
-              >
-                here
-              </Link>
-              .
-            </span>
-            <span className={muted()}>
-              Changing this value will not affect the existing environments.
-            </span>
-            <article className="flex items-center gap-3">
-              <span className="font-medium">Default value</span>
-              <Switch
-                className={cn(
-                  isTogglingDefaultValueSubmitting && "cursor-wait"
-                )}
-                checked={featureFlag.defaultValue}
-                disabled={isTogglingDefaultValueSubmitting}
-                onCheckedChange={handleToggleFeatureFlag}
+    <div className="flex-1">
+      <div className="flex flex-col gap-3">
+        <h1 className="font-bold text-lg mt-5">
+          Feature Flag: {featureFlag.slug}
+        </h1>
+        <p className={muted()}>
+          This page allows you to toggle the value of the feature flag in each
+          of the environments.
+        </p>
+        <ul className={cn(ul(), "max-w-screen-sm mt-1 md:mt-10")}>
+          {foundValues.map(
+            ({ environmentFeatureFlagId, value, environmentId }) => (
+              <ToggleFeatureFlagListItem
+                key={environmentFeatureFlagId}
+                environmentId={environmentId}
+                environmentFeatureFlagId={environmentFeatureFlagId}
+                value={!!value}
               />
-              {isTogglingDefaultValueSubmitting && <Spinner />}
-            </article>
-            <div>
-              <Divider />
-              <h2 className="font-semibold text-base my-3">
-                About this feature flag
-              </h2>
-              <div className="flex flex-col gap-1">
-                <span>
-                  <b className="font-semibold">Description:</b>&nbsp;
-                  {featureFlag.description}
-                </span>
-                <span>
-                  <b className="font-semibold">Last updated at:</b>&nbsp;
-                  {date(featureFlag.updatedAt).format(
-                    "DD MMMM YYYY [at] HH:mm A"
-                  )}
-                </span>
-                <span>
-                  <b className="font-semibold">Created at:</b>&nbsp;
-                  {date(featureFlag.createdAt).format(
-                    "DD MMMM YYYY [at] HH:mm A"
-                  )}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+            )
+          )}
+        </ul>
       </div>
     </div>
   );

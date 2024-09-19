@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import { redirectToProject } from "$/app/(projects)/projects/(management)/[projectId]/navigation";
 import { ToggleFeatureFlag } from "$/domains/feature-flags/views/toggle";
+import { AboutFlag } from "$/domains/feature-flags/views/toggle/about-flag";
 import {
   fetchProjectFeatureFlagById,
   fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId,
@@ -55,11 +56,21 @@ export default async function Page({
           <BreadcrumbItem>{foundFeatureFlag.slug}</BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <ToggleFeatureFlag
-        projectId={params.projectId}
-        featureFlag={foundFeatureFlag}
-        foundValues={foundValues}
-      />
+      <div className="flex flex-col animate-in">
+        <div className="flex flex-col lg:flex-row">
+          <ToggleFeatureFlag
+            featureFlag={foundFeatureFlag}
+            foundValues={foundValues}
+          />
+          <AboutFlag
+            featureFlagCreatedAt={foundFeatureFlag.createdAt}
+            featureFlagDefaultValue={foundFeatureFlag.defaultValue}
+            featureFlagId={foundFeatureFlag.featureFlagId}
+            featureFlagUpdatedAt={foundFeatureFlag.updatedAt}
+            featureFlagDescription={foundFeatureFlag.description ?? ""}
+          />
+        </div>
+      </div>
     </div>
   );
 }

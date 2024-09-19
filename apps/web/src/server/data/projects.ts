@@ -2,6 +2,7 @@ import { cache } from "react";
 
 import {
   and,
+  asc,
   db,
   eq,
   inArray,
@@ -30,7 +31,7 @@ export const fetchProjectById = cache(
   async (projectId: string): Promise<Project | null> => {
     try {
       log.debug(
-        `Querying for the project identified by the projectId: ${projectId}`,
+        `Querying for the project identified by the projectId: ${projectId}`
       );
       const [foundProject] = await db
         .select()
@@ -39,18 +40,18 @@ export const fetchProjectById = cache(
       return foundProject ?? null;
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectById(${projectId}) while attempting to fetch the project identified by the given projectId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectById(${projectId}) while attempting to fetch the project identified by the given projectId. Please see the original error: ${error}`
       );
       return null;
     }
-  },
+  }
 );
 
 export async function createProject(
   data: Omit<
     InferInsertModel<typeof projects>,
     "projectId" | "createdAt" | "updatedAt"
-  >,
+  >
 ): Promise<Project | null> {
   try {
     const [createdProject] = await db
@@ -63,12 +64,12 @@ export async function createProject(
       })
       .returning();
     log.debug(
-      `Created the project. [projectId: "${createdProject.projectId}", name: "${createdProject.name}"]`,
+      `Created the project. [projectId: "${createdProject.projectId}", name: "${createdProject.name}"]`
     );
     return createdProject;
   } catch (error) {
     log.error(
-      `An error occurred within the database statement at createProject(). See the error as follows: ${error}`,
+      `An error occurred within the database statement at createProject(). See the error as follows: ${error}`
     );
     return null;
   }
@@ -83,11 +84,11 @@ export const fetchProjectsOwnedByUser = cache(
         .where(eq(projects.ownerId, userId));
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectsOwnedByUser(${userId}) while attempting to fetch the projects owned by the user identified by the given userId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectsOwnedByUser(${userId}) while attempting to fetch the projects owned by the user identified by the given userId. Please see the original error: ${error}`
       );
       return [];
     }
-  },
+  }
 );
 
 export const fetchProjectsAssociatedWithUser = cache(
@@ -100,7 +101,7 @@ export const fetchProjectsAssociatedWithUser = cache(
         .from(projectAccessPasses)
         .where(eq(projectAccessPasses.accessGrantedTo, userId));
       const associatedProjectIds = memberships.map(
-        ({ projectId }) => projectId,
+        ({ projectId }) => projectId
       );
       return await db
         .select()
@@ -108,11 +109,11 @@ export const fetchProjectsAssociatedWithUser = cache(
         .where(inArray(projects.projectId, associatedProjectIds));
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectsAssociatedWithUser(${userId}) while attempting to fetch the projects accessible to the user identified by the given userId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectsAssociatedWithUser(${userId}) while attempting to fetch the projects accessible to the user identified by the given userId. Please see the original error: ${error}`
       );
       return [];
     }
-  },
+  }
 );
 
 export const fetchProjectsOwnedByAndAssociatedWithCurrentUser = cache(
@@ -124,7 +125,7 @@ export const fetchProjectsOwnedByAndAssociatedWithCurrentUser = cache(
     ]);
     const allProjects = [...ownedBy, ...associatedProjects];
     return allProjects;
-  },
+  }
 );
 
 export const fetchProjectFeatureFlagsByProjectId = cache(
@@ -136,18 +137,18 @@ export const fetchProjectFeatureFlagsByProjectId = cache(
         .where(
           and(
             eq(featureFlags.projectId, projectId),
-            isNull(featureFlags.deletedAt),
-          ),
+            isNull(featureFlags.deletedAt)
+          )
         );
       return foundFeatureFlags;
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectFeatureFlagsByProjectId(${projectId}) while attempting to fetch the feature flags associated with the project identified by the given projectId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectFeatureFlagsByProjectId(${projectId}) while attempting to fetch the feature flags associated with the project identified by the given projectId. Please see the original error: ${error}`
       );
 
       return [];
     }
-  },
+  }
 );
 
 /**
@@ -155,7 +156,7 @@ export const fetchProjectFeatureFlagsByProjectId = cache(
  */
 export const fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId = cache(
   async (
-    featureFlagId: string,
+    featureFlagId: string
   ): Promise<Omit<EnvironmentFeatureFlag, "updatedAt" | "createdAt">[]> => {
     try {
       const featureFlagsPerEnvironments = await db
@@ -167,15 +168,16 @@ export const fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId = cache(
           value: environmentFeatureFlags.value,
         })
         .from(environmentFeatureFlags)
-        .where(eq(environmentFeatureFlags.featureFlagId, featureFlagId));
+        .where(eq(environmentFeatureFlags.featureFlagId, featureFlagId))
+        .orderBy(asc(environmentFeatureFlags.createdAt));
       return featureFlagsPerEnvironments;
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId("${featureFlagId}") while attempting to fetch the feature flag values per environment associated with the feature flag identified by the given featureFlagId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId("${featureFlagId}") while attempting to fetch the feature flag values per environment associated with the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
       );
       return [];
     }
-  },
+  }
 );
 
 /**
@@ -193,11 +195,11 @@ export const fetchProjectFeatureFlagById = cache(
       return foundFeatureFlag ?? null;
     } catch (error) {
       log.error(
-        `An error occurred at fetchProjectFeatureFlagById("${featureFlagId}") while attempting to fetch the feature flag identified by the given featureFlagId. Please see the original error: ${error}`,
+        `An error occurred at fetchProjectFeatureFlagById("${featureFlagId}") while attempting to fetch the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
       );
       return null;
     }
-  },
+  }
 );
 
 /**
@@ -209,7 +211,7 @@ export async function createProjectFeatureFlag(
   payload: Omit<
     InferInsertModel<typeof featureFlags>,
     "privateId" | "updatedAt" | "createdAt"
-  >,
+  >
 ): Promise<FeatureFlag | null> {
   try {
     const [createdFeatureFlag] = await db
@@ -221,12 +223,12 @@ export async function createProjectFeatureFlag(
       })
       .returning();
     log.debug(
-      `Created the feature flag. [projectId: "${createdFeatureFlag.projectId}", slug: "${createdFeatureFlag.slug}"]`,
+      `Created the feature flag. [projectId: "${createdFeatureFlag.projectId}", slug: "${createdFeatureFlag.slug}"]`
     );
     return createdFeatureFlag;
   } catch (error) {
     log.error(
-      `An error occurred at createProjectFeatureFlag() while attempting to create a feature flag for the project identified by the given projectId. Please see the original error: ${error}`,
+      `An error occurred at createProjectFeatureFlag() while attempting to create a feature flag for the project identified by the given projectId. Please see the original error: ${error}`
     );
     return null;
   }
@@ -242,7 +244,7 @@ export async function updateProjectFeatureFlag(
   featureFlagId: string,
   payload: Partial<
     Pick<InferInsertModel<typeof featureFlags>, "description" | "defaultValue">
-  >,
+  >
 ): Promise<FeatureFlag | null> {
   try {
     const [updatedFeatureFlag] = await db
@@ -254,19 +256,19 @@ export async function updateProjectFeatureFlag(
       .where(eq(featureFlags.featureFlagId, featureFlagId))
       .returning();
     log.debug(
-      `Updated the feature flag. [projectId: "${updatedFeatureFlag.projectId}", slug: "${updatedFeatureFlag.slug}"]`,
+      `Updated the feature flag. [projectId: "${updatedFeatureFlag.projectId}", slug: "${updatedFeatureFlag.slug}"]`
     );
     return updatedFeatureFlag;
   } catch (error) {
     log.error(
-      `An error occurred at updateProjectFeatureFlag() while attempting to update the feature flag identified by the given featureFlagId. Please see the original error: ${error}`,
+      `An error occurred at updateProjectFeatureFlag() while attempting to update the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
     );
     return null;
   }
 }
 
 export async function deleteProjectFeatureFlag(
-  featureFlagId: string,
+  featureFlagId: string
 ): Promise<{ deletedAt: string } | null> {
   try {
     const deletedAt = new Date().toISOString();
@@ -277,7 +279,7 @@ export async function deleteProjectFeatureFlag(
     return { deletedAt };
   } catch (error) {
     log.error(
-      `An error occurred at deleteProjectFeatureFlag("${featureFlagId}") while attempting to delete the feature flag identified by the given featureFlagId. Please see the original error: ${error}`,
+      `An error occurred at deleteProjectFeatureFlag("${featureFlagId}") while attempting to delete the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
     );
     return null;
   }
@@ -287,7 +289,7 @@ export async function createEnvironmentFeatureFlagValues(
   payloads: Pick<
     InferInsertModel<typeof environmentFeatureFlags>,
     "environmentId" | "featureFlagId" | "value"
-  >[],
+  >[]
 ): Promise<EnvironmentFeatureFlag[]> {
   try {
     const createdEnvironmentFeatureFlags = await db
@@ -297,7 +299,7 @@ export async function createEnvironmentFeatureFlagValues(
     return createdEnvironmentFeatureFlags;
   } catch (error) {
     log.error(
-      `An error occurred at createEnvironmentFeatureFlag() while attempting to create an environment feature flag for the environment identified by the given environmentId. Please see the original error: ${error}`,
+      `An error occurred at createEnvironmentFeatureFlag() while attempting to create an environment feature flag for the environment identified by the given environmentId. Please see the original error: ${error}`
     );
     return [];
   }
@@ -319,14 +321,14 @@ export async function toggleEnvironmentFeatureFlagValue({
       .where(
         eq(
           environmentFeatureFlags.environmentFeatureFlagId,
-          environmentFeatureFlagId,
-        ),
+          environmentFeatureFlagId
+        )
       )
       .returning({ updatedAt: environmentFeatureFlags.updatedAt });
     return { updatedAt };
   } catch (error) {
     log.error(
-      `An error occurred at toggleEnvironmentFeatureFlagValue({ environmentFeatureFlagId: "${environmentFeatureFlags}", newValue: ${newValue} }). Please see the original error as follows: ${error}`,
+      `An error occurred at toggleEnvironmentFeatureFlagValue({ environmentFeatureFlagId: "${environmentFeatureFlags}", newValue: ${newValue} }). Please see the original error as follows: ${error}`
     );
     return null;
   }
@@ -338,7 +340,7 @@ export async function createEnvironmentFeatureFlagValuesPerEnvironment(
       InferInsertModel<typeof featureFlags>,
       "defaultValue" | "featureFlagId" | "projectId"
     >
-  >,
+  >
 ): Promise<EnvironmentFeatureFlag[]> {
   try {
     const environments = await fetchEnvironmentsByProjectId(payload.projectId);
@@ -352,15 +354,15 @@ export async function createEnvironmentFeatureFlagValuesPerEnvironment(
     const createdValues = await createEnvironmentFeatureFlagValues(payloads);
 
     const trueCreatedValues = createdValues.filter(
-      Boolean,
+      Boolean
     ) as EnvironmentFeatureFlag[];
     log.debug(
-      `Created environment ${trueCreatedValues.length} feature flag values for the feature flag "${payload.featureFlagId}".`,
+      `Created environment ${trueCreatedValues.length} feature flag values for the feature flag "${payload.featureFlagId}".`
     );
     return trueCreatedValues;
   } catch (error) {
     log.error(
-      `An error occurred at createEnvironmentFeatureFlagsPerEnvironment() while attempting to create environment feature flag values for the feature flag identified by the given featureFlagId. Please see the original error: ${error}`,
+      `An error occurred at createEnvironmentFeatureFlagsPerEnvironment() while attempting to create environment feature flag values for the feature flag identified by the given featureFlagId. Please see the original error: ${error}`
     );
     return [];
   }
