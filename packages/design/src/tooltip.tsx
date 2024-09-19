@@ -71,9 +71,9 @@ export interface TooltipTriggerProps
 export const TooltipTrigger = forwardRef<
   ElementRef<typeof PrimitiveTrigger>,
   TooltipTriggerProps
->(({ children, className, ...props }, ref) => (
+>(({ children, className, ...props }, forwardedRef) => (
   <PrimitiveTrigger
-    ref={ref as unknown as LegacyRef<HTMLButtonElement>}
+    ref={forwardedRef as unknown as LegacyRef<HTMLButtonElement>}
     className={className}
     {...props}
   >
