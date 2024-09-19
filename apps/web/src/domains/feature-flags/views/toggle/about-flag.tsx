@@ -1,19 +1,18 @@
 "use client";
 
-import { useState, type JSX } from "react";
+import { type JSX } from "react";
 
 import { cn } from "@planria/design/css";
 import { Divider } from "@planria/design/divider";
 import { Spinner } from "@planria/design/spinner";
 import { Switch } from "@planria/design/switch";
-import { useToast } from "@planria/design/toast";
 import { muted } from "@planria/design/typography";
 import { date } from "@planria/util/date";
 import Link from "next/link";
 
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 
-import { toggleFeatureFlagDefaultValueAction } from "../../server-actions";
+import { useTogglingDefaultValueController } from "./hooks";
 
 export interface AboutFlagProps {
   featureFlagId: string;
@@ -31,35 +30,14 @@ export function AboutFlag({
   featureFlagUpdatedAt,
 }: AboutFlagProps): JSX.Element {
   const projectId = useProjectId();
-  const { toast } = useToast();
-  const [
+  const {
+    handleToggleFeatureFlag,
     isTogglingDefaultValueSubmitting,
-    setIsTogglingDefaultValueSubmitting,
-  ] = useState(false);
-
-  async function handleToggleFeatureFlag(newValue: boolean) {
-    setIsTogglingDefaultValueSubmitting(true);
-    const { ok, message } = await toggleFeatureFlagDefaultValueAction(
-      newValue,
-      featureFlagId
-    );
-    setIsTogglingDefaultValueSubmitting(false);
-
-    if (!ok) {
-      toast({
-        title: "Oops...",
-        description: message,
-        variant: "error",
-      });
-      return;
-    }
-
-    toast({
-      title: "Success",
-      description: message,
-      variant: "success",
-    });
-  }
+    optimisticValue,
+  } = useTogglingDefaultValueController({
+    featureFlagId,
+    featureFlagDefaultValue,
+  });
 
   return (
     <div className="bg-gray-50 dark:bg-gray-950 lg:w-[32%] p-3 md:p-5 rounded-sm">
@@ -82,9 +60,10 @@ export function AboutFlag({
         <article className="flex items-center gap-3">
           <span className="font-medium">Default value</span>
           <Switch
-            className={cn(isTogglingDefaultValueSubmitting && "cursor-wait")}
-            checked={featureFlagDefaultValue}
-            disabled={isTogglingDefaultValueSubmitting}
+            className={cn(
+              isTogglingDefaultValueSubmitting && "pointer-events-none"
+            )}
+            checked={optimisticValue}
             onCheckedChange={handleToggleFeatureFlag}
           />
           {isTogglingDefaultValueSubmitting && <Spinner />}

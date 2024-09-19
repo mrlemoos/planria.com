@@ -61,6 +61,10 @@ export function ToggleFeatureFlagListItem({
   const [optimisticValue, setOptimisticValue] = useOptimistic(value);
 
   async function handleToggleDefaultValue(newValue: boolean) {
+    if (isSubmitting) {
+      return;
+    }
+
     setOptimisticValue(newValue);
     setSubmitting(true);
     const { ok, message } =
