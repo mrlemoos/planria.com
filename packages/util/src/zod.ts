@@ -1,4 +1,8 @@
-import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
+import {
+  OpenAPIRegistry,
+  OpenApiGeneratorV3,
+  extendZodWithOpenApi,
+} from "@asteasolutions/zod-to-openapi";
 import { z as zod } from "zod";
 
 import {
@@ -16,6 +20,12 @@ export function isPasswordValid(value: string): boolean {
     containsSpecialCharacter(value)
   );
 }
+
+export const openapi = {
+  registry: new OpenAPIRegistry(),
+} as const;
+
+export { OpenApiGeneratorV3 as OpenAPIGenerator };
 
 export function email({
   invalidEmailMessage = "Invalid email address",
