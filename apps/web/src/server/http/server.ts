@@ -30,14 +30,14 @@ export async function parseBodyJSON<T>({
  * @returns A function that can be used as a controller to handle HTTP requests.
  */
 export function defineController(
-  handlerFn: (request: NextRequest) => Promise<Response>
+  handlerFn: (request: NextRequest, context: object) => Promise<Response>
 ) {
-  return async (request: NextRequest) => {
+  return async (request: NextRequest, context: object) => {
     try {
       log.info(
         `The endpoint ${request.method} ${request.url} is being handled by the controller...`
       );
-      return await handlerFn(request);
+      return await handlerFn(request, context);
     } catch (error) {
       log.error(
         `An error occurred at the endpoint ${request.method} ${request.url}. See the original error: ${error}`
