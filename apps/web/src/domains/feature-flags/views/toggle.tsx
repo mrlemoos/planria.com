@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useFeatureFlagId } from "$/app/(projects)/projects/(management)/[projectId]/feature-flags/[featureFlagId]/toggle/hooks";
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 import { useEnvironments } from "$/domains/environments/context";
+import type { Environment } from "$/lib/schemas/projects/environments";
 import type {
   EnvironmentFeatureFlag,
   FeatureFlag,
@@ -25,6 +26,24 @@ import {
   toggleFeatureFlagDefaultValueAction,
   toggleFeatureFlagEnvironmentValueWithinEnvironmentAction,
 } from "../server-actions";
+
+function isProduction(
+  environment: Environment | undefined
+): environment is Environment {
+  const trimmedEnvironmentLowercasedName = environment?.name
+    ?.trim()
+    ?.toLowerCase();
+
+  if (!trimmedEnvironmentLowercasedName) {
+    return false;
+  }
+
+  return (
+    trimmedEnvironmentLowercasedName === "production" ||
+    trimmedEnvironmentLowercasedName.startsWith("production") ||
+    trimmedEnvironmentLowercasedName.endsWith("production")
+  );
+}
 
 export interface ToggleFeatureFlagListItemProps {
   environmentFeatureFlagId: string;
@@ -41,8 +60,6 @@ export function ToggleFeatureFlagListItem({
   const environment = environments.find(
     (env) => env.environmentId === environmentId
   );
-  const isProduction =
-    environment?.name?.trim()?.toLowerCase() === "production";
   const projectId = useProjectId();
   const featureFlagId = useFeatureFlagId();
   const { toast } = useToast();
@@ -89,7 +106,7 @@ export function ToggleFeatureFlagListItem({
         onCheckedChange={handleToggleDefaultValue}
       />
       <div className="w-20 ml-2">
-        {isProduction && (
+        {isProduction(environment) && (
           <Button variant="outlined" size="sm" className="gap-1">
             <Icon name="Calendar" size={16} aria-hidden="true" />
             Rollout
