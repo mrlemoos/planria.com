@@ -29,10 +29,10 @@ export async function parseBodyJSON<T>({
  * @param handlerFn The handler function that processes the request and returns a response.
  * @returns A function that can be used as a controller to handle HTTP requests.
  */
-export function defineController(
-  handlerFn: (request: NextRequest, context: object) => Promise<Response>
+export function defineController<TContext>(
+  handlerFn: (request: NextRequest, context: TContext) => Promise<Response>
 ) {
-  return async (request: NextRequest, context: object) => {
+  return async (request: NextRequest, context: TContext) => {
     try {
       log.info(
         `The endpoint ${request.method} ${request.url} is being handled by the controller...`
