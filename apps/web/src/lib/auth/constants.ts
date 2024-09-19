@@ -11,5 +11,5 @@ export const PUBLIC_NESTING_ROUTES = [
   "/sign-up",
   "/blog",
   "/developers",
-  "/api/webhooks",
+  "/api",
 ] as const;
