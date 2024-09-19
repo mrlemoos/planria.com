@@ -26,7 +26,7 @@ export async function parseBodyJSON<T>({
 
 /**
  * Defines a controller function that handles HTTP requests.
- * @param handlerFn - The handler function that processes the request and returns a response.
+ * @param handlerFn The handler function that processes the request and returns a response.
  * @returns A function that can be used as a controller to handle HTTP requests.
  */
 export function defineController(
