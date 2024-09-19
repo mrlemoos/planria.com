@@ -2,11 +2,44 @@ import { cache } from "react";
 
 import { and, db, eq, isNull, type InferInsertModel } from "@planria/db";
 import { accessTokens, environments } from "@planria/db/datasource";
-import { cuid } from "@planria/util/crypto";
+import { cuid, hash } from "@planria/util/crypto";
 import { log } from "@planria/util/logging";
 
 import type { AccessToken } from "$/lib/schemas/projects/access-tokens";
 import type { AccessTokenAndEnvironment } from "$/lib/schemas/projects/access-tokens+environment";
+
+/**
+ * Verifies the access token by checking if the access token exists in the database.
+ */
+export async function verifyAccessToken(
+  payload: Pick<AccessToken, "projectId" | "token" | "environmentId">
+): Promise<AccessToken | null> {
+  try {
+    const [foundAccessToken] = await db
+      .select()
+      .from(accessTokens)
+      .where(
+        and(
+          eq(accessTokens.projectId, payload.projectId),
+          eq(accessTokens.token, hash(payload.token)),
+          eq(accessTokens.environmentId, payload.environmentId),
+          isNull(accessTokens.deletedAt)
+        )
+      )
+      .limit(1);
+    log.debug(
+      `The encrypted access token verified for project ${payload.projectId} and environment ${payload.environmentId}`
+    );
+    return foundAccessToken;
+  } catch (error) {
+    log.error(
+      `An error occurred at verifyAccessToken(${JSON.stringify(
+        payload
+      )}) due to the following: ${error}`
+    );
+    return null;
+  }
+}
 
 /**
  * Fills the {@link accessTokens.deletedAt | `deletedAt`} field with the current date and time so
