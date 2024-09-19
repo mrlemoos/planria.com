@@ -10,6 +10,7 @@ import { Spinner } from "@planria/design/spinner";
 import { Switch } from "@planria/design/switch";
 import { useToast } from "@planria/design/toast";
 import { muted, ul } from "@planria/design/typography";
+import { date } from "@planria/util/date";
 import Link from "next/link";
 
 import { useFeatureFlagId } from "$/app/(projects)/projects/(management)/[projectId]/feature-flags/[featureFlagId]/toggle/hooks";
@@ -20,7 +21,6 @@ import type {
   FeatureFlag,
 } from "$/lib/schemas/projects/feature-flags";
 
-import { date } from "@planria/util/date";
 import {
   toggleFeatureFlagDefaultValueAction,
   toggleFeatureFlagEnvironmentValueWithinEnvironmentAction,
