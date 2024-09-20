@@ -79,6 +79,11 @@
       "import": "./dist/form.mjs",
       "require": "./dist/form.js"
     },
+    "./framer": {
+      "types": "./src/framer.tsx",
+      "import": "./dist/framer.mjs",
+      "require": "./dist/framer.js"
+    },
     "./icon": {
       "types": "./src/icon.tsx",
       "import": "./dist/icon.mjs",
@@ -183,6 +188,11 @@
       "types": "./src/typography.ts",
       "import": "./dist/typography.mjs",
       "require": "./dist/typography.js"
+    },
+    "./word-rotate": {
+      "types": "./src/word-rotate.tsx",
+      "import": "./dist/word-rotate.mjs",
+      "require": "./dist/word-rotate.js"
     }
   },
   "scripts": {
@@ -218,6 +228,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.5.5",
     "react": "^18.2.0",
     "react-hook-form": "^7.52.2",
     "tailwind-merge": "^2.5.2",
