@@ -4,6 +4,7 @@ import { type JSX } from "react";
 
 import { Badge } from "@planria/design/badge";
 import { Button } from "@planria/design/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@planria/design/card";
 import { cn } from "@planria/design/css";
 import { Icon } from "@planria/design/icon";
 import {
@@ -28,7 +29,6 @@ import { NewFeatureFlagForm } from "$/domains/feature-flags/views/new";
 import { TableView } from "$/domains/feature-flags/views/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@planria/design/card";
 import { useProjectManagement } from "../context";
 
 function canCreateFeatureFlag(environments: Environment[]): boolean {
