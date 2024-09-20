@@ -1,4 +1,6 @@
 [
   "apps/*",
-  "packages/*"
+  "packages/*",
+  "tools/*",
+  "vendors/*"
 ]
