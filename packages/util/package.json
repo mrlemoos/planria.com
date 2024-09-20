@@ -8,6 +8,9 @@
     "test:watch": "vitest"
   },
   "exports": {
+    "./assert": {
+      "default": "./src/assert.ts"
+    },
     "./crypto": {
       "default": "./src/crypto.ts"
     },
