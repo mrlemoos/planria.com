@@ -272,6 +272,7 @@ export async function deleteProjectFeatureFlag(
 ): Promise<{ deletedAt: string } | null> {
   try {
     const deletedAt = new Date().toISOString();
+    // TODO: check the number of rows affected and log a warning if it's not 1
     await db
       .update(featureFlags)
       .set({ deletedAt })
