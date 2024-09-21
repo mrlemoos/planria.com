@@ -85,9 +85,11 @@ export const featureFlags = pgTable("planria_feature_flags", {
     .notNull(),
   slug: text("pff_slug").notNull(),
   description: text("pff_description"),
-  defaultValue: boolean("pff_default_value")
-    .notNull()
-    .$default(() => false),
+  valueType: text("pff_value_type", {
+    enum: ["string", "boolean", "number"],
+  }),
+  variations: text("pff_variations"),
+  defaultValue: text("pff_default_value"),
   projectId: text("pff_project_id")
     .notNull()
     .references(() => projects.projectId),
@@ -139,11 +141,10 @@ export const environmentFeatureFlags = pgTable(
     environmentId: text("peff_environment_id")
       .notNull()
       .references(() => environments.environmentId),
-    // featureFlagId: text("peff_feature_flag_id")
-    //   .notNull()
-    //   .references(() => featureFlags.featureFlagId),
-    featureFlagId: text("peff_feature_flag_id").notNull(),
-    value: boolean("peff_value").default(false),
+    featureFlagId: text("peff_feature_flag_id")
+      // .references(() => featureFlags.featureFlagId)
+      .notNull(),
+    value: text("peff_value"),
     createdAt: timestamp("peff_created_at", { mode: "string" })
       .notNull()
       .defaultNow(),

@@ -1,0 +1,1 @@
+ALTER TABLE "planria_feature_flags" ADD COLUMN "pff_variations" text;
