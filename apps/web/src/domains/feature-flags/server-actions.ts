@@ -5,16 +5,13 @@ import { log } from "@planria/util/logging";
 import { tryParseFormData } from "@planria/util/objects";
 import { revalidatePath } from "next/cache";
 
-import type {
-  EnvironmentFeatureFlag,
-  FeatureFlag,
-} from "$/lib/schemas/projects/feature-flags";
+import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 import {
   createEnvironmentFeatureFlagValuesPerEnvironment,
   createProjectFeatureFlag,
   deleteProjectFeatureFlag,
-  updateProjectFeatureFlag,
   toggleEnvironmentFeatureFlagValue,
+  updateProjectFeatureFlag,
 } from "$/server/data/projects";
 
 import {
@@ -73,7 +70,7 @@ export async function toggleFeatureFlagEnvironmentValueWithinEnvironmentAction({
       };
     }
     revalidatePath(
-      `/projects/${projectId}/feature-flags/${featureFlagId}/toggle`,
+      `/projects/${projectId}/feature-flags/${featureFlagId}/toggle`
     );
     return {
       ok: true,
@@ -81,7 +78,7 @@ export async function toggleFeatureFlagEnvironmentValueWithinEnvironmentAction({
     };
   } catch (error) {
     log.error(
-      `An error ocurred at toggleFeatureFlagEnvironmentValueWithinEnvironmentAction() server action. See the error as follows: ${error}`,
+      `An error ocurred at toggleFeatureFlagEnvironmentValueWithinEnvironmentAction() server action. See the error as follows: ${error}`
     );
     return {
       ok: false,
@@ -92,15 +89,15 @@ export async function toggleFeatureFlagEnvironmentValueWithinEnvironmentAction({
 }
 
 export async function toggleFeatureFlagDefaultValueAction(
-  newValue: boolean,
-  featureFlagId: string,
+  newValue: boolean | number | string,
+  featureFlagId: string
 ): Promise<{
   ok: boolean;
   message?: string;
 }> {
   try {
     const updatedFeatureFlag = await updateProjectFeatureFlag(featureFlagId, {
-      defaultValue: newValue,
+      defaultValue: String(newValue),
     });
     if (!updatedFeatureFlag) {
       return {
@@ -115,7 +112,7 @@ export async function toggleFeatureFlagDefaultValueAction(
     };
   } catch (error) {
     log.error(
-      `An error ocurred at toggleFeatureFlagDefaultValue(${newValue}, "${featureFlagId}") server action. See the error as follows: ${error}`,
+      `An error ocurred at toggleFeatureFlagDefaultValue(${newValue}, "${featureFlagId}") server action. See the error as follows: ${error}`
     );
     return {
       ok: false,
@@ -143,7 +140,7 @@ interface UpdateFeatureFlagActionFormState {
  */
 export async function updateFeatureFlagAction(
   _previousFormState: UpdateFeatureFlagActionFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<UpdateFeatureFlagActionFormState> {
   const formValues = tryParseFormData<UpdateFeatureFlagFormValues>(formData);
 
@@ -158,7 +155,7 @@ export async function updateFeatureFlagAction(
     const data = updateFeatureFlagSchema.parse(formValues);
     const updatedFeatureFlag = await updateProjectFeatureFlag(
       data.featureFlagId,
-      data,
+      data
     );
     if (!updatedFeatureFlag) {
       return {
@@ -208,7 +205,7 @@ interface CreateFeatureFlagActionFormState {
  */
 export async function createFeatureFlagAction(
   _previousFormState: CreateFeatureFlagActionFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<CreateFeatureFlagActionFormState> {
   const formValues = tryParseFormData<
     Omit<CreateFeatureFlagFormValues, "defaultValue"> & {

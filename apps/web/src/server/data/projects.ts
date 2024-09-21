@@ -316,7 +316,7 @@ export async function toggleEnvironmentFeatureFlagValue({
     const [{ updatedAt }] = await db
       .update(environmentFeatureFlags)
       .set({
-        value: newValue,
+        value: String(newValue),
       })
       .where(
         eq(

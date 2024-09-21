@@ -68,6 +68,7 @@ export default async function Page({
             featureFlagId={foundFeatureFlag.featureFlagId}
             featureFlagUpdatedAt={foundFeatureFlag.updatedAt}
             featureFlagDescription={foundFeatureFlag.description ?? ""}
+            featureFlagValueType={foundFeatureFlag.valueType}
           />
         </div>
       </div>

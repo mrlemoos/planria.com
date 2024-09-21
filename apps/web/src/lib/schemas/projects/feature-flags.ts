@@ -5,7 +5,8 @@ export const featureFlagSchema = z.object({
   featureFlagId: z.string().min(1).cuid2(),
   slug: z.string().min(1),
   description: z.string().nullable(),
-  defaultValue: z.boolean(),
+  defaultValue: z.string().nullable(),
+  valueType: z.enum(["string", "boolean", "number"]).nullable(),
   projectId: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
@@ -17,7 +18,7 @@ export const environmentFeatureFlagSchema = z.object({
   environmentFeatureFlagId: z.string().min(1).cuid2(),
   environmentId: z.string().min(1),
   featureFlagId: z.string().min(1),
-  value: z.boolean().nullable(),
+  value: z.string().nullable(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
 });

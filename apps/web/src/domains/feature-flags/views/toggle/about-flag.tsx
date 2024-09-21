@@ -1,9 +1,10 @@
 "use client";
 
-import { type JSX } from "react";
+import { useId, type JSX } from "react";
 
 import { cn } from "@planria/design/css";
 import { Divider } from "@planria/design/divider";
+import { Label } from "@planria/design/label";
 import { Spinner } from "@planria/design/spinner";
 import { Switch } from "@planria/design/switch";
 import { muted } from "@planria/design/typography";
@@ -11,15 +12,17 @@ import { date } from "@planria/util/date";
 import Link from "next/link";
 
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
+import type { FeatureFlag } from "$/lib/schemas/projects/feature-flags";
 
 import { useTogglingDefaultValueController } from "./hooks";
 
 export interface AboutFlagProps {
   featureFlagId: string;
-  featureFlagDefaultValue: boolean;
+  featureFlagDefaultValue: `${string}` | `${number}` | (string & {}) | null;
   featureFlagDescription: string;
   featureFlagUpdatedAt: string;
   featureFlagCreatedAt: string;
+  featureFlagValueType: FeatureFlag["valueType"];
 }
 
 export function AboutFlag({
@@ -28,6 +31,7 @@ export function AboutFlag({
   featureFlagDescription,
   featureFlagCreatedAt,
   featureFlagUpdatedAt,
+  featureFlagValueType,
 }: AboutFlagProps): JSX.Element {
   const projectId = useProjectId();
   const {
@@ -36,8 +40,9 @@ export function AboutFlag({
     optimisticValue,
   } = useTogglingDefaultValueController({
     featureFlagId,
-    featureFlagDefaultValue,
+    featureFlagDefaultValue: featureFlagDefaultValue === "true",
   });
+  const switchDefaultValueId = useId();
 
   return (
     <div className="bg-gray-50 dark:bg-gray-950 lg:w-[32%] p-3 md:p-5 rounded-sm">
@@ -58,14 +63,20 @@ export function AboutFlag({
           Changing this value will not affect the existing environments.
         </span>
         <article className="flex items-center gap-3">
-          <span className="font-medium">Default value</span>
-          <Switch
-            className={cn(
-              isTogglingDefaultValueSubmitting && "pointer-events-none"
-            )}
-            checked={optimisticValue}
-            onCheckedChange={handleToggleFeatureFlag}
-          />
+          <Label className="font-medium" htmlFor={switchDefaultValueId}>
+            Default value
+          </Label>
+          {featureFlagValueType === "boolean" && (
+            <Switch
+              className={cn(
+                isTogglingDefaultValueSubmitting && "pointer-events-none"
+              )}
+              id={switchDefaultValueId}
+              checked={optimisticValue}
+              onCheckedChange={handleToggleFeatureFlag}
+            />
+          )}
+          {/* TODO: Implement other value types here. */}
           {isTogglingDefaultValueSubmitting && <Spinner />}
         </article>
         <div>
