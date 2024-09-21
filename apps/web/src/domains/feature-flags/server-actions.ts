@@ -207,11 +207,7 @@ export async function createFeatureFlagAction(
   _previousFormState: CreateFeatureFlagActionFormState,
   formData: FormData
 ): Promise<CreateFeatureFlagActionFormState> {
-  const formValues = tryParseFormData<
-    Omit<CreateFeatureFlagFormValues, "defaultValue"> & {
-      defaultValue: "true" | "false";
-    }
-  >(formData);
+  const formValues = tryParseFormData<CreateFeatureFlagFormValues>(formData);
 
   if (!formValues) {
     return {
@@ -223,7 +219,6 @@ export async function createFeatureFlagAction(
   try {
     const data = createFeatureFlagSchema.parse({
       ...formValues,
-      defaultValue: formValues.defaultValue === "true",
     });
     const createdFeatureFlag = await createProjectFeatureFlag(data);
     if (!createdFeatureFlag) {

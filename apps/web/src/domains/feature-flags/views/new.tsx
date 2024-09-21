@@ -47,7 +47,7 @@ export function NewFeatureFlagForm(): JSX.Element {
       description: "",
       projectId,
       slug: "",
-      defaultValue: false,
+      defaultValue: "",
     },
   });
   const { boundFormRef, handleSubmit } = useFormAction(form, formAction, {
@@ -152,8 +152,10 @@ export function NewFeatureFlagForm(): JSX.Element {
               <FormItem className="flex-row items-center">
                 <FormControl>
                   <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
+                    checked={field.value === "true"}
+                    onCheckedChange={(newChecked) =>
+                      field.onChange(String(newChecked))
+                    }
                   />
                 </FormControl>
                 <FormLabel>Will it be enabled by default?</FormLabel>
