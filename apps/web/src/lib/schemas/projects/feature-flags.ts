@@ -7,6 +7,7 @@ export const featureFlagSchema = z.object({
   description: z.string().nullable(),
   defaultValue: z.string().nullable(),
   valueType: z.enum(["string", "boolean", "number"]).nullable(),
+  variations: z.string().nullable(),
   projectId: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
