@@ -81,9 +81,7 @@ export function AboutFlag({
         </article>
         <div>
           <Divider />
-          <h2 className="font-semibold text-base my-3">
-            About this feature flag
-          </h2>
+          <h2 className="font-semibold text-base my-3">About this flag</h2>
           <div className="flex flex-col gap-1">
             <span>
               <b className="font-semibold">Description:</b>&nbsp;
