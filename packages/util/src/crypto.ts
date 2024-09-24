@@ -1,5 +1,5 @@
 import { createId, isCuid } from "@paralleldrive/cuid2";
-import { createHash } from "node:crypto";
+import { hashSync } from "bcryptjs";
 
 export function cuid(): string {
   return createId();
@@ -8,6 +8,9 @@ export function cuid(): string {
 // exposes the `isCuid` function from package
 export { isCuid };
 
-export function hash(value: string): string {
-  return createHash("md5").update(value, "utf-8").digest("hex");
+/**
+ * Hashes a string using `bcrypt` with the specified number of salt rounds.
+ */
+export function hash(value: string, saltRounds = 10): string {
+  return hashSync(value, saltRounds);
 }
