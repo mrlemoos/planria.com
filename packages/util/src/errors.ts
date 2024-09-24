@@ -47,6 +47,12 @@ export function isErrorCode<T extends string>(
   return code.startsWith(prefix);
 }
 
+export interface ExceptionObject<T extends string = string> {
+  errorCode: ErrorCode<T>;
+  error: string;
+  data?: Record<string, unknown>;
+}
+
 /**
  * Handles an exception and returns an object containing the error code, error message, and optional data.
  * @param code - The error code.
@@ -58,7 +64,7 @@ export function handleException<T extends string = string>(
   code: ErrorCode<T>,
   message: string,
   data?: Record<string, unknown>
-) {
+): ExceptionObject<T> {
   return {
     errorCode: code,
     error: message,
