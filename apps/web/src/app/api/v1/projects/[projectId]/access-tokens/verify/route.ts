@@ -45,6 +45,13 @@ openapi.registry.registerPath({
     [HttpStatusCode.OK]: {
       description:
         "The access token was successfully verified and is valid and authorised to be used to access the Planria API or SDKs for the specific given project within the given environment.",
+      content: {
+        "application/json": {
+          schema: z.object({
+            authenticated: z.literal(true),
+          }),
+        },
+      },
     },
     [HttpStatusCode.NOT_FOUND]: {
       description:
@@ -78,5 +85,8 @@ export const POST = defineController<Context>(async (_request, context) => {
     );
   }
 
-  return NextResponse.json({}, { status: HttpStatusCode.OK });
+  return NextResponse.json(
+    { authenticated: true },
+    { status: HttpStatusCode.OK }
+  );
 });
