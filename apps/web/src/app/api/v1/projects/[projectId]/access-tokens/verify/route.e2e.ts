@@ -10,7 +10,10 @@ describe("POST /api/v1/projects/[projectId]/access-tokens/verify", function () {
 
     // Act
     const response = await httpClient.post(
-      `http://localhost:3000/api/v1/projects/${projectId}/access-tokens/verify?token=${token}&environmentId=${environmentId}`
+      `http://localhost:3000/api/v1/projects/${projectId}/access-tokens/verify`,
+      {
+        searchParams: new URLSearchParams({ token, environmentId }),
+      }
     );
 
     // Assert
