@@ -13,9 +13,10 @@ export async function authenticate(): Promise<
 > {
   const credentials = getCredentials();
 
-  const searchParams = new URLSearchParams();
-  searchParams.set("token", credentials.accessToken);
-  searchParams.set("environmentId", credentials.environmentId);
+  const searchParams = new URLSearchParams({
+    token: credentials.accessToken,
+    environmentId: credentials.environmentId,
+  });
 
   const response = await httpClient
     .post(
