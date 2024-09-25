@@ -35,7 +35,7 @@ function tryCreateWebhookEvent(
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<Response> {
   const raw = await request.text();
   const signature = headers().get("Stripe-Signature") as string;
   const { event, error } = tryCreateWebhookEvent(raw, signature);
@@ -191,6 +191,16 @@ export async function POST(request: NextRequest) {
         },
         {
           status: HttpStatusCode.OK,
+        }
+      );
+    }
+    default: {
+      return NextResponse.json(
+        {
+          error: `Unhandled event type: ${event.type}`,
+        },
+        {
+          status: HttpStatusCode.BAD_REQUEST,
         }
       );
     }
