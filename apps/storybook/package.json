@@ -21,7 +21,7 @@
     "@planria/eslint-config": "workspace:*",
     "@planria/tailwindcss": "workspace:*",
     "@planria/tsconfig": "workspace:*",
-    "@storybook/addon-actions": "^8.3.1",
+    "@storybook/addon-actions": "^8.3.3",
     "@storybook/addon-essentials": "^8.3.1",
     "@storybook/addon-links": "^8.3.1",
     "@storybook/addon-mdx-gfm": "^8.3.3",

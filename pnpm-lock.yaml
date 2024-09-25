@@ -55,8 +55,8 @@ importers:
         specifier: workspace:*
         version: link:../../tools/tsconfig
       '@storybook/addon-actions':
-        specifier: ^8.3.1
-        version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/addon-essentials':
         specifier: ^8.3.1
         version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
@@ -2280,6 +2280,11 @@ packages:
     resolution: {integrity: sha512-f00NxBNBcsMHqtwsOpRbZKrNMLdUjnSg1G6zYdVxAG7NwxzgpqPZm37I36ebFmgz/WO2XQ3ihxzfV2IKFuiZ6g==}
     peerDependencies:
       storybook: ^8.3.1
+
+  '@storybook/addon-actions@8.3.3':
+    resolution: {integrity: sha512-cbpksmld7iADwDGXgojZ4r8LGI3YA3NP68duAHg2n1dtnx1oUaFK5wd6dbNuz7GdjyhIOIy3OKU1dAuylYNGOQ==}
+    peerDependencies:
+      storybook: ^8.3.3
 
   '@storybook/addon-backgrounds@8.3.1':
     resolution: {integrity: sha512-HPQElHIi5SMWJTOimYt27QaiPrrwTprVShVfq3gQKpUcDJhT4qMpI3Bn3JCtthPlXlUA+miZcNdNRTIc2XzhSA==}
@@ -9285,6 +9290,15 @@ snapshots:
     optional: true
 
   '@storybook/addon-actions@8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
+    dependencies:
+      '@storybook/global': 5.0.0
+      '@types/uuid': 9.0.8
+      dequal: 2.0.3
+      polished: 4.3.1
+      storybook: 8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
+      uuid: 9.0.1
+
+  '@storybook/addon-actions@8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
       '@storybook/global': 5.0.0
       '@types/uuid': 9.0.8
