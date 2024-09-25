@@ -1,5 +1,5 @@
 import { createId, isCuid } from "@paralleldrive/cuid2";
-import { hashSync } from "bcryptjs";
+import { compareSync, hashSync } from "bcryptjs";
 
 export function cuid(): string {
   return createId();
@@ -13,4 +13,11 @@ export { isCuid };
  */
 export function hash(value: string, saltRounds = 10): string {
   return hashSync(value, saltRounds);
+}
+
+/**
+ * Compares a raw string value with a hashed value to determine if they match.
+ */
+export function compareHash(value: string, hash: string): boolean {
+  return compareSync(value, hash);
 }
