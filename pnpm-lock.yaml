@@ -64,8 +64,8 @@ importers:
         specifier: ^8.3.1
         version: 8.3.1(react@18.3.1)(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/addon-mdx-gfm':
-        specifier: ^8.3.1
-        version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/addon-postcss':
         specifier: ^2.0.0
         version: 2.0.0(webpack@5.93.0(esbuild@0.23.1))
@@ -2311,10 +2311,10 @@ packages:
       react:
         optional: true
 
-  '@storybook/addon-mdx-gfm@8.3.1':
-    resolution: {integrity: sha512-Kth9noYkHrK3s3XjQCG51Li42ecK4BVd0xS77xRrsmFBBR9fdBCPbMhR2g9WYmFJz5Vq2vEta9vBTXZUnxzNEg==}
+  '@storybook/addon-mdx-gfm@8.3.3':
+    resolution: {integrity: sha512-jdwVXoBSEdmuw8L4MxUeJ/qIInADfCwdtShnfTQIJBBRucOl8ykgfTKKNjllT79TFiK0gsWoiZmE05P4wuBofw==}
     peerDependencies:
-      storybook: ^8.3.1
+      storybook: ^8.3.3
 
   '@storybook/addon-measure@8.3.1':
     resolution: {integrity: sha512-XL7Rph0K0vggVcY7mxGws9SNzLJlCvzrPJdz1xZBKBLLd0fdpbR5Y+1oP1w/7qhZ9Xrg44VRVs4yUzCYUeK2OQ==}
@@ -9348,7 +9348,7 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@storybook/addon-mdx-gfm@8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
+  '@storybook/addon-mdx-gfm@8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
       remark-gfm: 4.0.0
       storybook: 8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
@@ -11350,7 +11350,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.35.0(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -11404,7 +11404,7 @@ snapshots:
       enhanced-resolve: 5.17.1
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.6
       is-core-module: 2.15.0
@@ -11491,7 +11491,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
