@@ -64,8 +64,8 @@ importers:
         specifier: ^8.3.1
         version: 8.3.1(react@18.3.1)(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/addon-mdx-gfm':
-        specifier: ^8.3.1
-        version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/addon-postcss':
         specifier: ^2.0.0
         version: 2.0.0(webpack@5.93.0(esbuild@0.23.1))
@@ -2315,10 +2315,10 @@ packages:
       react:
         optional: true
 
-  '@storybook/addon-mdx-gfm@8.3.1':
-    resolution: {integrity: sha512-Kth9noYkHrK3s3XjQCG51Li42ecK4BVd0xS77xRrsmFBBR9fdBCPbMhR2g9WYmFJz5Vq2vEta9vBTXZUnxzNEg==}
+  '@storybook/addon-mdx-gfm@8.3.3':
+    resolution: {integrity: sha512-jdwVXoBSEdmuw8L4MxUeJ/qIInADfCwdtShnfTQIJBBRucOl8ykgfTKKNjllT79TFiK0gsWoiZmE05P4wuBofw==}
     peerDependencies:
-      storybook: ^8.3.1
+      storybook: ^8.3.3
 
   '@storybook/addon-measure@8.3.1':
     resolution: {integrity: sha512-XL7Rph0K0vggVcY7mxGws9SNzLJlCvzrPJdz1xZBKBLLd0fdpbR5Y+1oP1w/7qhZ9Xrg44VRVs4yUzCYUeK2OQ==}
@@ -9352,7 +9352,7 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@storybook/addon-mdx-gfm@8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
+  '@storybook/addon-mdx-gfm@8.3.3(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
       remark-gfm: 4.0.0
       storybook: 8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
