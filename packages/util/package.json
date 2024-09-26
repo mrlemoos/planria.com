@@ -1,51 +1,81 @@
 {
   "name": "@planria/util",
   "version": "1.0.0",
+  "description": "Utility functions used across Planria projects.",
   "sideEffects": false,
   "license": "Apache-2.0",
   "scripts": {
-    "test": "vitest run --reporter=verbose",
-    "test:watch": "vitest"
+    "build": "tsup ./src",
+    "dev": "tsup ./src --watch",
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "test": "vitest run"
   },
   "exports": {
     "./assert": {
-      "default": "./src/assert.ts"
+      "types": "./src/assert.ts",
+      "import": "./dist/assert.mjs",
+      "require": "./dist/assert.js"
     },
     "./crypto": {
-      "default": "./src/crypto.ts"
+      "types": "./src/crypto.ts",
+      "import": "./dist/crypto.mjs",
+      "require": "./dist/crypto.js"
     },
     "./currency": {
-      "default": "./src/currency.ts"
+      "types": "./src/currency.ts",
+      "import": "./dist/currency.mjs",
+      "require": "./dist/currency.js"
     },
     "./date": {
-      "default": "./src/date.ts"
+      "types": "./src/date.ts",
+      "import": "./dist/date.mjs",
+      "require": "./dist/date.js"
     },
     "./errors": {
-      "default": "./src/errors.ts"
+      "types": "./src/errors.ts",
+      "import": "./dist/errors.mjs",
+      "require": "./dist/errors.js"
     },
     "./http": {
-      "default": "./src/http.ts"
+      "types": "./src/http.ts",
+      "import": "./dist/http.mjs",
+      "require": "./dist/http.js"
     },
     "./logging": {
-      "default": "./src/logging.ts"
+      "types": "./src/logging.ts",
+      "import": "./dist/logging.mjs",
+      "require": "./dist/logging.js"
     },
     "./objects": {
-      "default": "./src/objects.ts"
+      "types": "./src/objects.ts",
+      "import": "./dist/objects.mjs",
+      "require": "./dist/objects.js"
     },
     "./proto": {
-      "default": "./src/proto.ts"
+      "types": "./src/proto.ts",
+      "import": "./dist/proto.mjs",
+      "require": "./dist/proto.js"
     },
     "./runtime": {
-      "default": "./src/runtime.ts"
+      "types": "./src/runtime.ts",
+      "import": "./dist/runtime.mjs",
+      "require": "./dist/runtime.js"
     },
     "./strings": {
-      "default": "./src/strings.ts"
+      "types": "./src/strings.ts",
+      "import": "./dist/strings.mjs",
+      "require": "./dist/strings.js"
     },
     "./uuid": {
-      "default": "./src/uuid.ts"
+      "types": "./src/uuid.ts",
+      "import": "./dist/uuid.mjs",
+      "require": "./dist/uuid.js"
     },
     "./zod": {
-      "default": "./src/zod.ts"
+      "types": "./src/zod.ts",
+      "import": "./dist/zod.mjs",
+      "require": "./dist/zod.js"
     }
   },
   "devDependencies": {
@@ -53,6 +83,7 @@
     "@planria/tsconfig": "workspace:*",
     "@types/bcryptjs": "^2.4.6",
     "typescript": "^5.3.3",
+    "tsup": "^8.3.0",
     "vitest": "^2.0.5"
   },
   "dependencies": {
