@@ -1,3 +1,6 @@
+/**
+ * Type guard for checking if a value whether the given value is an object.
+ */
 export function isObject<T extends object>(value: unknown): value is T {
   return typeof value === "object" && value !== null;
 }
