@@ -2,14 +2,15 @@ import type { ExceptionObject } from "@planria/util/errors";
 import { httpClient } from "@planria/util/http";
 
 import { BASE_API_URL } from "../constants";
-import { getCredentials } from "../credentials";
+import { getCredentials, type Credentials } from "../credentials";
 
 /**
  * Authenticates the given access token if the provided environment and project IDs are also
  * valid and all corresponding to one another.
  */
 export async function authenticate(): Promise<
-  { authenticated: true } | { authenticated: false; error: string }
+  | { authenticated: true; credentials: Credentials }
+  | { authenticated: false; credentials?: never; error: string }
 > {
   const credentials = getCredentials();
 
@@ -21,9 +22,7 @@ export async function authenticate(): Promise<
   const response = await httpClient
     .post(
       `${BASE_API_URL}/v1/projects/${credentials.projectId}/access-tokens/verify`,
-      {
-        searchParams,
-      }
+      { searchParams }
     )
     .json<
       { authenticated: true } | ({ authenticate: false } & ExceptionObject)
@@ -32,5 +31,5 @@ export async function authenticate(): Promise<
   if (!("authenticated" in response)) {
     return { authenticated: false, error: response.error };
   }
-  return { authenticated: true };
+  return { authenticated: true, credentials };
 }
