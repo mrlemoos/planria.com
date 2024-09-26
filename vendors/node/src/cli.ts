@@ -9,6 +9,7 @@ import { authenticate } from "./internals/commands/auth";
 const cmd = yargs(hideBin(process.argv));
 
 cmd
+  .scriptName("planria")
   .command(
     "deploy",
     "Deploy the feature flags defined in your flags.ts file 🚀",
