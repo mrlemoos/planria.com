@@ -55,4 +55,5 @@ export const z = { ...zod, email, password };
 extendZodWithOpenApi(z); // https://github.com/asteasolutions/zod-to-openapi
 
 export * from "zod";
+export { ZodError } from "zod";
 export type { infer as Infer, output as Output } from "zod";
