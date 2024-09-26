@@ -52,6 +52,11 @@
       "import": "./dist/objects.mjs",
       "require": "./dist/objects.js"
     },
+    "./primitives": {
+      "types": "./src/primitives.ts",
+      "import": "./dist/primitives.mjs",
+      "require": "./dist/primitives.js"
+    },
     "./proto": {
       "types": "./src/proto.ts",
       "import": "./dist/proto.mjs",
