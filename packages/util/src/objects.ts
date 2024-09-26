@@ -18,6 +18,9 @@ export function tryParseFormData<T>(formData: FormData): T | null {
   }
 }
 
+/**
+ * Copies a form data object and returns a new instance.
+ */
 export function copyFormData(formData: FormData): FormData {
   const copy = new FormData();
 
