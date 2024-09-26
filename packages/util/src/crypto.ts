@@ -1,5 +1,6 @@
 import { createId, isCuid } from "@paralleldrive/cuid2";
 import { compareSync, hashSync } from "bcryptjs";
+import { randomUUID } from "node:crypto";
 
 export function cuid(): string {
   return createId();
@@ -20,4 +21,11 @@ export function hash(value: string, saltRounds = 10): string {
  */
 export function compareHash(value: string, hash: string): boolean {
   return compareSync(value, hash);
+}
+
+/**
+ * Generates and returns a UUID v4 string.
+ */
+export function uuid(): string {
+  return randomUUID();
 }
