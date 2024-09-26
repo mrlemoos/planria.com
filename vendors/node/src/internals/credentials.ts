@@ -96,9 +96,9 @@ export type Credentials = Output<typeof credentialsSchema>;
  * @since 1.0.0
  */
 export function getCredentials(): Credentials {
-  const accessToken = getEnvironmentVariable("PLANRIA_ACCESS_TOKEN")!;
-  const environmentId = getEnvironmentVariable("PLANRIA_ENVIRONMENT_ID")!;
-  const projectId = getEnvironmentVariable("PLANRIA_PROJECT_ID")!;
+  const accessToken = getEnvironmentVariable("PLANRIA_ACCESS_TOKEN");
+  const environmentId = getEnvironmentVariable("PLANRIA_ENVIRONMENT_ID");
+  const projectId = getEnvironmentVariable("PLANRIA_PROJECT_ID");
 
   const { success, data, error } = credentialsSchema.safeParse({
     accessToken,
