@@ -29,7 +29,13 @@ cmd
             response.error,
           ].join("\n")
         );
+        return;
       }
+
+      log.info("You've been successfully authenticated! 🎉");
+      log.info(`Project ID • ${response.credentials.projectId}`);
+      log.info(`Environment ID • ${response.credentials.environmentId}`);
+      log.info(`Access token • ${response.credentials.accessToken}`);
     }
   )
   .strictCommands()
