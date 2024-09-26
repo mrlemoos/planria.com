@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "sideEffects": false,
   "license": "Apache-2.0",
+  "bin": {
+    "planria": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsup ./src",
     "postbuild": "rimraf -rf ./dist/*.{test,spec}.*",
