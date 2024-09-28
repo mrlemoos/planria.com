@@ -8,8 +8,8 @@ This is an open-source (licensed under the [Apache 2.0 license](./LICENSE)) beca
 transparency towards our customers and that the things meant for developers should be evaluated
 and supported by developers.
 
-> Infrastructure. Edge. Feature Flags. Remote Config.
-> A/B tests. No fuss. No hassle.
+> **Infrastructure. Edge. Feature Flags. Remote Config.**
+> **A/B tests. No fuss. No hassle.**
 
 Planria is the complete platform for managing your feature flags, remote config,
 and A/B tests. Deploy with confidence and make data-driven decisions.
@@ -42,6 +42,80 @@ to help you manage feature flags, remote config, and A/B tests with ease.
   See the License for the specific language governing permissions and
   limitations under the License.
 ```
+
+Planria is an under-construction platform for managing your feature flags, remote config, and A/B tests.
+Deploy with confidence and make data-driven decisions.
+
+Planria provides a comprehensive set of tools to help you manage your feature flags, remote config,
+and A/B tests with ease.
+
+- **Feature Flags:** Easily manage and deploy feature flags across your application.
+- **Remote Config:** Dynamically configure your application without redeploying.
+- **A/B Testing:** Run experiments and make data-driven decisions about your application.
+
+Planria was founded in 2024 with the mission to make feature management easy and accessible for teams
+of all sizes. Our platform and infrastructure are designed to help projects become products.
+
+## Engineering
+
+This section relates to the development, tools, and solution structure and architecture that have been
+implemented in the project across the entire monorepo.
+
+
+### Package manager 📦
+
+As this structure is a monorepo, we've decided to take Yarn into consideration and we've been using 
+it to manage our dependencies and internal modules.
+
+>
+> **As Yarn maintainers define it on the official website,**
+> 
+> "[Yarn](https://yarnpkg.com) is a package manager that doubles down as project manager. 
+> Whether you work on simple projects or industry monorepos, whether you're an open source developer 
+> or an enterprise user, Yarn has your back."
+>
+
+### Scripts 🎰
+
+As mentioned above, we're using [Yarn as package manager](https://yarnpkg.com) to control 
+the dependencies and dev. dependencies, internal modules, and monorepo scripts. In addition to Yarn, 
+we use [Turborepo](https://turbo.build) - a build system with remote cache developed by [Vercel](https://vercel.com).
+
+- **Dependency installation:** Run `yarn install` or `yarn` to install dependencies and dev. dependencies
+  for all the internal workspaces and root project defined in the [package.json](./package.json) file.
+- **Build process:** Run `yarn run build` to build all the applications and modules that require bundling.
+  This process is controlled by Turborepo.
+
+### Structure ⚖️
+
+The file structure is mapped out in 4 main directories:
+
+```
+└── planria.com/
+  └── apps/
+  └── packages/
+  └── tools/
+  └── vendors/
+```
+
+- **apps** is the directory where the final applications are stored.
+- **tools** is the directory where the configurations are stored for several development and/or build tools,
+  _e.g._, [TailwindCSS](https://tailwindcss.com), [TypeScript](https://typescriptlang.org), [ESLint](https://eslint.org).
+- **packages** is the directory where internal modules and/or packages are stored to be used in the apps.
+- **vendors** is the directory where modules to be published on the public [npm registry](https://npmjs.com) are stored.
+
+
+### Testing 🧪
+
+We utilise [Vitest](https://vitest.dev) as the test runner with [Testing Library](https://testing-library.com)
+to sandbox the testing documents and scenarios.
+
+- **Unit testing** files must be named after the file they're testing, followed by 
+  the `.test.ts?(x)` suffix and extension.
+- **Behavioural and component testing** files must be name after the file they're testing, 
+  followed by the `.spec.ts?(x)` suffix and extension.
+- **End-to-end testing** files must be named after the scenario, followed by the `.e2e.ts?(x)`
+  suffix and extension.
 
 ## Features 🗳️
 
