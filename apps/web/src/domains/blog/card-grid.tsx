@@ -30,7 +30,7 @@ export function BlogCardGrid(): JSX.Element {
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle>planria and the feature flags on the edge</CardTitle>
+          <CardTitle>Planria and the feature flags on the edge</CardTitle>
           <CardDescription>
             See how we make the software to provide you with the best experience
             for your users.
