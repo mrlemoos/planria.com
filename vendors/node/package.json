@@ -22,7 +22,7 @@
     "@types/yargs": "^17.0.33",
     "eslint": "^8.57.0",
     "rimraf": "^6.0.1",
-    "tsup": "^8.0.2",
+    "tsup": "^8.3.0",
     "typescript": "^5.3.3",
     "vitest": "^2.1.1"
   },
