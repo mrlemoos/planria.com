@@ -236,3 +236,20 @@ export const accessTokens = pgTable("planria_project_access_tokens", {
     .defaultNow(),
   deletedAt: timestamp("ppat_deleted_at", { mode: "string" }),
 });
+
+/**
+ * The schema which defines the newsletter recipients table in the database. This table
+ * stores the recipients of the newsletter which are used to send the newsletters to the
+ * recipients.
+ */
+export const newsletterRecipients = pgTable("planria_newsletter_recipients", {
+  email: text("pnr_email").notNull().unique(),
+  firstName: text("pnr_first_name").notNull(),
+  lastName: text("pnr_last_name").notNull(),
+  createdAt: timestamp("pnr_created_at", { mode: "string" })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("pnr_updated_at", { mode: "string" })
+    .notNull()
+    .$defaultFn(() => sql`now()`),
+});

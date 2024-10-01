@@ -120,6 +120,13 @@
       "when": 1726879269605,
       "tag": "0016_mixed_alice",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1727743500277,
+      "tag": "0017_bent_sentinel",
+      "breakpoints": true
     }
   ]
 }
