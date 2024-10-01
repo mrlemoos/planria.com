@@ -1,7 +1,17 @@
 import type { JSX } from "react";
 import { expect, test, vi } from "vitest";
 
-import { render, renderAsync } from "./testing-library+ext";
+import { render, renderAsync, renderHook } from "./testing-library+ext";
+
+test("renderHook() should render the result of a custom hook", () => {
+  function useCustomHook(): number {
+    return 42;
+  }
+
+  const { result } = renderHook(useCustomHook);
+
+  expect(result.current).toBe(42);
+});
 
 test("render() should render the JSX of a React Component", () => {
   function Component(): JSX.Element {

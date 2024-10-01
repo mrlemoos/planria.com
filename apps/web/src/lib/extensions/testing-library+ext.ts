@@ -5,6 +5,42 @@ import {
   screen,
   type RenderResult as TestingLibraryRenderResult,
 } from "@testing-library/react";
+import {
+  renderHook as renderHook__,
+  type RenderHookResult as TestingLibraryRenderHookResult,
+} from "@testing-library/react-hooks";
+
+/**
+ * The interface for the result of a render hook operation.
+ */
+export interface RenderHookResult<P, R>
+  extends TestingLibraryRenderHookResult<P, R> {}
+
+/**
+ * Renders a custom hook and returns the result of the render.
+ */
+export function renderHook<P, R>(
+  statement: (input: P) => R,
+  options?: { initialProps?: P }
+): RenderHookResult<P, R> {
+  const {
+    rerender,
+    result,
+    unmount,
+    waitFor,
+    waitForNextUpdate,
+    waitForValueToChange,
+  } = renderHook__(statement, options);
+
+  return {
+    rerender,
+    result,
+    unmount,
+    waitFor,
+    waitForNextUpdate,
+    waitForValueToChange,
+  };
+}
 
 /**
  * The interface for the result of a render operation.
