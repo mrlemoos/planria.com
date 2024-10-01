@@ -243,6 +243,7 @@ export const accessTokens = pgTable("planria_project_access_tokens", {
  * recipients.
  */
 export const newsletterRecipients = pgTable("planria_newsletter_recipients", {
+  recipientId: serial("pnr_recipient_id").notNull().primaryKey(),
   email: text("pnr_email").notNull().unique(),
   firstName: text("pnr_first_name").notNull(),
   lastName: text("pnr_last_name").notNull(),

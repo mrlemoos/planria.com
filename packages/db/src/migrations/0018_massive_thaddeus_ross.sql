@@ -1,0 +1,1 @@
+ALTER TABLE "planria_newsletter_recipients" ADD COLUMN "pnr_recipient_id" serial PRIMARY KEY NOT NULL;
