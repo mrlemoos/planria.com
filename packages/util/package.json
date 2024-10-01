@@ -17,6 +17,11 @@
       "import": "./dist/assert.mjs",
       "require": "./dist/assert.js"
     },
+    "./async": {
+      "types": "./src/async.ts",
+      "import": "./dist/async.mjs",
+      "require": "./dist/async.js"
+    },
     "./crypto": {
       "types": "./src/crypto.ts",
       "import": "./dist/crypto.mjs",
