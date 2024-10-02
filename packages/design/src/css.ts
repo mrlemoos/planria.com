@@ -33,6 +33,9 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Utility function to convert pixels to rem.
+ */
 export function toRem(px: number): string {
   return `${px / 16}rem`;
 }
