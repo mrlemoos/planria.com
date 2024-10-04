@@ -14,6 +14,11 @@
       "import": "./dist/badge.mjs",
       "require": "./dist/badge.js"
     },
+    "./banner": {
+      "types": "./src/banner.tsx",
+      "import": "./dist/banner.mjs",
+      "require": "./dist/banner.js"
+    },
     "./border-beam": {
       "types": "./src/border-beam.tsx",
       "import": "./dist/border-beam.mjs",
