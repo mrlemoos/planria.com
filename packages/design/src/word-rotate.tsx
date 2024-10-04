@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Key, type ReactNode } from "react";
 
 import { AnimatePresence, motion, type HTMLMotionProps } from "framer-motion";
 
 import { cn } from "./css";
 
 export interface WordRotateProps extends HTMLMotionProps<"h1"> {
-  words: string[];
+  words: { content: ReactNode; key: Key }[];
   duration?: number;
   framerProps?: HTMLMotionProps<"h1">;
   className?: string;
@@ -33,11 +33,13 @@ export function WordRotate({
     return () => clearInterval(interval);
   }, [words, duration]);
 
+  const word = words[index];
+
   return (
     <div className="overflow-hidden py-2">
       <AnimatePresence mode="wait">
         <motion.h1
-          key={words[index]}
+          key={word.key}
           className={cn(className)}
           initial={initial}
           animate={animate}
@@ -45,7 +47,7 @@ export function WordRotate({
           transition={transition}
           {...props}
         >
-          {words[index]}
+          {word.content}
         </motion.h1>
       </AnimatePresence>
     </div>
