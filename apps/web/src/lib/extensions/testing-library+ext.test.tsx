@@ -1,7 +1,11 @@
 import type { JSX } from "react";
 import { expect, test, vi } from "vitest";
 
-import { render, renderAsync, renderHook } from "./testing-library+ext";
+import {
+  renderHook,
+  renderSandbox,
+  renderSandboxAsync,
+} from "./testing-library+ext";
 
 test("renderHook() should render the result of a custom hook", () => {
   function useCustomHook(): number {
@@ -13,36 +17,36 @@ test("renderHook() should render the result of a custom hook", () => {
   expect(result.current).toBe(42);
 });
 
-test("render() should render the JSX of a React Component", () => {
+test("renderSandbox() should render the JSX of a React Component", () => {
   function Component(): JSX.Element {
     return <div>Hello, World!</div>;
   }
 
-  const { screen } = render(<Component />);
+  const { screen } = renderSandbox(<Component />);
 
   const helloWorld = screen.getByText("Hello, World!");
   expect(helloWorld).toBeTruthy();
 });
 
-test("renderAsync() should render the JSX of a React Server Component (RSC)", async () => {
+test("renderSandboxAsync() should render the JSX of a React Server Component (RSC)", async () => {
   async function ServerComponent(): Promise<JSX.Element> {
     return <div>Hello, World!</div>;
   }
 
-  const { screen } = await renderAsync(ServerComponent);
+  const { screen } = await renderSandboxAsync(ServerComponent);
 
   const helloWorld = screen.getByText("Hello, World!");
   expect(helloWorld).toBeTruthy();
 });
 
-test("renderAsync() should call once the asynchronous function in the React Server Component (RSC) body", async () => {
+test("renderSandboxAsync() should call once the asynchronous function in the React Server Component (RSC) body", async () => {
   const asyncFn = vi.fn().mockResolvedValue({});
   async function ServerComponent(): Promise<JSX.Element> {
     await asyncFn();
     return <div>Hello, World!</div>;
   }
 
-  const { screen } = await renderAsync(ServerComponent);
+  const { screen } = await renderSandboxAsync(ServerComponent);
 
   const helloWorld = screen.getByText("Hello, World!");
   expect(helloWorld).toBeTruthy();

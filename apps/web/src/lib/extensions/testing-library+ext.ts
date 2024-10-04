@@ -56,7 +56,7 @@ export interface RenderResult
 /**
  * Renders a React component and returns the result of the render.
  */
-export function render(node: ReactNode): RenderResult {
+export function renderSandbox(node: ReactNode): RenderResult {
   const { asFragment, baseElement, container, debug, rerender } =
     render__(node);
   return { asFragment, baseElement, container, debug, rerender, screen };
@@ -70,19 +70,19 @@ export interface AsyncRenderResult extends RenderResult {}
  *
  * @example
  * ```tsx
- * import { renderAsync } from "$/lib/ext/+testing-library";
+ * import { renderSandboxAsync } from "$/lib/ext/+testing-library";
  *
  * import { MyComponent } from "./my-component";
  *
  * // ...
  *
- * const { screen } = await renderAsync(MyComponent, { name: "World" });
+ * const { screen } = await renderSandboxAsync(MyComponent, { name: "World" });
  * ```
  */
-export async function renderAsync<P extends object>(
+export async function renderSandboxAsync<P extends object>(
   ServerComponent: (props?: P) => Promise<JSX.Element | null>,
   props: P = {} as P
 ): Promise<AsyncRenderResult> {
   const jsx = await ServerComponent(props);
-  return render(jsx);
+  return renderSandbox(jsx);
 }
