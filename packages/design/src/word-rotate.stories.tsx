@@ -16,7 +16,10 @@ const meta: Meta<WordRotateProps> = {
       randomNoun(),
       randomAdjective(),
       randomNoun(),
-    ].map(capitalize),
+    ].map((word) => ({
+      content: capitalize(word),
+      key: word,
+    })),
   },
   argTypes: {
     words: {
