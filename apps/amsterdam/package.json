@@ -1,0 +1,45 @@
+{
+  "name": "@planria/amsterdam",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "🇳🇱 Amsterdam exposes the HTTP REST API to be accessed by our SDKs.",
+  "scripts": {
+    "build": "bun build src/main.ts",
+    "start": "bun run src/main.ts",
+    "dev": "bun run --watch src/main.ts",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "amsterdam",
+    "netherlands",
+    "planria",
+    "express",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "ts-node"
+  ],
+  "author": "Leonardo Lemos <leo.lemos@planria.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@planria/tsconfig": "workspace:*",
+    "@planria/util": "workspace:*",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "dependencies": {
+    "@planria/db": "workspace:*",
+    "@t3-oss/env-core": "^0.11.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "helmet": "^8.0.0",
+    "zod": "^3.23.8"
+  }
+}

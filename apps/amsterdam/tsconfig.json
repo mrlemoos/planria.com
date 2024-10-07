@@ -1,0 +1,11 @@
+{
+  "extends": "@planria/tsconfig/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$/*": [
+        "src/*"
+      ]
+    }
+  }
+}
