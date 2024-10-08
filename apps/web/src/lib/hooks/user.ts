@@ -3,9 +3,9 @@
 import { useMemo } from "react";
 
 import { useUser as useClerkUser } from "@clerk/nextjs";
+import { formatDateToISOStringOrDefaultToNull } from "@planria/util/date";
 
 import { userSchema, type User } from "$/lib/schemas/user";
-import { formatDateToISOStringOrDefaultToNull } from "@planria/util/date";
 
 /**
  * Custom hook that returns user-related data.
