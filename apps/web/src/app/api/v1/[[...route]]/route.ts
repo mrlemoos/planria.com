@@ -9,6 +9,7 @@ import { handle } from "hono/vercel";
 import { health } from "$/server/http/handlers/health";
 import { auth } from "$/server/http/middleware/auth";
 import { authGuard } from "$/server/http/middleware/auth/guard";
+import { chronometer } from "$/server/http/middleware/chronometer";
 import { cors } from "$/server/http/middleware/cors";
 import { passport } from "$/server/http/middleware/passport";
 
@@ -20,6 +21,7 @@ app.use("*", auth());
 app.use(logger());
 app.use(poweredBy());
 app.use(cors());
+app.use(chronometer());
 
 app.notFound((c) => {
   c.status(HttpStatusCode.NOT_FOUND);
