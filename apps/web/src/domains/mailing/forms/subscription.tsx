@@ -3,27 +3,20 @@
 import { useEffect, type JSX } from "react";
 
 import { Button } from "@planria/design/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormFooter,
-  FormItem,
-  FormLabel,
-  useForm,
-  zodResolver,
-} from "@planria/design/form";
-import { Input } from "@planria/design/input";
+import { Form, FormFooter, useForm, zodResolver } from "@planria/design/form";
 import { useToast } from "@planria/design/toast";
 import { useFormState } from "react-dom";
 
 import { useFormAction } from "$/lib/hooks/form";
 
+import { EmailFormField } from "../components/email-form-field";
+import { FamilyNameFormField } from "../components/family-name-form-field";
+import { GivenNameFormField } from "../components/given-name-form-field";
 import {
   subscribeToNewsletterSchema,
   type SubscribeToNewsletter,
-} from "../../schema";
-import { subscribeToNewsletterAction } from "../../server-actions";
+} from "../schema";
+import { subscribeToNewsletterAction } from "../server-actions";
 
 export interface SubscriptionFormProps {
   onCancel?: () => void;
@@ -73,59 +66,10 @@ export function SubscriptionForm({
         action={formAction}
         onSubmit={handleSubmit}
       >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="email"
-                  autoComplete="email"
-                  autoCapitalize="off"
-                  autoCorrect="off"
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <EmailFormField />
         <div className="flex flex-col md:flex-row items-center gap-1">
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First name</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    autoComplete="given-name"
-                    autoCapitalize="off"
-                    autoCorrect="off"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First name</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    autoComplete="family-name"
-                    autoCapitalize="off"
-                    autoCorrect="off"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          <GivenNameFormField />
+          <FamilyNameFormField />
         </div>
         <FormFooter>
           <Button type="submit" variant="primary">
