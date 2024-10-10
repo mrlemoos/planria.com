@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { EnvironmentsProvider } from "$/domains/environments/context";
 import { ProjectManagementProvider } from "$/domains/projects/context";
-import { Aside } from "$/domains/shared/aside/aside";
+import { Aside } from "$/domains/shared/aside";
 import {
   fetchProjectById,
   fetchProjectFeatureFlagsByProjectId,
