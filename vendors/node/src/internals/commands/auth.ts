@@ -2,7 +2,10 @@ import type { ExceptionObject } from "@planria/util/errors";
 import { httpClient } from "@planria/util/http";
 
 import { BASE_API_URL } from "../constants";
-import { getCredentials, type Credentials } from "../credentials";
+import {
+  getUserEnvironmentCredentials,
+  type Credentials,
+} from "../credentials";
 
 /**
  * Authenticates the given access token if the provided environment and project IDs are also
@@ -12,7 +15,7 @@ export async function authenticate(): Promise<
   | { authenticated: true; credentials: Credentials }
   | { authenticated: false; credentials?: never; error: string }
 > {
-  const credentials = getCredentials();
+  const credentials = getUserEnvironmentCredentials();
 
   const searchParams = new URLSearchParams({
     token: credentials.accessToken,

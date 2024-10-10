@@ -1,5 +1,11 @@
 import { z, type Output } from "@planria/util/zod";
 
+import {
+  PLANRIA_ACCESS_TOKEN_HEADER_KEY,
+  PLANRIA_ENVIRONMENT_ID_HEADER_KEY,
+  PLANRIA_PROJECT_ID_HEADER_KEY,
+} from "./constants";
+
 /**
  * [INTERNAL]
  *
@@ -95,7 +101,7 @@ export type Credentials = Output<typeof credentialsSchema>;
  *
  * @since 1.0.0
  */
-export function getCredentials(): Credentials {
+export function getUserEnvironmentCredentials(): Credentials {
   const accessToken = getEnvironmentVariable("PLANRIA_ACCESS_TOKEN");
   const environmentId = getEnvironmentVariable("PLANRIA_ENVIRONMENT_ID");
   const projectId = getEnvironmentVariable("PLANRIA_PROJECT_ID");
@@ -113,4 +119,20 @@ export function getCredentials(): Credentials {
   }
 
   return data;
+}
+
+/**
+ * Creates and returns an instance of the server-side headers class populated by the required
+ * http headers used to authenticate the operation performed by the SDK on the server.
+ */
+export function createHttpCredentialHeaders({
+  accessToken,
+  environmentId,
+  projectId,
+}: Credentials): Headers {
+  const headers = new Headers();
+  headers.set(PLANRIA_ACCESS_TOKEN_HEADER_KEY, accessToken);
+  headers.set(PLANRIA_ENVIRONMENT_ID_HEADER_KEY, environmentId);
+  headers.set(PLANRIA_PROJECT_ID_HEADER_KEY, projectId);
+  return headers;
 }
