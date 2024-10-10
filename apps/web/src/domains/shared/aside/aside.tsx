@@ -30,6 +30,16 @@ export interface AsideProps {
   projectDescription?: string;
 }
 
+function canShowProjectDescription(
+  projectDescription: string | undefined
+): boolean {
+  return !!projectDescription;
+}
+
+function canShowProjectDetails(projectId: string | undefined): boolean {
+  return !!projectId;
+}
+
 export function Aside({
   projectName,
   projectSlug,
@@ -51,7 +61,7 @@ export function Aside({
             <Fragment>
               <Badge variant="secondary">{projectSlug}</Badge>
               <span className="font-bold text-foreground">{projectName}</span>
-              {!!projectDescription && (
+              {canShowProjectDescription(projectDescription) && (
                 <span className="text-muted-foreground text-sm">
                   {projectDescription}
                 </span>
@@ -74,7 +84,7 @@ export function Aside({
           )}
         </div>
         <Divider />
-        {!!params.projectId && (
+        {canShowProjectDetails(params.projectId) && (
           <Fragment>
             <Tooltip>
               <TooltipTrigger>
