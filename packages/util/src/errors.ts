@@ -7,7 +7,11 @@ import { ZodError } from "./zod";
  * @returns `true` if the error is an instance of ZodError, `false` otherwise.
  */
 export function isZodError<T>(err: unknown): err is ZodError<T> {
-  return err instanceof ZodError;
+  return (
+    err instanceof ZodError ||
+    (err instanceof Error &&
+      (err.name === ZodError.name || err.name === ZodError.prototype.name))
+  );
 }
 
 /**
