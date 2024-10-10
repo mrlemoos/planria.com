@@ -20,6 +20,7 @@ import {
   FormProvider,
   useForm,
   useFormContext,
+  type Control,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
@@ -33,6 +34,7 @@ export {
   useForm,
   useFormContext,
   zodResolver,
+  type Control,
   type FieldValues,
   type UseFormReturn,
 };
