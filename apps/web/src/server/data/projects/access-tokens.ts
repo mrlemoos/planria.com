@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { and, db, eq, isNull, type InferInsertModel } from "@planria/db";
 import { accessTokens, environments } from "@planria/db/datasource";
-import { cuid, hash, compareHash } from "@planria/util/crypto";
+import { cuid, compareHash } from "@planria/util/crypto";
 import { log } from "@planria/util/logging";
 
 import type { AccessToken } from "$/lib/schemas/projects/access-tokens";
