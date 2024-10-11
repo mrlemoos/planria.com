@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { and, db, eq, isNull, type InferInsertModel } from "@planria/db";
 import { accessTokens, environments } from "@planria/db/datasource";
-import { cuid, hash } from "@planria/util/crypto";
+import { cuid, hash, compareHash } from "@planria/util/crypto";
 import { log } from "@planria/util/logging";
 
 import type { AccessToken } from "$/lib/schemas/projects/access-tokens";
@@ -12,30 +12,40 @@ import type { AccessTokenAndEnvironment } from "$/lib/schemas/projects/access-to
  * Verifies the access token by checking if the access token exists in the database.
  */
 export async function verifyAccessToken(
-  payload: Pick<AccessToken, "projectId" | "token" | "environmentId">
+  payload: Pick<AccessToken, "projectId" | "token" | "environmentId">,
 ): Promise<AccessToken | null> {
   try {
-    const [foundAccessToken] = await db
+    const foundAccessTokens = await db
       .select()
       .from(accessTokens)
       .where(
         and(
           eq(accessTokens.projectId, payload.projectId),
-          eq(accessTokens.token, hash(payload.token)),
           eq(accessTokens.environmentId, payload.environmentId),
-          isNull(accessTokens.deletedAt)
-        )
+          isNull(accessTokens.deletedAt),
+        ),
       )
       .limit(1);
+
+    const foundAccessToken = foundAccessTokens.find((entry) =>
+      compareHash(payload.token, entry.token),
+    );
+
+    if (!foundAccessToken) {
+      throw new Error(
+        `The access token could not be determined for project ${payload.projectId} and environment ${payload.environmentId} in a comparison over ${foundAccessTokens.length} entries.`,
+      );
+    }
+
     log.debug(
-      `The encrypted access token verified for project ${payload.projectId} and environment ${payload.environmentId}`
+      `The encrypted access token verified for project ${payload.projectId} and environment ${payload.environmentId}`,
     );
     return foundAccessToken;
   } catch (error) {
     log.error(
       `An error occurred at verifyAccessToken(${JSON.stringify(
-        payload
-      )}) due to the following: ${error}`
+        payload,
+      )}) due to the following: ${error}`,
     );
     return null;
   }
@@ -49,7 +59,7 @@ export async function verifyAccessToken(
  * Note: This function does not actually drop the access token from the database.
  */
 export async function softDeleteAccessTokenById(
-  accessTokenId: string
+  accessTokenId: string,
 ): Promise<{ deletedAt: string } | null> {
   try {
     const deletedAt = new Date().toISOString();
@@ -66,7 +76,7 @@ export async function softDeleteAccessTokenById(
 
     if (!hasBeenSoftDeleted) {
       log.error(
-        `Failed to soft delete the access token at softDeleteAccessTokenById(${accessTokenId}). Please check the logs for more information.`
+        `Failed to soft delete the access token at softDeleteAccessTokenById(${accessTokenId}). Please check the logs for more information.`,
       );
       return null;
     }
@@ -74,7 +84,7 @@ export async function softDeleteAccessTokenById(
     return { deletedAt };
   } catch (error) {
     log.error(
-      `An error occurred at deleteAccessTokenById(${accessTokenId}) due to the following: ${error}`
+      `An error occurred at deleteAccessTokenById(${accessTokenId}) due to the following: ${error}`,
     );
     return null;
   }
@@ -91,7 +101,7 @@ export async function createAccessToken(
     | "projectId"
     | "tokenFourInitialCharacters"
     | "displayName"
-  >
+  >,
 ): Promise<AccessToken | null> {
   try {
     const [createdAccessToken] = await db
@@ -106,7 +116,7 @@ export async function createAccessToken(
   } catch (error) {
     log.error(
       `Failed to create the access token at createAccessToken() due to:`,
-      error
+      error,
     );
     return null;
   }
@@ -135,20 +145,20 @@ export const fetchAccessTokensWithEnvironmentByProjectId = cache(
         .where(
           and(
             eq(accessTokens.projectId, projectId),
-            isNull(accessTokens.deletedAt)
-          )
+            isNull(accessTokens.deletedAt),
+          ),
         )
         .innerJoin(
           environments,
-          eq(accessTokens.environmentId, environments.environmentId)
+          eq(accessTokens.environmentId, environments.environmentId),
         );
       return foundProjects;
     } catch (error) {
       log.error(
         `Failed to fetch the access tokens at fetchAccessTokens("${projectId}") due to:`,
-        error
+        error,
       );
       return [];
     }
-  }
+  },
 );
