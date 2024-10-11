@@ -12,6 +12,7 @@ import { authGuard } from "$/server/http/middleware/auth/guard";
 import { chronometer } from "$/server/http/middleware/chronometer";
 import { cors } from "$/server/http/middleware/cors";
 import { passport } from "$/server/http/middleware/passport";
+import { tokens } from "$/server/http/handlers/projects/tokens";
 
 export const runtime = "edge"; // https://hono.dev/docs/getting-started/vercel#node-js
 
@@ -28,23 +29,27 @@ app.notFound((c) => {
   return c.json(
     handleException(
       "router.not.found",
-      "This path does not correspond to any API route. Please refer to the right endpoint and try again."
-    )
+      "This path does not correspond to any API route. Please refer to the right endpoint and try again.",
+    ),
   );
 });
 
-app.onError((error, c) => {
-  if (
+function isMissingClerkKeyError(error: unknown): error is Error {
+  return (
     error instanceof Error &&
     error.message.includes("Missing Clerk Publishable key")
-  ) {
+  );
+}
+
+app.onError((error, c) => {
+  if (isMissingClerkKeyError(error)) {
     log.debug(error.message);
     c.status(HttpStatusCode.INTERNAL_SERVER_ERROR);
     return c.json(
       handleException(
         "auth.service.not.configured",
-        "The authentication service has not yet been properly configured or is missing the necessary credentials. Check the environment variables and try again."
-      )
+        "The authentication service has not yet been properly configured or is missing the necessary credentials. Check the environment variables and try again.",
+      ),
     );
   }
 
@@ -53,16 +58,16 @@ app.onError((error, c) => {
     return c.json(
       handleException(
         "api.router.validation.error",
-        error?.errors?.[0]?.message || "The request input is invalid."
-      )
+        error?.message || "The request input is invalid.",
+      ),
     );
   }
   c.status(HttpStatusCode.INTERNAL_SERVER_ERROR);
   return c.json(
     handleException(
       "api.router.error",
-      error?.message || "An error occurred while processing the request."
-    )
+      error?.message || "An error occurred while processing the request.",
+    ),
   );
 });
 
@@ -70,11 +75,12 @@ app.onError((error, c) => {
 app.route("/health", health);
 
 const userHandlers = new Hono();
-userHandlers.use("*", authGuard());
+userHandlers.use(authGuard());
 app.route("/u" /* "u" is short for "user" */, userHandlers);
 
 const projectHandlers = new Hono();
-projectHandlers.use("*", passport());
+projectHandlers.use(passport());
+projectHandlers.route("/projects/tokens", tokens);
 app.route("/p" /* "p" is short for "project" */, projectHandlers);
 
 export const GET = handle(app);
