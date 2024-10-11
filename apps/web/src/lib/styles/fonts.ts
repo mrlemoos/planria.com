@@ -90,6 +90,7 @@ export const fontMono = IBM_Plex_Mono({
   weight: ["400", "700"],
   display: "swap",
   variable: "--font-mono",
+  fallback: ["monospace"],
 });
 
 export const fontCode = JetBrains_Mono({
