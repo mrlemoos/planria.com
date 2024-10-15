@@ -14,6 +14,10 @@ export function isZodError<T>(err: unknown): err is ZodError<T> {
   );
 }
 
+export function isError(err: unknown): err is Error {
+  return err instanceof Error;
+}
+
 /**
  * Represents a network error.
  */

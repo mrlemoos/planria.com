@@ -1,4 +1,4 @@
-import { handleException, isZodError } from "@planria/util/errors";
+import { handleException, isError, isZodError } from "@planria/util/errors";
 import { HttpStatusCode } from "@planria/util/http";
 import { log } from "@planria/util/logging";
 import { Hono } from "hono";
@@ -7,12 +7,12 @@ import { poweredBy } from "hono/powered-by";
 import { handle } from "hono/vercel";
 
 import { health } from "$/server/http/handlers/health";
+import { tokens } from "$/server/http/handlers/projects/tokens";
 import { auth } from "$/server/http/middleware/auth";
 import { authGuard } from "$/server/http/middleware/auth/guard";
 import { chronometer } from "$/server/http/middleware/chronometer";
 import { cors } from "$/server/http/middleware/cors";
 import { passport } from "$/server/http/middleware/passport";
-import { tokens } from "$/server/http/handlers/projects/tokens";
 
 export const runtime = "edge"; // https://hono.dev/docs/getting-started/vercel#node-js
 
@@ -29,8 +29,8 @@ app.notFound((c) => {
   return c.json(
     handleException(
       "router.not.found",
-      "This path does not correspond to any API route. Please refer to the right endpoint and try again.",
-    ),
+      "This path does not correspond to any API route. Please refer to the right endpoint and try again."
+    )
   );
 });
 
@@ -48,8 +48,8 @@ app.onError((error, c) => {
     return c.json(
       handleException(
         "auth.service.not.configured",
-        "The authentication service has not yet been properly configured or is missing the necessary credentials. Check the environment variables and try again.",
-      ),
+        "The authentication service has not yet been properly configured or is missing the necessary credentials. Check the environment variables and try again."
+      )
     );
   }
 
@@ -58,16 +58,20 @@ app.onError((error, c) => {
     return c.json(
       handleException(
         "api.router.validation.error",
-        error?.message || "The request input is invalid.",
-      ),
+        isError(error)
+          ? (error as Error)?.message
+          : "The request input is invalid."
+      )
     );
   }
   c.status(HttpStatusCode.INTERNAL_SERVER_ERROR);
   return c.json(
     handleException(
       "api.router.error",
-      error?.message || "An error occurred while processing the request.",
-    ),
+      isError(error)
+        ? (error as Error)?.message
+        : "An error occurred while processing the request."
+    )
   );
 });
 
