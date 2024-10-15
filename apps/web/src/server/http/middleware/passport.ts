@@ -1,23 +1,15 @@
 import { handleException } from "@planria/util/errors";
 import { HttpStatusCode } from "@planria/util/http";
 import { log } from "@planria/util/logging";
-import { z } from "@planria/util/zod";
 import type { Context, MiddlewareHandler, Next } from "hono";
 
-import { projectSchema } from "$/lib/schemas/projects";
-import { environmentSchema } from "$/lib/schemas/projects/environments";
+import { passportSchema } from "./_schema";
 
 import {
   PLANRIA_ACCESS_TOKEN_HEADER_KEY,
   PLANRIA_ENVIRONMENT_ID_HEADER_KEY,
   PLANRIA_PROJECT_ID_HEADER_KEY,
 } from "../constants";
-
-const passportSchema = z.object({
-  accessToken: z.string().min(1, "The access token is required"),
-  projectId: projectSchema.shape.projectId,
-  environmentId: environmentSchema.shape.environmentId,
-});
 
 /**
  * Middleware to require the presence of the Planria headers in the HTTP request to
