@@ -99,7 +99,7 @@
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.1.1",
     "@paralleldrive/cuid2": "^2.2.2",
-    "bcryptjs": "^2.4.3",
+    "bcrypt-edge": "^0.1.0",
     "dayjs": "^1.11.13",
     "form-data": "^4.0.0",
     "ky": "^1.7.1",
