@@ -17,7 +17,7 @@ vi.mock("$/server/env", () => ({
 }));
 const env = __env as MockedFunction<typeof __env>;
 
-test("should call clerkMiddleware with the correct publishableKey and secretKey", function () {
+test("auth() should pass the publishableKey and secretKey from environment to clerkMiddleware() factory", function () {
   const publishableKey = "publishable_key";
   const secretKey = "secret_key";
   env
