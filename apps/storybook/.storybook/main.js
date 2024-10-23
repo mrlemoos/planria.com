@@ -8,7 +8,15 @@ function getAbsolutePath(value) {
  * @type {import('@storybook/react-vite').StorybookConfig}
  */
 const config = {
-  stories: ["../../../packages/design/src/*.stories.@(ts|tsx)", "../docs/*.mdx", "../docs/**/*.mdx"],
+  stories: [
+    // design system stories
+    "../../../packages/design/src/*.stories.@(ts|tsx)",
+    // general documentation
+    "../docs/*.mdx",
+    "../docs/**/*.mdx",
+    // organisms
+    "../../../apps/web/src/**/*.stories.@(ts|tsx)",
+  ],
 
   addons: [
     getAbsolutePath("@storybook/addon-links"),
@@ -23,7 +31,7 @@ const config = {
       },
     },
     getAbsolutePath("@storybook/addon-mdx-gfm"),
-    "@chromatic-com/storybook"
+    "@chromatic-com/storybook",
   ],
 
   framework: {
@@ -51,12 +59,12 @@ const config = {
   },
 
   docs: {
-    defaultName: "Overview"
+    defaultName: "Overview",
   },
 
   typescript: {
-    reactDocgen: "react-docgen-typescript"
-  }
+    reactDocgen: "react-docgen-typescript",
+  },
 };
 
 export default config;
