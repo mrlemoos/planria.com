@@ -128,9 +128,9 @@ export function NewProject({ children }: NewProjectProps): JSX.Element {
               <FormLabel>Description</FormLabel>
               <p className={muted({ className: "text-sm" })}>(Optional)</p>
               <FormControl>
-                {/* @ts-expect-error FIXME */}
                 <Textarea
                   {...field}
+                  value={field.value || ""}
                   placeholder="We'll create a ship nice and shiny, buy a comfy pilot seat, and a cockpit full of buttons..."
                 />
               </FormControl>
