@@ -25,11 +25,11 @@ import { heading } from "@planria/design/typography";
 import Link from "next/link";
 
 import { useEnvironments } from "$/domains/environments/context";
-import { NewFeatureFlagForm } from "$/domains/feature-flags/views/new";
-import { TableView } from "$/domains/feature-flags/views/table-view";
+import { NewFeatureFlagForm } from "$/domains/feature-flags/new";
+import { TableView } from "$/domains/feature-flags/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
-import { useProjectManagement } from "../context";
+import { useProjectManagement } from "./context";
 
 function canCreateFeatureFlag(environments: Environment[]): boolean {
   return environments.length > 0;

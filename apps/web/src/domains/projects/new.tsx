@@ -32,8 +32,8 @@ import { useProjectManagementRouter } from "$/app/(projects)/projects/(managemen
 import { useFormAction } from "$/lib/hooks/form";
 import { useUser } from "$/lib/hooks/user";
 
-import { createProjectSchema, type CreateProjectFormValues } from "../schema";
-import { createProjectAction } from "../server-actions";
+import { createProjectSchema, type CreateProjectFormValues } from "./schema";
+import { createProjectAction } from "./server-actions";
 
 export interface NewProjectProps {
   children?: ReactNode;
@@ -60,7 +60,7 @@ export function NewProject({ children }: NewProjectProps): JSX.Element {
     {
       message: "",
       ok: false,
-    }
+    },
   );
   const form = useForm<CreateProjectFormValues>({
     resolver: zodResolver(createProjectSchema),

@@ -7,7 +7,7 @@ import { NavigationBar } from "@planria/design/navigation";
 import { TopBar } from "@planria/design/top-bar";
 import Link from "next/link";
 
-import { ProjectSelector } from "$/domains/projects/views/selector";
+import { ProjectSelector } from "$/domains/projects/selector";
 import { ForSignedIn, ForSignedOut } from "$/lib/auth/delimiters";
 import { tryGetUser } from "$/lib/auth/server";
 

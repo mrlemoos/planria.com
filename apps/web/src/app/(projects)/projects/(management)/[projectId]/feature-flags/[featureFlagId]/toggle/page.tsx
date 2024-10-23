@@ -10,8 +10,8 @@ import {
 import Link from "next/link";
 
 import { redirectToProject } from "$/app/(projects)/projects/(management)/[projectId]/navigation";
-import { ToggleFeatureFlag } from "$/domains/feature-flags/views/toggle";
-import { AboutFlag } from "$/domains/feature-flags/views/toggle/about-flag";
+import { ToggleFeatureFlag } from "$/domains/feature-flags/toggle";
+import { AboutFlag } from "$/domains/feature-flags/about-flag";
 import {
   fetchProjectFeatureFlagById,
   fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId,
@@ -28,7 +28,7 @@ export default async function Page({
   };
 }): Promise<JSX.Element> {
   const foundFeatureFlag = await fetchProjectFeatureFlagById(
-    params.featureFlagId
+    params.featureFlagId,
   );
 
   if (!foundFeatureFlag) {
@@ -38,7 +38,7 @@ export default async function Page({
 
   const foundValues =
     await fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId(
-      params.featureFlagId
+      params.featureFlagId,
     );
 
   return (

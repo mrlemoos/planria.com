@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import type { Metadata } from "next";
 
-import { Dashboard } from "$/domains/projects/views/dashboard";
+import { Dashboard } from "$/domains/projects/dashboard";
 import { fetchProjectById } from "$/server/data/projects";
 import { APP_NAME } from "$/server/meta";
 import { createMetadata } from "$/server/seo";

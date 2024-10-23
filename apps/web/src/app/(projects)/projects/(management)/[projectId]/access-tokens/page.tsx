@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 
-import { AccessTokensTableView } from "$/domains/access-tokens/views/table-view";
+import { AccessTokensTableView } from "$/domains/access-tokens/table-view";
 
 export const dynamic = "force-dynamic";
 

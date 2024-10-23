@@ -38,8 +38,8 @@ import { fontMono } from "$/lib/styles/fonts";
 import {
   createAccessTokenSchema,
   type CreateAccessTokenFormValues,
-} from "../schema";
-import { createAccessTokenAction } from "../server-actions";
+} from "./schema";
+import { createAccessTokenAction } from "./server-actions";
 
 export interface NewAccessTokenFormProps {
   generatedToken: string;
@@ -65,7 +65,7 @@ export function NewAccessTokenForm({
     createAccessTokenAction,
     {
       ok: false,
-    }
+    },
   );
   const { boundFormRef, handleSubmit } = useFormAction(form, formAction);
   const [, copyToClipboard] = useClipboard();
@@ -76,7 +76,7 @@ export function NewAccessTokenForm({
     return environments.sort(
       (left, right) =>
         date(right.updatedAt).toDate().getTime() -
-        date(left.updatedAt).toDate().getTime()
+        date(left.updatedAt).toDate().getTime(),
     );
   }, [environments]);
 
@@ -130,7 +130,7 @@ export function NewAccessTokenForm({
                     type="text"
                     className={cn(
                       "w-full focus-within:outline-none h-full",
-                      fontMono.className
+                      fontMono.className,
                     )}
                     readOnly={true}
                     {...field}

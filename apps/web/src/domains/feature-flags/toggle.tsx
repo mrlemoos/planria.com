@@ -19,10 +19,10 @@ import type {
   FeatureFlag,
 } from "$/lib/schemas/projects/feature-flags";
 
-import { toggleFeatureFlagEnvironmentValueWithinEnvironmentAction } from "../server-actions";
+import { toggleFeatureFlagEnvironmentValueWithinEnvironmentAction } from "./server-actions";
 
 function isProduction(
-  environment: Environment | undefined
+  environment: Environment | undefined,
 ): environment is Environment {
   const trimmedEnvironmentLowercasedName = environment?.name
     ?.trim()
@@ -52,7 +52,7 @@ export function ToggleFeatureFlagListItem({
 }: ToggleFeatureFlagListItemProps): JSX.Element {
   const { environments } = useEnvironments();
   const environment = environments.find(
-    (env) => env.environmentId === environmentId
+    (env) => env.environmentId === environmentId,
   );
   const projectId = useProjectId();
   const featureFlagId = useFeatureFlagId();
@@ -144,7 +144,7 @@ export function ToggleFeatureFlag({
                 environmentFeatureFlagId={environmentFeatureFlagId}
                 value={!!value}
               />
-            )
+            ),
           )}
         </ul>
       </div>

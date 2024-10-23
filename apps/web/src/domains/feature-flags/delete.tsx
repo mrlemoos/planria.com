@@ -25,7 +25,7 @@ import { create } from "zustand";
 
 import { useProjectId } from "$/app/(projects)/projects/(management)/[projectId]/hooks";
 
-import { deleteFeatureFlagAction } from "../server-actions";
+import { deleteFeatureFlagAction } from "./server-actions";
 
 const useConfirmDeleteFeatureFlagController = create<{
   isOpen: boolean;

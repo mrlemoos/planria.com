@@ -3,7 +3,7 @@ import { useState as __useState } from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import { describe, expect, test, vi, type MockedFunction } from "vitest";
 
-import { toggleFeatureFlagDefaultValueAction as __toggleFeatureFlagDefaultValueAction } from "../../server-actions";
+import { toggleFeatureFlagDefaultValueAction as __toggleFeatureFlagDefaultValueAction } from "./server-actions";
 
 import { useTogglingDefaultValueController } from "./hooks";
 
@@ -11,7 +11,7 @@ vi.mock("@planria/design/toast", () => ({
   useToast: vi.fn().mockReturnValue({ toast: vi.fn() }),
 }));
 
-vi.mock("../../server-actions", () => ({
+vi.mock("./server-actions", () => ({
   toggleFeatureFlagDefaultValueAction: vi.fn().mockResolvedValue({
     ok: true,
     message: 'Flagging sounds nicer than "toggling."',
@@ -46,7 +46,7 @@ describe("given that the feature flag is still submitting", function () {
         useTogglingDefaultValueController({
           featureFlagId: "123",
           featureFlagDefaultValue: true,
-        })
+        }),
       );
 
       const { handleToggleFeatureFlag } = result.current;

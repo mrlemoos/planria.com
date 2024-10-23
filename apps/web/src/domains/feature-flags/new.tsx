@@ -32,12 +32,12 @@ import { useFormState } from "react-dom";
 import { useProjectManagement } from "$/domains/projects/context";
 import { useFormAction } from "$/lib/hooks/form";
 
-import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "../constants";
+import { FEATURE_FLAG_SLUG_PLACEHOLDER } from "./constants";
 import {
   createFeatureFlagSchema,
   type CreateFeatureFlagFormValues,
-} from "../schema";
-import { createFeatureFlagAction } from "../server-actions";
+} from "./schema";
+import { createFeatureFlagAction } from "./server-actions";
 
 import { SDKPreview } from "./preview";
 
@@ -46,7 +46,7 @@ export function NewFeatureFlagForm(): JSX.Element {
     createFeatureFlagAction,
     {
       ok: false,
-    }
+    },
   );
   const { projectId } = useProjectManagement();
   const form = useForm<CreateFeatureFlagFormValues>({

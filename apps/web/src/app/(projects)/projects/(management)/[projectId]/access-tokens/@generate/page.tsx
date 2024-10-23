@@ -8,9 +8,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@planria/design/sheet";
-import { uuid } from "@planria/util/uuid";
+import { uuid } from "@planria/util/crypto";
 
-import { NewAccessTokenForm } from "$/domains/access-tokens/views/new";
+import { NewAccessTokenForm } from "$/domains/access-tokens/new";
 import { fetchEnvironmentsByProjectId } from "$/server/data/projects/environments";
 
 export const dynamic = "force-dynamic";

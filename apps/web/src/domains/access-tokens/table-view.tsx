@@ -26,8 +26,8 @@ import Link from "next/link";
 import type { AccessTokenAndEnvironment } from "$/lib/schemas/projects/access-tokens+environment";
 import { fontMono } from "$/lib/styles/fonts";
 
-import { TABLE_VIEW_DATE_FORMAT } from "../constants";
-import { useAccessTokens } from "../context";
+import { TABLE_VIEW_DATE_FORMAT } from "./constants";
+import { useAccessTokens } from "./context";
 
 import { DeleteAccessTokenButtonAction } from "./delete";
 
@@ -143,7 +143,7 @@ export function AccessTokensTableView(): JSX.Element {
                   displayName={displayName}
                   tokenFourInitialCharacters={tokenFourInitialCharacters}
                 />
-              )
+              ),
             )}
           </TableBody>
         </Table>

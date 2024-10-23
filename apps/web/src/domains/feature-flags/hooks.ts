@@ -2,7 +2,7 @@ import { useOptimistic, useState } from "react";
 
 import { useToast } from "@planria/design/toast";
 
-import { toggleFeatureFlagDefaultValueAction } from "../../server-actions";
+import { toggleFeatureFlagDefaultValueAction } from "./server-actions";
 
 export function useTogglingDefaultValueController({
   featureFlagId,
@@ -17,7 +17,7 @@ export function useTogglingDefaultValueController({
     setIsTogglingDefaultValueSubmitting,
   ] = useState(false);
   const [optimisticValue, setOptimisticValue] = useOptimistic(
-    featureFlagDefaultValue
+    featureFlagDefaultValue,
   );
 
   async function handleToggleFeatureFlag(newValue: boolean) {
@@ -31,7 +31,7 @@ export function useTogglingDefaultValueController({
     setIsTogglingDefaultValueSubmitting(true);
     const { ok, message } = await toggleFeatureFlagDefaultValueAction(
       newValue,
-      featureFlagId
+      featureFlagId,
     );
     setIsTogglingDefaultValueSubmitting(false);
 
