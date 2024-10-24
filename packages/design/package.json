@@ -251,7 +251,7 @@
     "tailwind-merge": "^2.5.4",
     "tailwind-variants": "^0.2.1",
     "vaul": "^0.9.1",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.3"
   },
   "peerDependencies": {
     "@planria/react-hooks": "workspace:*",
