@@ -3,18 +3,8 @@
 import { type JSX } from "react";
 
 import { Badge } from "@planria/design/badge";
-import { Button } from "@planria/design/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@planria/design/card";
 import { cn } from "@planria/design/css";
-import { Icon } from "@planria/design/icon";
-import {
-  ResponsiveDialog,
-  ResponsiveDialogClose,
-  ResponsiveDialogContent,
-  ResponsiveDialogHeader,
-  ResponsiveDialogTitle,
-  ResponsiveDialogTrigger,
-} from "@planria/design/responsive-dialog";
 import {
   Tooltip,
   TooltipArrow,
@@ -22,14 +12,14 @@ import {
   TooltipTrigger,
 } from "@planria/design/tooltip";
 import { heading } from "@planria/design/typography";
-import Link from "next/link";
 
 import { useEnvironments } from "$/domains/environments/context";
-import { NewFeatureFlagForm } from "$/domains/feature-flags/new";
 import { TableView } from "$/domains/feature-flags/table-view";
 import type { Environment } from "$/lib/schemas/projects/environments";
 
 import { useProjectManagement } from "./context";
+import { CreateFlagButton } from "./create-flag-button";
+import { DisabledCreateFlagButton } from "./disabled-create-flag-button";
 
 function canCreateFeatureFlag(environments: Environment[]): boolean {
   return environments.length > 0;
@@ -59,48 +49,9 @@ export function Dashboard(): JSX.Element {
           </section>
           <div className="flex items-center gap-1">
             {canCreateFeatureFlag(environments) ? (
-              <ResponsiveDialog variant="dismissable">
-                <ResponsiveDialogTrigger asChild={true}>
-                  <Button size="sm" type="button">
-                    <Icon
-                      name="Plus"
-                      aria-hidden="true"
-                      size={15}
-                      className="mr-2"
-                    />
-                    Create flag
-                  </Button>
-                </ResponsiveDialogTrigger>
-                <ResponsiveDialogContent>
-                  <ResponsiveDialogHeader>
-                    <ResponsiveDialogTitle>
-                      Create feature flag
-                    </ResponsiveDialogTitle>
-                  </ResponsiveDialogHeader>
-                  <NewFeatureFlagForm />
-                  <ResponsiveDialogClose />
-                </ResponsiveDialogContent>
-              </ResponsiveDialog>
+              <CreateFlagButton />
             ) : (
-              <Tooltip>
-                <TooltipTrigger asChild={true}>
-                  <div className="cursor-not-allowed">
-                    <Button size="sm" type="button" disabled={true}>
-                      Create flag
-                    </Button>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  You need to create an environment first. Click&nbsp;
-                  <Link
-                    href={`/projects/${projectId}/environments`}
-                    className="text-primary"
-                  >
-                    here
-                  </Link>
-                  &nbsp;to go to environments.
-                </TooltipContent>
-              </Tooltip>
+              <DisabledCreateFlagButton projectId={projectId} />
             )}
           </div>
         </div>
