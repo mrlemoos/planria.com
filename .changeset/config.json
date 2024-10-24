@@ -6,7 +6,7 @@
       "repo": "mrlemoos/planria.com"
     }
   ],
-  "commit": "chore: release package(s)",
+  "commit": true,
   "baseBranch": "main",
   "fixed": [],
   "linked": [],
