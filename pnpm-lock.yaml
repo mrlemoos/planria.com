@@ -151,8 +151,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/util
       '@stripe/react-stripe-js':
-        specifier: ^2.8.0
-        version: 2.8.0(@stripe/stripe-js@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.8.1
+        version: 2.8.1(@stripe/stripe-js@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@stripe/stripe-js':
         specifier: ^4.4.0
         version: 4.4.0
@@ -2536,8 +2536,8 @@ packages:
     peerDependencies:
       storybook: ^8.3.1
 
-  '@stripe/react-stripe-js@2.8.0':
-    resolution: {integrity: sha512-Vf1gNEuBxA9EtxiLghm2ZWmgbADNMJw4HW6eolUu0DON/6mZvWZgk0KHolN0sozNJwYp0i/8hBsDBcBUWcvnbw==}
+  '@stripe/react-stripe-js@2.8.1':
+    resolution: {integrity: sha512-C410jVKOATinXLalWotab6E6jlWAlbqUDWL9q1km0p5UHrvnihjjYzA8imYXc4xc4Euf9GeKDQc4n35HKZvgwg==}
     peerDependencies:
       '@stripe/stripe-js': ^1.44.1 || ^2.0.0 || ^3.0.0 || ^4.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -9656,7 +9656,7 @@ snapshots:
     dependencies:
       storybook: 8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
 
-  '@stripe/react-stripe-js@2.8.0(@stripe/stripe-js@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@stripe/react-stripe-js@2.8.1(@stripe/stripe-js@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@stripe/stripe-js': 4.4.0
       prop-types: 15.8.1
