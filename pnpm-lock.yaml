@@ -73,8 +73,8 @@ importers:
         specifier: ^8.3.1
         version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/manager-api':
-        specifier: ^8.3.1
-        version: 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        specifier: ^8.4.1
+        version: 8.4.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/react':
         specifier: ^8.3.1
         version: 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))(typescript@5.5.4)
@@ -2487,10 +2487,10 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  '@storybook/manager-api@8.3.1':
-    resolution: {integrity: sha512-GHJr1/nNAfkzNs4P8z31zBN8ZBucMfl+aSH6ciCy12jN3dOmEfb67mx3aes2PmBJjY3K8HG2lgsO9tNKIyDJXQ==}
+  '@storybook/manager-api@8.4.1':
+    resolution: {integrity: sha512-7hb2k4zsp6lREGZbQ85QOlsC8EIMZXuY9Pg12VUgaZd+LmLjLuaqtrxRz3SwIgIWsRpFun9AHO0X37DmYNGTSw==}
     peerDependencies:
-      storybook: ^8.3.1
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
   '@storybook/node-logger@6.5.16':
     resolution: {integrity: sha512-YjhBKrclQtjhqFNSO+BZK+RXOx6EQypAELJKoLFaawg331e8VUfvUuRCNB3fcEWp8G9oH13PQQte0OTjLyyOYg==}
@@ -9579,7 +9579,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/manager-api@8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
+  '@storybook/manager-api@8.4.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
       storybook: 8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4)
 
@@ -9628,7 +9628,7 @@ snapshots:
     dependencies:
       '@storybook/components': 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+      '@storybook/manager-api': 8.4.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/preview-api': 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/react-dom-shim': 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@storybook/theming': 8.3.1(storybook@8.3.1(bufferutil@4.0.8)(utf-8-validate@6.0.4))
