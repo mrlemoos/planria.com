@@ -1,17 +1,9 @@
 import type { JSX } from "react";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@planria/design/breadcrumb";
-import Link from "next/link";
-
 import { redirectToProject } from "$/app/(projects)/projects/(management)/[projectId]/navigation";
-import { ToggleFeatureFlag } from "$/domains/feature-flags/toggle";
 import { AboutFlag } from "$/domains/feature-flags/about-flag";
+import { Breadcrumbs } from "$/domains/feature-flags/breadcrumbs";
+import { ToggleFeatureFlag } from "$/domains/feature-flags/toggle";
 import {
   fetchProjectFeatureFlagById,
   fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId,
@@ -28,7 +20,7 @@ export default async function Page({
   };
 }): Promise<JSX.Element> {
   const foundFeatureFlag = await fetchProjectFeatureFlagById(
-    params.featureFlagId,
+    params.featureFlagId
   );
 
   if (!foundFeatureFlag) {
@@ -38,24 +30,12 @@ export default async function Page({
 
   const foundValues =
     await fetchProjectFeatureFlagValuesPerEnvironmentByFeatureFlagId(
-      params.featureFlagId,
+      params.featureFlagId
     );
 
   return (
     <div className="container mx-auto mb-10 mt-20 min-h-[60dvh]">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild={true}>
-              <Link href={`/projects/${params.projectId}`}>Project</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>Feature Flags</BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>{foundFeatureFlag.slug}</BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <Breadcrumbs featureFlagSlug={foundFeatureFlag.slug} />
       <div className="flex flex-col animate-in">
         <div className="flex flex-col lg:flex-row">
           <ToggleFeatureFlag
