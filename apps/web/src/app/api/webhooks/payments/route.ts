@@ -2,7 +2,7 @@ import { date } from "@planria/util/date";
 import { HttpStatusCode } from "@planria/util/http";
 import { log } from "@planria/util/logging";
 import { headers } from "next/headers";
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";
 
 import { stripe } from "$/lib/stripe/server";
@@ -187,7 +187,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 
       return NextResponse.json(
         {
-          message: `User payment account updated successfully.`,
+          message: "User payment account updated successfully.",
         },
         {
           status: HttpStatusCode.OK,
