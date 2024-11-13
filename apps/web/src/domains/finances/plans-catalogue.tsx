@@ -20,10 +20,10 @@ export function PlansCatalogue(): JSX.Element {
         >
           As currently in beta, we have a special offer for you to get started
           with Planria and help us shape&nbsp;
-          <span className="text-primary text-3xl font-semibold">
+          <span className="underline underline-offset-2">
             the future of feature flags
           </span>
-          &nbsp;.
+          .
         </h2>
         <PlanCard
           name="Earlybird"
@@ -34,6 +34,8 @@ export function PlansCatalogue(): JSX.Element {
             "Unlimited projects",
             "Unlimited environments per project",
             "Unlimited feature flags",
+            "Unlimited users",
+            "5 remote configs",
             "Guaranteed spot in our ❤️",
           ]}
           action="Let's do it!"
@@ -42,7 +44,7 @@ export function PlansCatalogue(): JSX.Element {
       <div>
         <hr className="border-t border-zinc-500/50 mt-10 mb-1" />
         <div className="flex flex-col justify-center">
-          <span className="text-center text-muted-foreground">Or</span>
+          <span className="text-center text-muted-foreground my-10">Or</span>
           <h3 className={cn(heading({ variant: "h3" }), "text-center")}>
             Get to know our soon-to-come plans
           </h3>
