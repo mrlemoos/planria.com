@@ -1,12 +1,12 @@
 "use client";
 
 import {
+  type HTMLAttributes,
+  type JSX,
   createContext,
   forwardRef,
   useContext,
   useMemo,
-  type HTMLAttributes,
-  type JSX,
 } from "react";
 
 import { Button } from "@planria/design/button";
@@ -122,6 +122,7 @@ export const CodeSnippet = forwardRef<HTMLPreElement, CodeSnippetProps>(
         {!!codeSnippet && (
           <code
             className={cn("text-sm font-mono", fontCode.className)}
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: Yeah, we have to do that :/
             dangerouslySetInnerHTML={{ __html: highlight(codeSnippet) }}
           />
         )}
