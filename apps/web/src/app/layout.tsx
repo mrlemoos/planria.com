@@ -24,6 +24,10 @@ export default function Layout({
 }: Readonly<{
   children: ReactNode;
 }>): JSX.Element {
+  const canShowBreakpointMarker = ["development", "preview"].includes(
+    env("NODE_ENV")
+  );
+
   return (
     <AuthProvider>
       <ThemeProvider>
@@ -37,7 +41,7 @@ export default function Layout({
             {children}
             <WildcardFooter />
             <ToastController />
-            {env("NODE_ENV") === "development" && <BreakpointMarker />}
+            {canShowBreakpointMarker && <BreakpointMarker />}
           </body>
         </html>
       </ThemeProvider>
