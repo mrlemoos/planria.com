@@ -50,7 +50,7 @@
     "@planria/design": "workspace:*",
     "@planria/react-hooks": "workspace:*",
     "@planria/util": "workspace:*",
-    "@stripe/react-stripe-js": "^2.8.0",
+    "@stripe/react-stripe-js": "^3.6.0",
     "@stripe/stripe-js": "^4.4.0",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@vercel/og": "^0.6.2",
