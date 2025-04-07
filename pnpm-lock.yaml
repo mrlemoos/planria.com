@@ -25,7 +25,7 @@ importers:
         version: 2.1.2
       vitest:
         specifier: ^2.1.3
-        version: 2.1.3(@types/node@22.14.0)(happy-dom@15.7.4)(terser@5.39.0)
+        version: 2.1.3(@types/node@22.14.0)(happy-dom@17.4.4)(terser@5.39.0)
 
   apps/storybook:
     dependencies:
@@ -242,8 +242,8 @@ importers:
         specifier: 14.2.5
         version: 14.2.5(eslint@8.57.0)(typescript@5.5.4)
       happy-dom:
-        specifier: ^15.7.4
-        version: 15.7.4
+        specifier: ^17.4.4
+        version: 17.4.4
       postcss:
         specifier: ^8.4.43
         version: 8.4.47
@@ -258,7 +258,7 @@ importers:
         version: 5.5.4
       vitest:
         specifier: ^2.1.3
-        version: 2.1.3(@types/node@20.16.1)(happy-dom@15.7.4)(terser@5.39.0)
+        version: 2.1.3(@types/node@20.16.1)(happy-dom@17.4.4)(terser@5.39.0)
 
   packages/db:
     dependencies:
@@ -358,7 +358,7 @@ importers:
         version: 0.9.1(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest:
         specifier: ^2.1.3
-        version: 2.1.3(@types/node@22.14.0)(happy-dom@15.7.4)(terser@5.39.0)
+        version: 2.1.3(@types/node@22.14.0)(happy-dom@17.4.4)(terser@5.39.0)
     devDependencies:
       '@planria/eslint-config':
         specifier: workspace:*
@@ -460,7 +460,7 @@ importers:
         version: 5.5.4
       vitest:
         specifier: ^2.1.3
-        version: 2.1.3(@types/node@22.14.0)(happy-dom@15.7.4)(terser@5.39.0)
+        version: 2.1.3(@types/node@22.14.0)(happy-dom@17.4.4)(terser@5.39.0)
 
   tools/eslint-config:
     devDependencies:
@@ -543,7 +543,7 @@ importers:
         version: 5.5.4
       vitest:
         specifier: ^2.1.3
-        version: 2.1.3(@types/node@22.6.0)(happy-dom@15.7.4)(terser@5.39.0)
+        version: 2.1.3(@types/node@22.6.0)(happy-dom@17.4.4)(terser@5.39.0)
 
 packages:
 
@@ -4148,10 +4148,6 @@ packages:
     resolution: {integrity: sha512-rRqJg/6gd538VHvR3PSrdRBb/1Vy2YfzHqzvbhGIQpDRKIa4FgV/54b5Q1xYSxOOwKvjXweS26E0Q+nAMwp2pQ==}
     engines: {node: '>=8.6'}
 
-  entities@4.5.0:
-    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
-    engines: {node: '>=0.12'}
-
   err-code@2.0.3:
     resolution: {integrity: sha512-2bmlRpNKBxT/CRmPOlyISQpNj+qSeYvcym/uT0Jx2bMOlKLtSy1ZmLuVxSEKKyor/N5yhvp/ZiG1oE3DEYMSFA==}
 
@@ -4839,8 +4835,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  happy-dom@15.7.4:
-    resolution: {integrity: sha512-r1vadDYGMtsHAAsqhDuk4IpPvr6N8MGKy5ntBo7tSdim+pWDxus2PNqOcOt8LuDZ4t3KJHE+gCuzupcx/GKnyQ==}
+  happy-dom@17.4.4:
+    resolution: {integrity: sha512-/Pb0ctk3HTZ5xEL3BZ0hK1AqDSAUuRQitOmROPHhfUYEWpmTImwfD8vFDGADmMAX0JYgbcgxWoLFKtsWhcpuVA==}
     engines: {node: '>=18.0.0'}
 
   has-bigints@1.0.2:
@@ -11773,8 +11769,6 @@ snapshots:
       ansi-colors: 4.1.3
       strip-ansi: 6.0.1
 
-  entities@4.5.0: {}
-
   err-code@2.0.3: {}
 
   error-ex@1.3.2:
@@ -12947,9 +12941,8 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  happy-dom@15.7.4:
+  happy-dom@17.4.4:
     dependencies:
-      entities: 4.5.0
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
 
@@ -16719,7 +16712,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.39.0
 
-  vitest@2.1.3(@types/node@20.16.1)(happy-dom@15.7.4)(terser@5.39.0):
+  vitest@2.1.3(@types/node@20.16.1)(happy-dom@17.4.4)(terser@5.39.0):
     dependencies:
       '@vitest/expect': 2.1.3
       '@vitest/mocker': 2.1.3(@vitest/spy@2.1.3)(vite@5.4.6(@types/node@20.16.1)(terser@5.39.0))
@@ -16742,7 +16735,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.16.1
-      happy-dom: 15.7.4
+      happy-dom: 17.4.4
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -16754,7 +16747,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@2.1.3(@types/node@22.14.0)(happy-dom@15.7.4)(terser@5.39.0):
+  vitest@2.1.3(@types/node@22.14.0)(happy-dom@17.4.4)(terser@5.39.0):
     dependencies:
       '@vitest/expect': 2.1.3
       '@vitest/mocker': 2.1.3(@vitest/spy@2.1.3)(vite@5.4.6(@types/node@22.14.0)(terser@5.39.0))
@@ -16777,7 +16770,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.14.0
-      happy-dom: 15.7.4
+      happy-dom: 17.4.4
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -16789,7 +16782,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@2.1.3(@types/node@22.6.0)(happy-dom@15.7.4)(terser@5.39.0):
+  vitest@2.1.3(@types/node@22.6.0)(happy-dom@17.4.4)(terser@5.39.0):
     dependencies:
       '@vitest/expect': 2.1.3
       '@vitest/mocker': 2.1.3(@vitest/spy@2.1.3)(vite@5.4.6(@types/node@22.6.0)(terser@5.39.0))
@@ -16812,7 +16805,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.6.0
-      happy-dom: 15.7.4
+      happy-dom: 17.4.4
     transitivePeerDependencies:
       - less
       - lightningcss
